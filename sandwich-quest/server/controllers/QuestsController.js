@@ -1,4 +1,5 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
+import { questsService } from "../services/QuestsService.js";
 import BaseController from "../utils/BaseController";
 
 

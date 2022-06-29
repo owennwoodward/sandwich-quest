@@ -26,7 +26,7 @@ class QuestsService{
 
     // TODO: Add updateQuest
 
-    async deleteQuest(id, userId){
+    async removeQuest(id, userId){
         let quest = await dbContext.Quest.findById(id);
         if(!quest){
             throw new BadRequest("Invalid quest id");

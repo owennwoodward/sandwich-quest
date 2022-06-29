@@ -10,7 +10,7 @@ export const QuestSchema = new Schema({
 
 QuestSchema.virtual('creator', {
     localField: 'creatorId',
-    ref: 'Account',
     foreignField: '_id',
+    ref: 'Account',
     justOne: true
 })
