@@ -2,7 +2,7 @@ import { dbContext } from "../db/DbContext.js";
 import { BadRequest } from "@bcwdev/auth0provider/lib/Errors.js";
 
 
-class QuestItemService{
+class QuestItemsService{
     async getQuestItems(accountId){
         let questItems = await dbContext.QuestItem.find({accountId})
         .populate("creator", "name picture")
@@ -30,4 +30,4 @@ class QuestItemService{
     }
 }
 
-export const questItemService = new QuestItemService();
+export const questItemsService = new QuestItemsService();
