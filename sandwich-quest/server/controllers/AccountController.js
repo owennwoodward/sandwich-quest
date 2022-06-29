@@ -32,7 +32,7 @@ export class AccountController extends BaseController {
   }
   async getUserQuestItems(req, res, next) {
     try {
-      const questItems = await questItemsService.getQuestItems(req.userInfo.id)
+      const questItems = await questItemsService.getAllItems(req.userInfo.id)
       res.send(questItems)
     } catch (error) {
       next(error)
