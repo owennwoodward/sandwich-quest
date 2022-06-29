@@ -3,7 +3,7 @@ import {BadRequest} from "@bcwdev/auth0provider/lib/Errors.js";
 
 class QuestsService{
     async getAllQuests(query={}){
-        let quests = await dbContext.Quests.find(query).populate(
+        let quests = await dbContext.Quest.find(query).populate(
             "creator",
             "name picture"
         );
@@ -11,14 +11,14 @@ class QuestsService{
 
         }
     async getQuestById(id){
-        let quest = await dbContext.Quests.findById(id).populate(
+        let quest = await dbContext.Quest.findById(id).populate(
             "creator",
             "name picture"
         );
         return quest;
     }
     async createQuest(quest){
-        let newQuest = await dbContext.Quests.create(quest);
+        let newQuest = await dbContext.Quest.create(quest);
         await newQuest.populate("creator", "name picture")
         return newQuest;
     }
@@ -27,7 +27,7 @@ class QuestsService{
     // TODO: Add updateQuest
 
     async deleteQuest(id, userId){
-        let quest = await dbContext.Quests.findById(id);
+        let quest = await dbContext.Quest.findById(id);
         if(!quest){
             throw new BadRequest("Invalid quest id");
         }
