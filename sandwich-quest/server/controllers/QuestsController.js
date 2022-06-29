@@ -9,10 +9,20 @@ export class QuestsController extends BaseController {
         super('api/quests')
         this.router
             .get('', this.getAllQuests)
+            .get('/:id', this.getQuestById)
             .use(Auth0Provider.getAuthorizedUserInfo)
             .post('', this.createQuest)
             .delete('/:id', this.removeQuest)
     }
+    getQuestById(req, res, next) {
+        try {
+            const quest = questsService.getQuestById(req.params.id)
+            return res.send(quest)
+        } catch (error) {
+            next(error)
+        }
+    }
+    
 
     async getAllQuests(req, res, next) {
         try {
