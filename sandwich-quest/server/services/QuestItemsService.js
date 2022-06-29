@@ -2,26 +2,29 @@ import { dbContext } from "../db/DbContext.js";
 import { BadRequest } from "@bcwdev/auth0provider/lib/Errors.js";
 
 
-class QuestItemsService{
-    async getQuestItems(accountId){
-        let questItems = await dbContext.QuestItem.find({accountId})
-        .populate("creator", "name picture")
+class QuestItemsService {
+    editItem(id, body) {
+        throw new Error("Method not implemented.");
+    }
+    async getAllItems(accountId) {
+        let questItems = await dbContext.QuestItem.find({ accountId })
+            .populate("creator", "name picture")
         return questItems;
     }
 
-    async createQuestItem(questItem){
+    async createItem(questItem) {
         let newQuestItem = await dbContext.QuestItem.create(questItem);
         await newQuestItem.populate("creator")
-      
+
         return newQuestItem;
     }
 
-    async removeQuestItem(id, userId){
+    async removeItem(id, userId) {
         let questItem = await dbContext.QuestItem.findById(id);
-        if(!questItem){
+        if (!questItem) {
             throw new BadRequest("Invalid quest item id");
         }
-        if(questItem.creatorId.toString() !== userId){
+        if (questItem.creatorId.toString() !== userId) {
             throw new BadRequest("You do not have permission to delete this quest item");
         }
 
