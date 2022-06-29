@@ -1,14 +1,13 @@
-<template>
-  <header>
-    <Navbar />
-  </header>
-  <main>
-    <router-view />
+<template class="">
+  <main class="bg-dark text-light">
+    <div class="container ">
+      <router-view />
+      
+    </div>
   </main>
   <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
-    </div>
+    
+    <Navbar />
   </footer>
 </template>
 
@@ -26,5 +25,9 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
+
+footer{
+  font-family: 'Julius Sans One', sans-serif;
+}
 
 </style>
