@@ -23,8 +23,23 @@ class QuestsService {
         return newQuest;
     }
 
+    async editQuest(id, body) {
+        let quest = await dbContext.Quest.findById(id);
+        if (!quest) {
+            throw new BadRequest("Invalid quest id");
+        }
+        quest.name = body.name;
+        quest.description = body.description;
+        quest.picture = body.picture;
+        await quest.save();
+        return quest;
+    }
 
-    // TODO: Add updateQuest
+
+
+
+
+
 
     async removeQuest(id, userId) {
         let quest = await dbContext.Quest.findById(id);
@@ -37,6 +52,7 @@ class QuestsService {
 
         await quest.remove();
     }
+   
 
 }
 

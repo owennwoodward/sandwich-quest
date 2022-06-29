@@ -31,6 +31,7 @@ class QuestItemsService {
         await questItem.remove();
         return "deleted";
     }
+   
 }
 
 export const questItemsService = new QuestItemsService();
