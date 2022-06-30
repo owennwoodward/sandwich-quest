@@ -3,8 +3,13 @@ import { BadRequest } from "@bcwdev/auth0provider/lib/Errors.js";
 
 
 class QuestItemsService {
+    getQuestItems(id) {
+        const questItems = dbContext.QuestItem.findById({ id });
+        return questItems;
+
+        
+    }
     editItem(id, body) {
-        throw new Error("Method not implemented.");
     }
     async getAllItems(accountId) {
         let questItems = await dbContext.QuestItem.find({ accountId })
