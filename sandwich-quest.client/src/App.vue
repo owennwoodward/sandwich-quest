@@ -2,11 +2,11 @@
   <main class="bg-dark text-light">
     <div class="container ">
       <router-view />
-      
+
     </div>
   </main>
   <footer>
-    
+
     <Navbar />
   </footer>
 </template>
@@ -26,8 +26,7 @@ export default {
 <style lang="scss">
 @import "./assets/scss/main.scss";
 
-footer{
+footer {
   font-family: 'Julius Sans One', sans-serif;
 }
-
 </style>
