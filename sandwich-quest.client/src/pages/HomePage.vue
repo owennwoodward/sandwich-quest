@@ -18,12 +18,7 @@ export default {
   name: 'Home',
   setup(){
     onMounted(async () => {
-      try{
-        await yelpService.getAll()
-      } catch (error) {
-        logger.error(error)
-
-      }
+    
     } )
     return{
       restaurants: computed(() => AppState.homeRestaurants)
