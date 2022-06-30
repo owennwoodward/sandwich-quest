@@ -7,12 +7,12 @@ class QuestItemsService {
         const questItems = dbContext.QuestItem.findById({ id });
         return questItems;
 
-        
+
     }
     editItem(id, body) {
     }
-    async getAllItems(accountId) {
-        let questItems = await dbContext.QuestItem.find({ accountId })
+    async getUserQuestItems(creatorId) {
+        let questItems = await dbContext.QuestItem.find({ creatorId })
             .populate("creator", "name picture")
         return questItems;
     }
@@ -36,7 +36,7 @@ class QuestItemsService {
         await questItem.remove();
         return "deleted";
     }
-   
+
 }
 
 export const questItemsService = new QuestItemsService();

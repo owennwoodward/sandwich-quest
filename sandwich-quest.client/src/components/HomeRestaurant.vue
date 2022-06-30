@@ -1,15 +1,19 @@
 <template>
-    <div class="container text-black">
+    <div class="container home-card mb-4">
         <div class="row">
             <div class="col-md-12">
                 <div class="card" @click="goToRestaurantDetails">
                     <div class="card-header">
-                        <h3>{{ homeRestaurant.name }}</h3>
+                        <div class="d-flex justify-content-between">
+                            <h3>{{ homeRestaurant.name }}</h3>
+                            <div class="stars"> <YelpStars :rating="homeRestaurant.rating"/></div>
+                        </div>
+                        
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <img :src="homeRestaurant.image_url" class="img-fluid" alt="Responsive image">
+                                <img :src="homeRestaurant.image_url" class="img-fluid" :alt="homeRestaurant.name">
                             </div>
 
 
@@ -28,6 +32,7 @@
 import { onMounted } from '@vue/runtime-core'
 import { useRouter } from "vue-router"
 import { yelpService } from '../services/YelpService.js'
+// import '../assets/img/yelpStars'
 export default {
     props: {
         homeRestaurant: {
@@ -39,6 +44,7 @@ export default {
     setup(props) {
         const router = useRouter()        
         return {
+
             goToRestaurantDetails() {
                 router.push({
                     name: 'restaurant-details',
@@ -55,4 +61,15 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.home-card {
+    color: rgb(34, 32, 32);
+}
+
+.stars {
+    display: flex;
+    flex-direction: row-reverse;
+    transform: scale(.75);
+}
+
 </style>

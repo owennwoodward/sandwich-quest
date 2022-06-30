@@ -8,7 +8,6 @@ export class QuestItemsController extends BaseController {
     constructor() {
         super('api/items')
         this.router
-            .get('', this.getAllItems)
             .use(Auth0Provider.getAuthorizedUserInfo)
             .post('', this.createItem)
             .put('/:id', this.editItem)
@@ -16,14 +15,7 @@ export class QuestItemsController extends BaseController {
     }
 
 
-    async getAllItems(req, res, next) {
-        try {
-            const Items = await questItemsService.getAllItems()
-            return res.send(Items)
-        } catch (error) {
-            next(error)
-        }
-    }
+
 
     async createItem(req, res, next) {
         try {
