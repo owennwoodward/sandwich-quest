@@ -3,9 +3,11 @@ import { logger } from "../utils/Logger.js";
 import { BadRequest, Forbidden } from "@bcwdev/auth0provider/lib/Errors.js";
 
 class QuestsService {
-  getQuestItems(id) {
-      throw new Error("Method not implemented.");
-  }
+
+
+  // getQuestItems(id) {
+  //     throw new Error("Method not implemented.");
+  // }
   async getAllQuests(query) {
     let quests = await dbContext.Quest.find(query).populate(
       "creator",
@@ -15,8 +17,13 @@ class QuestsService {
   }
   async getQuestById(id) {
     let quest = await dbContext.Quest.findById(id).populate("creator", "name picture");
-    logger.log( "getQuestById", quest);
+    logger.log("getQuestById", quest);
     return quest;
+  }
+
+  // Come back after lunch and write this get user quest logic
+  async getUserQuests() {
+
   }
   async createQuest(quest, userId) {
     quest.creatorId = userId;
@@ -25,15 +32,15 @@ class QuestsService {
     return newQuest;
   }
 
-  async editQuest(id,questData) {
+  async editQuest(id, questData) {
     const original = await dbContext.Quest.findById(id).populate("creator", "name picture")
     if (original.creatorId.toString() != questData.creatorId)
-    throw new Forbidden("can't edit that")
+      throw new Forbidden("can't edit that")
     original.name = questData.name ? questData.name : original.name
     original.save()
     logger.log('edited', original)
     return original
-    
+
   }
 
   async removeQuest(id, userId) {
