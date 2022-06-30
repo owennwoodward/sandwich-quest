@@ -4,7 +4,6 @@ import { BadRequest } from "@bcwdev/auth0provider/lib/Errors.js";
 
 class QuestItemsService {
     editItem(id, body) {
-        throw new Error("Method not implemented.");
     }
     async getAllItems(accountId) {
         let questItems = await dbContext.QuestItem.find({ accountId })

@@ -11,7 +11,7 @@ export class AccountController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
       .get('/quests', this.getUserQuests)
-      .get('/ questItems', this.getUserQuestItems)
+      .get('/questItems', this.getUserQuestItems)
   }
 
   async getUserAccount(req, res, next) {
@@ -24,7 +24,7 @@ export class AccountController extends BaseController {
   }
   async getUserQuests(req, res, next) {
     try {
-      const quests = await questsService.getAllQuests({creatorId: req.userInfo.id})
+      const quests = await questsService.getAllQuests()
       res.send(quests)
     } catch (error) {
       next(error)

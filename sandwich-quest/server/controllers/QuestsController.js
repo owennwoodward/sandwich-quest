@@ -12,6 +12,7 @@ export class QuestsController extends BaseController {
             .get('/:id', this.getQuestById)
             .use(Auth0Provider.getAuthorizedUserInfo)
             .post('', this.createQuest)
+            
             .delete('/:id', this.removeQuest)
     }
     getQuestById(req, res, next) {
@@ -26,7 +27,7 @@ export class QuestsController extends BaseController {
 
     async getAllQuests(req, res, next) {
         try {
-            const quests = await questsService.getAllQuests()
+            const quests = await questsService.getAllQuests(req.query)
             return res.send(quests)
         } catch (error) {
             next(error)
@@ -35,12 +36,28 @@ export class QuestsController extends BaseController {
 
     async createQuest(req, res, next) {
         try {
+            req.quest.creatorId = req.userInfo.id
             const quest = await questsService.createQuest(req.body)
             return res.send(quest)
         } catch (error) {
             next(error)
         }
     }
+    async editQuest(req, res, next) {
+        try {
+            req.quest.creatorId = req.userInfo.id
+            const quest = await questsService.editQuest(req.params.id, req.body)
+            return res.send(quest)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+
+
+
+
+
     async removeQuest(req, res, next) {
         try {
             const message = await questsService.removeQuest(req.params.id, req.userInfo.id)
