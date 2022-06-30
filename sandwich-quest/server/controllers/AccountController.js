@@ -25,7 +25,7 @@ export class AccountController extends BaseController {
   }
   async getUserQuests(req, res, next) {
     try {
-      const quests = await questsService.getAllQuests()
+      const quests = await questsService.getAllQuests(req.userInfo.id)
       res.send(quests)
     } catch (error) {
       next(error)

@@ -22,7 +22,7 @@ class YelpService {
         AppState.activeRestaurant = res.data
         logger.log('getById', res.data)
     }
-    
+   
 
 }
 

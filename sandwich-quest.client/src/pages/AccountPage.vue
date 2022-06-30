@@ -11,12 +11,13 @@
         <button class="btn btn-primary">save</button>
       </form> -->
       <h3 class="mt-4">My Quests</h3>
-      {{ quests.name }}
-      <div class="row justify-content-center">
-        <div class="col-8">
-
+      <div v-for="q in quests" :key="q.id" class="row  card p-3 m-3 bg-primary">
+        <div class="col-12 text-center">
+          {{ q.name }}
         </div>
+
       </div>
+
     </div>
   </div>
 </template>
@@ -28,9 +29,24 @@ import { questsService } from '../services/QuestsService'
 export default {
   name: 'Account',
   setup() {
-    // const edits = ref({})
+    const edits = ref({})
+    onMounted(async () => {
+      try {
+        AppState.quests = [];
+        await questsService.getMyQuests()
+        // AppState.account
+        // edits.value = { ...AppState.account }
+      } catch (error) {
+        next(error)
+      }
+    })
     return {
       // edits,
+      account: computed(() => AppState.account),
+      quests: computed(() => AppState.quests),
+
+
+
       // async editAccount() {
       //   try {
       //     await accountService.editAccount(edits.value)
