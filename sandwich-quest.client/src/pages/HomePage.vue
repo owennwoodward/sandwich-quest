@@ -6,6 +6,8 @@
 
   </div>
 
+<h2 class="selectable" @click="filterCoffee">☕</h2>
+
 <div v-for="r in homeRestaurants" :key="r.id" class=" ">
   <HomeRestaurant :homeRestaurant="r"/>
 </div>
@@ -18,6 +20,7 @@ import { AppState } from '../AppState.js'
 import { yelpService } from '../services/YelpService.js'
 import { logger } from '../utils/Logger.js'
 import HomeRestaurant from '../components/HomeRestaurant.vue'
+import { filterService } from '../services/FilterService.js'
 export default {
     name: "Home",
     setup() {
@@ -26,6 +29,10 @@ export default {
         onMounted(async () => {
         });
         return {
+          filterCoffee(){
+            logger.log('made it to filtercoffee in homepage')
+            filterService.filterCoffee()
+          },
             searchTerm,
             async search() {
                 let query = searchTerm.value;
