@@ -22,9 +22,7 @@ export default {
     name: "Home",
     setup() {
         const searchTerm = ref("");
-        const getByType = (type) => {
-            return yelpService.getByType(type);
-        };
+       
         onMounted(async () => {
         });
         return {
@@ -35,7 +33,7 @@ export default {
                 await yelpService.getAll(query);
                 searchTerm.value = "";
             },
-            homeRestaurants: computed(() => AppState.homeRestaurants.business),
+            homeRestaurants: computed(() => AppState.homeRestaurants.businesses),
         };
     },
     components: { HomeRestaurant }
