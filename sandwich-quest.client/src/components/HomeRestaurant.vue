@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container text-black">
         <div class="row">
             <div class="col-md-12">
                 <div class="card" @click="goToRestaurantDetails">
