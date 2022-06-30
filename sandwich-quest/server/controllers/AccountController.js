@@ -12,6 +12,7 @@ export class AccountController extends BaseController {
       .get('', this.getUserAccount)
       .get('/quests', this.getUserQuests)
       .get('/questItems', this.getUserQuestItems)
+    // .put('', this.editAccount)
   }
 
   async getUserAccount(req, res, next) {
@@ -38,4 +39,8 @@ export class AccountController extends BaseController {
       next(error)
     }
   }
+
+  // async updateAccount(req, res, next) {
+  //   const account = await accountService.updateAccount(req.body.value, req.userInfo)
+  // }
 }
