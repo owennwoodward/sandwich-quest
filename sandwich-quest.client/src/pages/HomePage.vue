@@ -10,8 +10,26 @@
 </template>
 
 <script>
+import { computed, onMounted, ref } from 'vue'
+import { AppState } from '../AppState.js'
+import { Searchbar } from '../components/Searchbar.vue'
+import { yelpService } from '../services/YelpService.js'
+import { logger } from '../utils/Logger.js'
 export default {
-  name: 'Home'
+  name: 'Home',
+  setup(){
+    onMounted(async () => {
+      try{
+        await yelpService.getAll()
+      } catch (error) {
+        logger.error(error)
+
+      }
+    } )
+    return{
+      restaurants: computed(() => AppState.homeRestaurants)
+    }
+  }
 }
 </script>
 
