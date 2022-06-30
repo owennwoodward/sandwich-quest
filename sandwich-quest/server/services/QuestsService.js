@@ -1,6 +1,6 @@
 import { dbContext } from "../db/DbContext.js";
 import { logger } from "../utils/Logger.js";
-import { BadRequest } from "@bcwdev/auth0provider/lib/Errors.js";
+import { BadRequest, Forbidden } from "@bcwdev/auth0provider/lib/Errors.js";
 
 class QuestsService {
   getQuestItems(id) {
@@ -24,16 +24,15 @@ class QuestsService {
     return newQuest;
   }
 
-  async editQuest(id, body) {
-    let quest = await dbContext.Quest.findById(id);
-    if (!quest) {
-      throw new BadRequest("Invalid quest id");
-    }
-    quest.name = body.name;
-    quest.description = body.description;
-    quest.picture = body.picture;
-    await quest.save();
-    return quest;
+  async editQuest(questData,id) {
+    const original = await dbContext.Quest.findById(id).populate("creator", "name picture")
+    if (original.accountId.toString() != questData.accountId)
+    throw new Forbidden("can't edit that")
+    original.name = questData.name ? questData.name : original.name
+    original.save()
+    logger.log('edited', original)
+    return original
+    
   }
 
   async removeQuest(id, userId) {

@@ -11,6 +11,7 @@ export class QuestsController extends BaseController {
       .get("/:id", this.getQuestById)
       .get("/:id/items", this.getQuestItems)
       .use(Auth0Provider.getAuthorizedUserInfo)
+      .put("/:id", this.editQuest)
       .post("", this.createQuest)
       .delete("/:id", this.removeQuest);
   }
@@ -51,7 +52,7 @@ export class QuestsController extends BaseController {
   }
   async editQuest(req, res, next) {
     try {
-      req.quest.creatorId = req.userInfo.id;
+      req.body.creatorId = req.userInfo.id;
       const quest = await questsService.editQuest(req.params.id, req.body);
       return res.send(quest);
     } catch (error) {
