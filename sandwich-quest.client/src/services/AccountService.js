@@ -12,6 +12,14 @@ class AccountService {
     }
   }
 
+  async getQuests() {
+    try {
+      const res = await api.get('api/account/quests')
+    } catch (error) {
+      logger.error('Cant find quests', error)
+    }
+  }
+
   // async editAccount(editData) {
   //   const res = await api.put('/account', editData)
   //   logger.log(res.data)
