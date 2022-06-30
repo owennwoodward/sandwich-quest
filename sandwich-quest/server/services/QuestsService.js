@@ -24,9 +24,9 @@ class QuestsService {
     return newQuest;
   }
 
-  async editQuest(questData,id) {
+  async editQuest(id,questData) {
     const original = await dbContext.Quest.findById(id).populate("creator", "name picture")
-    if (original.accountId.toString() != questData.accountId)
+    if (original.creatorId.toString() != questData.creatorId)
     throw new Forbidden("can't edit that")
     original.name = questData.name ? questData.name : original.name
     original.save()
