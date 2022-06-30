@@ -3,8 +3,8 @@
 <div>branding here</div>
   <Searchbar/>
 
-<div v-for="r in restaurants" :key="r.id" class="col-md-4 ">
-  <Restaurant :restaurant="r"/>
+<div v-for="r in homeRestaurants" :key="r.id" class="col-md-4 ">
+  <homeRestaurant :homeRestaurant="r"/>
 </div>
 
 </template>
@@ -12,7 +12,6 @@
 <script>
 import { computed, onMounted, ref } from 'vue'
 import { AppState } from '../AppState.js'
-import { Searchbar } from '../components/Searchbar.vue'
 import { yelpService } from '../services/YelpService.js'
 import { logger } from '../utils/Logger.js'
 export default {
