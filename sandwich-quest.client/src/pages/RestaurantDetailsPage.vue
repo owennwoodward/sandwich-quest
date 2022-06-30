@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <!-- //a page to show all the restaurant details pulled from yelp -->
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -47,7 +46,7 @@
                                     <div class="col-md-12">
                                         <h4>{{ restaurant.categories[0].title }}</h4>
                                         <a href="{{restaurant.url}}" target="_blank">{{ restaurant.url }}</a>
-                                  </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -60,8 +59,20 @@
 
 
 <script>
+import { useRouter } from "vue-router"
+import { AppState } from "../AppState.js"
+import { yelpService } from "../services/YelpService.js"
+import { logger } from "../utils/Logger.js"
+
+
+
+
+
+
+
 export default {
     setup() {
+        const router = useRouter()
         return {}
     }
 }
