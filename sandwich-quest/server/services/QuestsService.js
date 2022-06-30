@@ -1,7 +1,11 @@
 import { dbContext } from "../db/DbContext.js";
+import { logger } from "../utils/Logger.js";
 import { BadRequest } from "@bcwdev/auth0provider/lib/Errors.js";
 
 class QuestsService {
+  getQuestItems(id) {
+      throw new Error("Method not implemented.");
+  }
   async getAllQuests(query) {
     let quests = await dbContext.Quest.find(query).populate(
       "creator",
@@ -10,10 +14,8 @@ class QuestsService {
     return quests;
   }
   async getQuestById(id) {
-    let quest = await dbContext.Quest.findById(id).populate(
-      "creator",
-      "name picture"
-    );
+    let quest = await dbContext.Quest.findById(id).populate("creator", "name picture");
+    logger.log( "getQuestById", quest);
     return quest;
   }
   async createQuest(quest) {

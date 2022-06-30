@@ -3,6 +3,12 @@ import { BadRequest } from "@bcwdev/auth0provider/lib/Errors.js";
 
 
 class QuestItemsService {
+    getQuestItems(id) {
+        const questItems = dbContext.QuestItem.findById({ id });
+        return questItems;
+
+        
+    }
     editItem(id, body) {
     }
     async getAllItems(accountId) {
