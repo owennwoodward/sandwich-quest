@@ -2,7 +2,7 @@
 
 <template>
     <form @submit.prevent="search">
-        <!-- TODO icon for the searchbar -->
+        <!-- TODO fix focus highlighting for bar/icon-->
         
         <div class="mb-3 p-2 d-flex">
           <input v-model="searchTerm" type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search!">
