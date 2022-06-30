@@ -11,6 +11,7 @@
             <input type="text" v-model="edits.name" />
             <label for="">account picture</label>
             <input type="text" v-model="edits.picture" />
+            <button class="btn btn-primary">save</button>
           </form>
         </div>
       </div>
@@ -19,7 +20,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { AppState } from '../AppState'
 import { accountService } from '../services/AccountService'
 import { logger } from '../utils/Logger'
@@ -28,6 +29,10 @@ export default {
   name: 'Account',
   setup() {
     const edits = ref({})
+    watchEffect(() => {
+      AppState.account
+      edits.value = { ...AppState.account }
+    })
     return {
       edits,
       account: computed(() => AppState.account),
