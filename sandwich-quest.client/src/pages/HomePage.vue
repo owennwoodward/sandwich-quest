@@ -14,16 +14,26 @@ import { computed, onMounted, ref } from 'vue'
 import { AppState } from '../AppState.js'
 import { yelpService } from '../services/YelpService.js'
 import { logger } from '../utils/Logger.js'
+import Restaurant from '../components/HomeRestaurant.vue'
 export default {
-  name: 'Home',
-  setup(){
-    onMounted(async () => {
-    
-    } )
-    return{
-      restaurants: computed(() => AppState.homeRestaurants)
-    }
-  }
+    name: "Home",
+    setup() {
+              const searchTerm = ref('')
+
+        onMounted(async () => {
+        });
+        return {
+            homeRestaurants: computed(() => AppState.homeRestaurants.businesses),
+             searchTerm,
+            async search() {
+                let query = searchTerm.value
+                console.log(query)
+                await yelpService.getAll(query)
+                searchTerm.value = ''
+            }
+        };
+    },
+    components: { Restaurant }
 }
 </script>
 
