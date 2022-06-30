@@ -4,10 +4,11 @@
   <Searchbar/>
   <div class="container text-center">
 
-    <h1 class="selectable" @click="select" value="pizza">☕</h1>
   </div>
 
-<div v-for="r in homeRestaurants" :key="r.id" class="col-md-4 ">
+<h2 class="selectable" @click="filterCoffee">☕</h2>
+
+<div v-for="r in homeRestaurants" :key="r.id" class=" ">
   <HomeRestaurant :homeRestaurant="r"/>
 </div>
 
@@ -18,29 +19,31 @@ import { computed, onMounted, ref } from 'vue'
 import { AppState } from '../AppState.js'
 import { yelpService } from '../services/YelpService.js'
 import { logger } from '../utils/Logger.js'
-import Restaurant from '../components/HomeRestaurant.vue'
+import HomeRestaurant from '../components/HomeRestaurant.vue'
+import { filterService } from '../services/FilterService.js'
 export default {
     name: "Home",
     setup() {
-              const searchTerm = ref('')
-              const getByType = (type) => {
-                return yelpService.getByType(type)
-              }
-
+        const searchTerm = ref("");
+       
         onMounted(async () => {
         });
         return {
-            homeRestaurants: computed(() => AppState.homeRestaurants.filter),
-             searchTerm,
+          filterCoffee(){
+            logger.log('made it to filtercoffee in homepage')
+            filterService.filterCoffee()
+          },
+            searchTerm,
             async search() {
-                let query = searchTerm.value
-                console.log(query)
-                await yelpService.getAll(query)
-                searchTerm.value = ''
+                let query = searchTerm.value;
+                console.log(query);
+                await yelpService.getAll(query);
+                searchTerm.value = "";
             },
-         
+            homeRestaurants: computed(() => AppState.homeRestaurants.businesses),
         };
     },
+    components: { HomeRestaurant }
 }
 </script>
 
