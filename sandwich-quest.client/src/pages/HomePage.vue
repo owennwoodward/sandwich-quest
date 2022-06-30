@@ -4,7 +4,7 @@
   <Searchbar/>
 
 <div v-for="r in homeRestaurants" :key="r.id" class="col-md-4 ">
-  <homeRestaurant :homeRestaurant="r"/>
+  <HomeRestaurant :homeRestaurant="r"/>
 </div>
 
 </template>
@@ -33,7 +33,6 @@ export default {
             }
         };
     },
-    components: { Restaurant }
 }
 </script>
 

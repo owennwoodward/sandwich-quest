@@ -9,9 +9,9 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="{{homeRestaurant.image_url}}" class="img-fluid" alt="Responsive image">
+                                <img :src="homeRestaurant.image_url" class="img-fluid" alt="Responsive image">
                             </div>
-                            <div class="col-md-8">
+                            <!-- <div class="col-md-8">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h4>{{ homeRestaurant.price }}</h4>
@@ -46,19 +46,20 @@
                                     <div class="col-md-12">
                                         <h4>{{ homeRestaurant.categories[0].title }}</h4>
                                         <a href="{{homeRestaurant.url}}" target="_blank">{{ homeRestaurant.url }}</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        <!-- </div>
+    </div> -->
 </template>
 
 
 <script>
+import { onMounted } from '@vue/runtime-core'
 import { useRoute } from "vue-router"
 import { AppState } from "../AppState.js"
 import { yelpService } from "../services/YelpService.js"
@@ -73,7 +74,18 @@ import { logger } from "../utils/Logger.js"
 export default {
     setup() {
         const route = useRoute()
-        return {}
+
+        onMounted(() => {
+            try {
+              yelpService.getById(route.params.id)
+            } catch (error) {
+              logger.error(error)
+              Pop.toast(error.message, 'error')
+            }
+        })
+        return {
+            homeRestaurant: AppState.activeRestaurant
+        }
     }
 }
 </script>

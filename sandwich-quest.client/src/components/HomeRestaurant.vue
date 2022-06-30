@@ -26,23 +26,30 @@
 
 <script>
 import { onMounted } from '@vue/runtime-core'
-import { useRoute } from "vue-router"
+import { useRouter } from "vue-router"
 import { yelpService } from '../services/YelpService.js'
 export default {
+    props: {
+        homeRestaurant: {
+            type: Object,
+            required: true
+        }
+    },
 
-    setup() {
-        const route = useRoute()
-        onMounted(async () => {
-            try {
-                await yelpService.getById(route.params.id)
-
-            } catch (error) {
-            }
-        }) 
+    setup(props) {
+        const router = useRouter()        
         return {
-            activeRestaurant: computed(() => AppState.activeRestaurant),
+            goToRestaurantDetails() {
+                router.push({
+                    name: 'restaurant-details',
+                    params: {
+                        id: props.homeRestaurant.id
+                    }
+                })
+            }
+        }
     }
-}}
+}
 
 </script>
 
