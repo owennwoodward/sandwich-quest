@@ -2,6 +2,10 @@
 
 <div>branding here</div>
   <Searchbar/>
+  <div class="container text-center">
+
+    <h1 class="selectable" @click="select" value="pizza">☕</h1>
+  </div>
 
 <div v-for="r in homeRestaurants" :key="r.id" class="col-md-4 ">
   <HomeRestaurant :homeRestaurant="r"/>
@@ -19,18 +23,22 @@ export default {
     name: "Home",
     setup() {
               const searchTerm = ref('')
+              const getByType = (type) => {
+                return yelpService.getByType(type)
+              }
 
         onMounted(async () => {
         });
         return {
-            homeRestaurants: computed(() => AppState.homeRestaurants.businesses),
+            homeRestaurants: computed(() => AppState.homeRestaurants.filter),
              searchTerm,
             async search() {
                 let query = searchTerm.value
                 console.log(query)
                 await yelpService.getAll(query)
                 searchTerm.value = ''
-            }
+            },
+         
         };
     },
 }
