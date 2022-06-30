@@ -10,9 +10,10 @@ export const yelp = Axios.create({
 
 // TODO yelp service in server, CORS requires this from the backend instead of frontend.
 
+let location = 'boise'
 class YelpService {
     async getAll(query = '') {
-        const res = await api.get('yelp', {params: {categories: 'food', location: 'boise', term: query }})
+        const res = await api.get('yelp', {params: {categories: 'food', location: location, term: query }})
         console.log(res.data, 'here is the get all res')
         AppState.homeRestaurants = res.data
     }
