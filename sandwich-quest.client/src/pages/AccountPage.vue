@@ -17,7 +17,7 @@
         <button class="btn btn-primary">save</button>
       </form> -->
       <h3 class="mt-4">My Quests</h3>
-      <div v-for="q in quests" :key="q.id" class="row  card p-3 m-3 bg-primary">
+      <div v-for="q in quests" :key="q.id" class="row card p-3 m-3 bg-primary selectable">
         <div class="col-12 text-center">
           <h5>{{ q.name }}</h5>
 
