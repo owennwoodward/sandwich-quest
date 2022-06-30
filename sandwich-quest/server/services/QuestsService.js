@@ -18,7 +18,8 @@ class QuestsService {
     logger.log( "getQuestById", quest);
     return quest;
   }
-  async createQuest(quest) {
+  async createQuest(quest, userId) {
+    quest.creatorId = userId;
     let newQuest = await dbContext.Quest.create(quest);
     await newQuest.populate("creator", "name picture");
     return newQuest;

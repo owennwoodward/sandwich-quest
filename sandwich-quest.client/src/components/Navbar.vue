@@ -70,6 +70,7 @@ import { computed, ref } from "vue";
 import { useRouter } from 'vue-router';
 import { AppState } from "../AppState";
 import Pop from "../utils/Pop";
+import { questsService } from '../services/QuestsService'
 
 export default {
   setup() {
@@ -95,6 +96,7 @@ export default {
         try {
           questsService.createQuest(form.value)
           // TODO go to new quest page 
+          Pop.toast('this should go to the collections page when created')
         } catch (error) {
           console.error(error)
           Pop.toast(error, 'error')

@@ -43,8 +43,7 @@ export class QuestsController extends BaseController {
 
   async createQuest(req, res, next) {
     try {
-      req.body.creatorId = req.userInfo.id;
-      const quest = await questsService.createQuest(req.body);
+      const quest = await questsService.createQuest(req.body, req.userInfo.id);
       return res.send(quest);
     } catch (error) {
       next(error);
