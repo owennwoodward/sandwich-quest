@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-primary px-3">
+  <nav class="bg-primary px-3 fixed-bottom">
 
     <div @click="homePage()" class="d-flex justify-content-between py-2 pt-3 px-1">
       <div>
