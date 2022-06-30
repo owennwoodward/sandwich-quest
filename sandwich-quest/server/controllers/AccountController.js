@@ -12,7 +12,7 @@ export class AccountController extends BaseController {
       .get('', this.getUserAccount)
       .get('/quests', this.getUserQuests)
       .get('/questItems', this.getUserQuestItems)
-      .put('', this.editAccount)
+    // .put('', this.editAccount)
   }
 
   async getUserAccount(req, res, next) {
