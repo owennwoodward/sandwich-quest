@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card" @click="goToRestaurantDetails">
                     <div class="card-header">
                         <h3>{{ restaurant.name }}</h3>
                     </div>
@@ -17,11 +17,15 @@
 
 
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 
 <script>
-import {useRouter} from "vue-router"
+import { useRouter } from "vue-router"
 export default {
     props: {
         restaurant: {
