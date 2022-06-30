@@ -17,13 +17,14 @@ import { yelpService } from '../services/YelpService'
 
 export default {
     setup(){
-        const searchTerm = ref({})
+        const searchTerm = ref('')
         return {
             searchTerm,
             async search() {
                 let query = searchTerm.value
                 console.log(query)
                 await yelpService.getAll(query)
+                searchTerm.value = ''
             }
         }
     }

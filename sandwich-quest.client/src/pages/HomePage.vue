@@ -3,6 +3,10 @@
 <div>branding here</div>
   <Searchbar/>
 
+<div v-for="r in restaurants" :key="r.id" class="col-md-4 ">
+  <Restaurant :restaurant="r"/>
+</div>
+
 </template>
 
 <script>
