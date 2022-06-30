@@ -1,8 +1,8 @@
 <template>
   <nav class="bg-primary px-3 fixed-bottom">
 
-    <div @click="homePage()" class="d-flex justify-content-between py-2 pt-3 px-1">
-      <div>
+    <div  class="d-flex justify-content-between py-2 pt-3 px-1">
+      <div @click="homePage()">
         <i class="selectable mdi mdi-home-circle fs-1"></i>
       </div>
       <div class="selectable d-flex display-6 fw-bold flex-column justify-content-center p-1" data-bs-toggle="modal"
@@ -89,7 +89,7 @@ export default {
       },
       accountPage() {
         router.push({
-          name: 'Account'
+          path: '/account'
         })
       },
       async createQuest() {
