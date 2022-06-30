@@ -1,56 +1,56 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+  <nav class="bg-primary px-3">
+
+    <div @click="homePage()" class="d-flex justify-content-between py-2 pt-3 px-1" >
+              <div>
+           <i class="selectable mdi mdi-home-circle fs-1"></i>
+        </div>
+      <div class="selectable d-flex display-6 fw-bold flex-column justify-content-center">
+        New Quest
       </div>
-    </router-link>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon" />
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          <router-link
-            :to="{ name: 'About' }"
-            class="btn text-success lighten-30 selectable text-uppercase"
-          >
-            About
-          </router-link>
-        </li>
-      </ul>
-      <!-- LOGIN COMPONENT HERE -->
-      <Login />
+      <div @click="accountPage()">
+        <i class="selectable mdi mdi-account-circle fs-1"></i>
+      </div>
     </div>
+
+
+
   </nav>
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+
 export default {
   setup() {
-    return {};
+    const router = useRouter()
+    return {
+      homePage() {
+        router.push({
+          name: 'Home'
+        })
+      },
+      accountPage() {
+        router.push({
+          name: 'Account'
+        })
+      }
+    };
   },
 };
 </script>
 
+
+
 <style scoped>
+
+.d-flex div i {
+  width: 3rem;
+  height: 3rem;
+}
+
 a:hover {
   text-decoration: none;
 }
-.nav-link {
-  text-transform: uppercase;
-}
-.navbar-nav .router-link-exact-active {
-  border-bottom: 2px solid var(--bs-success);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
+
 </style>
