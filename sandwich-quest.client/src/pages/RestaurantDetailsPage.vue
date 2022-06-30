@@ -47,11 +47,15 @@
                                     <div class="col-md-12">
                                         <h4>{{ restaurant.categories[0].title }}</h4>
                                         <a href="{{restaurant.url}}" target="_blank">{{ restaurant.url }}</a>
-
-
-
-
-                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 
