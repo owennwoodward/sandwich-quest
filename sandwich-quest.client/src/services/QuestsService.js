@@ -10,7 +10,7 @@ class QuestsService {
     AppState.quests = [quest, ...AppState.quests]
   }
 
-  async getAccountQuests() {
+  async getMyQuests(id) {
     const res = await api.get('account/quests')
     console.log('get my account quests', res.data)
     AppState.quests = res.data

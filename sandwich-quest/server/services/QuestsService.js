@@ -22,8 +22,10 @@ class QuestsService {
   }
 
   // Come back after lunch and write this get user quest logic
-  async getUserQuests() {
-
+  async getUserQuests(id) {
+    const quest = await dbContext.Quest.find({ creatorId: id })
+    logger.log('getting your posts', quest)
+    return quest
   }
   async createQuest(quest, userId) {
     quest.creatorId = userId;
