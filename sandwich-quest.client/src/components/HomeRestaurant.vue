@@ -10,24 +10,34 @@
                                 <YelpStars :rating="homeRestaurant.rating" />
                             </div>
                         </div>
-                        <h5>{{homeRestaurant.location.address1}}</h5>
+                        <h5>{{homeRestaurant?.location?.address1}}</h5>
                         <div class="d-flex justify-content-between">
-                            <p>
-                                {{homeRestaurant.categories[0]?.title}}
-                            </p>
-                            <p>
-                                {{homeRestaurant.categories[1]?.title}}
 
-                            </p>
-                            <p>
-                                {{homeRestaurant.categories[2]?.title}}
-                            </p>
+                            <p v-for="c in homeRestaurant.categories" :key="c.alias"> {{c.title}}</p>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <img :src="homeRestaurant.image_url" class="img-fluid" :alt="homeRestaurant.name">
+                            </div>
+                            <div class="col-md-8">
+                                <div>
+                                    <div>Phone Numba
+                                        <p>{{homeRestaurant.phone}}</p>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        Transactions:
+                                        <p class="p-1 m-0 fst-italic" v-for="m in homeRestaurant.transactions">{{m}}</p>
+                                    </div>
+                                    <div v-if="homeRestaurant.coordinates?.latitude" class="d-flex flex-column">
+                                        Get The Heck Over There:
+                                        <a class="text-secondary" :href="`https://maps.google.com/?q=${homeRestaurant.coordinates?.latitude},${homeRestaurant.coordinates?.longitude}`"> Google Maps</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <AddToQuest />
+                                </div>
                             </div>
                         </div>
                     </div>

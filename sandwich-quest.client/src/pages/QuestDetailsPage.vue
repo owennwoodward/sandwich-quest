@@ -1,14 +1,19 @@
 <template>
     <div class="component">
+        <h2>{{quest.name}}</h2>
         
-
+        <div v-for="q in questItems" :key="q.id"  class="">
+        <!-- <QuestItem :quest="q" /> -->
+        <!-- <HomeRestaurant :homeRestaurant="q" /> -->
+        </div>
     </div>
 </template>
 
 
 <script>
-import { onMounted } from "vue"
+import { computed, onMounted } from "vue"
 import { useRoute } from "vue-router"
+import { AppState } from "../AppState";
 import { questItemsService } from "../services/QuestItemsService";
 import { questsService } from "../services/QuestsService";
 import Pop from "../utils/Pop";
@@ -27,7 +32,8 @@ export default {
        }
      });
         return {
-            
+            questItems: computed(()=> AppState.questitems),
+            quest: computed(()=> AppState.quests.find(q => q.id == route.params.id))
         }
     }
 }

@@ -29,4 +29,10 @@ export default {
 footer {
   font-family: 'Julius Sans One', sans-serif;
 }
+
+.stars {
+    display: flex;
+    flex-direction: row-reverse;
+    transform: scale(.75);
+}
 </style>
