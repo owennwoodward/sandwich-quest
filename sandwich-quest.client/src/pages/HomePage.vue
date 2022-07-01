@@ -101,4 +101,8 @@ export default {
   
 }
 
+.filter-button:hover{
+  transform: scale(1.05);
+}
+
 </style>

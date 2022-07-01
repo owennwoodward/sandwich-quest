@@ -1,13 +1,16 @@
 import { AppState } from "../AppState"
+import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
 
 class QuestsService {
 
   async createQuest(questData) {
+    logger.log('hitting questsService', questData)
     const quest = await api.post('api/quests', questData)
-    console.log('-createQuest-', quest)
-    AppState.quests = [quest, ...AppState.quests]
+    console.log('-createQuest-', quest.data)
+    AppState.quests = [quest.data, ...AppState.quests]
+    return quest.data
   }
 
   async getMyQuests(query = {}) {
