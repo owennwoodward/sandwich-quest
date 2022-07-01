@@ -3,8 +3,9 @@ import { BadRequest } from "@bcwdev/auth0provider/lib/Errors.js";
 
 
 class QuestItemsService {
-    getQuestItems(id) {
-        const questItems = dbContext.QuestItem.findById({ id });
+    getQuestItems(questId) {
+        const questItems = dbContext.QuestItem.findById({ questId });
+
         return questItems;
 
 
