@@ -22,16 +22,21 @@
                                 <img :src="homeRestaurant.image_url" class="img-fluid" :alt="homeRestaurant.name">
                             </div>
                             <div class="col-md-8">
-                                <div>Phone Numba
-                                    <p>{{homeRestaurant.phone}}</p>
+                                <div>
+                                    <div>Phone Numba
+                                        <p>{{homeRestaurant.phone}}</p>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        Transactions:
+                                        <p class="p-1 m-0 fst-italic" v-for="m in homeRestaurant.transactions">{{m}}</p>
+                                    </div>
+                                    <div v-if="homeRestaurant.coordinates?.latitude" class="d-flex flex-column">
+                                        Get The Heck Over There:
+                                        <a class="text-secondary" :href="`https://maps.google.com/?q=${homeRestaurant.coordinates?.latitude},${homeRestaurant.coordinates?.longitude}`"> Google Maps</a>
+                                    </div>
                                 </div>
-                                <div class="d-flex flex-column">
-                                    Transactions:
-                                    <p class="p-1 m-0 fst-italic" v-for="m in homeRestaurant.transactions">{{m}}</p>
-                                </div>
-                                <div v-if="homeRestaurant.coordinates?.latitude" class="d-flex flex-column">
-                                    Get The Heck Over There:
-                                    <a class="text-secondary" :href="`https://maps.google.com/?q=${homeRestaurant.coordinates?.latitude},${homeRestaurant.coordinates?.longitude}`"> Google Maps</a>
+                                <div>
+                                    <AddToQuest />
                                 </div>
                             </div>
                         </div>
