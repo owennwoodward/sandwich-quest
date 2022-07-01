@@ -56,7 +56,7 @@ export default {
     setup() {
         const route = useRoute()
 
-        watchEffect( async () => {
+        onMounted( async () => {
             try {
               await yelpService.getById(route.params.id)
             //   await questsService.getQuests()
