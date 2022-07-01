@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <div class="d-flex align-middle">
     <h1 class="logo">
       <img class="logo-img" src="../assets/img/SQ BW.png" alt="">
       Sando Quest
@@ -11,7 +11,7 @@
 
   </div>
   <!-- TODO make the button not show up if the result would be empty array -->
-  <!-- TODO make the search reset the filter -->
+  
   <h5>Filters:</h5>
   <div class="p-3 pb-5 d-flex justify-content-around">
     <h2 title="All" class="filter-button selectable" @click="filter= ''">👌</h2>
@@ -34,6 +34,7 @@ import { AppState } from '../AppState.js'
 import { yelpService } from '../services/YelpService.js'
 import { logger } from '../utils/Logger.js'
 import HomeRestaurant from '../components/HomeRestaurant.vue'
+import Pop from '../utils/Pop.js'
 
 export default {
     name: "Home",
@@ -42,25 +43,15 @@ export default {
         const filter = ref('');
         let categories = [];
         onMounted(async () => {
+          try {
+             await yelpService.getAll('');  
+          } catch (error) {
+            Pop.error(error)
+          }
         });
         return {
-          log(){
-            logger.log('log function works')
-          },
-          // filter(category){
-          //   logger.log('made it to filtercoffee in homepage')
-          //   filterService.filter(category)
-          // },
             filter,
             searchTerm,
-            // async search() {
-            //   logger.log('here is the filter', filter.value)
-            //     let query = searchTerm.value;
-            //     console.log(query);
-            //     await yelpService.getAll(query);
-            //     filter.value = ""
-            //     searchTerm.value = "";
-            // },
             homeRestaurants: computed(() => AppState.homeRestaurants.businesses?.filter(r => filter.value ?  (r.categories[0]?.alias || r.categories[1]?.alias || r.categories[2]?.alias) == filter.value : true)),
         };
     },
@@ -102,8 +93,9 @@ export default {
 
 .filter-button{
   border: 2px;
-  border-color:$secondary;
+  border-color: $secondary;
   border-style: solid;
+  background-color: $secondary;
   border-radius: 50%;
   padding: 5px;
   
