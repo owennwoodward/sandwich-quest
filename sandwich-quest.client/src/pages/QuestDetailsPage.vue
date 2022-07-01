@@ -1,5 +1,7 @@
 <template>
     <div class="component">
+        <h2>{{quest.name}}</h2>
+        
         <div v-for="q in questItems" :key="q.id"  class="">
         <QuestItem :quest="q" />
         </div>
@@ -29,7 +31,8 @@ export default {
        }
      });
         return {
-            questItems: computed(()=> AppState.questitems)
+            questItems: computed(()=> AppState.questitems),
+            quest: computed(()=> AppState.quests.find(q => q.id == route.params.id))
         }
     }
 }
