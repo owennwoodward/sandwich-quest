@@ -3,6 +3,7 @@ import { accountService } from '../services/AccountService'
 import { questsService } from '../services/QuestsService.js'
 import BaseController from '../utils/BaseController'
 import { questItemsService } from '../services/QuestItemsService.js'
+import { logger } from '../utils/Logger'
 
 export class AccountController extends BaseController {
   constructor() {
@@ -12,7 +13,7 @@ export class AccountController extends BaseController {
       .get('', this.getUserAccount)
       .get('/quests', this.getUserQuests)
       .get('/questItems', this.getUserQuestItems)
-    // .put('', this.editAccount)
+      .put('', this.editAccount)
   }
 
   async getUserAccount(req, res, next) {
@@ -40,7 +41,14 @@ export class AccountController extends BaseController {
     }
   }
 
-  // async updateAccount(req, res, next) {
-  //   const account = await accountService.updateAccount(req.body.value, req.userInfo)
-  // }
+  async editAccount(req, res, next) {
+    try {
+      logger.log('made it to controller')
+      const account = await accountService.updateAccount(req.userInfo, req.body)
+      res.send(account)
+    } catch (error) {
+      next(error)
+    }
+
+  }
 }

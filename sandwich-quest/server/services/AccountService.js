@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import { logger } from '../utils/Logger'
 
 // Private Methods
 
@@ -70,6 +71,7 @@ class AccountService {
    */
   async updateAccount(user, body) {
     const update = sanitizeBody(body)
+    logger.log('made it to update account in server service')
     const account = await dbContext.Account.findOneAndUpdate(
       { _id: user.id },
       { $set: update },

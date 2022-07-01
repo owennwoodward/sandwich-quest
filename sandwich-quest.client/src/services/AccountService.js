@@ -14,15 +14,20 @@ class AccountService {
 
   async getQuests() {
     const res = await api.get('account/quests')
+    // FIXME datap???
     AppState.quests = res.datap
     return res.data
   }
+
+
+  async editAccount(editData) {
+    
+    const res = await api.put('/account', editData)
+    logger.log(res.data)
+    AppState.account = res.data
+  }
+
 }
 
-// async editAccount(editData) {
-//   const res = await api.put('/account', editData)
-//   logger.log(res.data)
-//   AppState.account = res.data
-// }
 
 export const accountService = new AccountService()
