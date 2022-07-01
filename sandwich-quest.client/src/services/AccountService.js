@@ -14,7 +14,7 @@ class AccountService {
 
   async getQuests() {
     const res = await api.get('account/quests')
-    AppState.quests = res.data
+    AppState.quests = res.datap
     return res.data
   }
 }
