@@ -29,9 +29,9 @@
                                     Transactions:
                                     <p class="p-1 m-0 fst-italic" v-for="m in homeRestaurant.transactions">{{m}}</p>
                                 </div>
-                                <div class="d-flex flex-column">
+                                <div v-if="homeRestaurant.coordinates?.latitude" class="d-flex flex-column">
                                     Get The Heck Over There:
-                                    <a class="text-secondary" :href="`https://maps.google.com/?q=${homeRestaurant.coordinates.latitude},${homeRestaurant.coordinates.longitude}`"> Google Maps</a>
+                                    <a class="text-secondary" :href="`https://maps.google.com/?q=${homeRestaurant.coordinates?.latitude},${homeRestaurant.coordinates?.longitude}`"> Google Maps</a>
                                 </div>
                             </div>
                         </div>
