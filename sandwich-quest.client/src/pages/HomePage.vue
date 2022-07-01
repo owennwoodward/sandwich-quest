@@ -1,27 +1,30 @@
 <template>
 
-<div>
-  <h1 class="logo">
-    <img class="logo-img" src="../assets/img/SQ BW.png" alt="">
-    Sando Quest</h1>
-</div>
+  <div>
+    <h1 class="logo">
+      <img class="logo-img" src="../assets/img/SQ BW.png" alt="">
+      Sando Quest
+    </h1>
+  </div>
   <Searchbar @submit.prevent="filter = ''" />
   <div class="container text-center">
 
   </div>
-<!-- TODO make the button not show up if the result would be empty array -->
-<!-- TODO make the search reset the filter -->
-<h2 class="selectable" @click="filter= ''">🍴</h2>
-<h2 class="selectable" @click="filter= 'coffee'">☕</h2>
-<h2 class="selectable" @click="filter= 'tradamerican'">🏈</h2>
-<h2 class="selectable" @click="filter= 'burger'">🍔</h2>
-<h2 class="selectable" @click="filter= 'vegan'">🥦</h2>
-<h2 class="selectable" @click="filter= 'bakeries'">🥐</h2>
-<h2 class="selectable" @click="filter= 'desserts'">🍨</h2>
-
-<div v-for="r in homeRestaurants" :key="r.id" class=" ">
-  <HomeRestaurant :homeRestaurant="r"/>
-</div>
+  <!-- TODO make the button not show up if the result would be empty array -->
+  <!-- TODO make the search reset the filter -->
+  <h5>Filters:</h5>
+  <div class="p-3 pb-5 d-flex justify-content-around">
+    <h2 title="All" class="filter-button selectable" @click="filter= ''">👌</h2>
+    <h2 title="Coffee" class="filter-button selectable" @click="filter= 'coffee'">☕</h2>
+    <h2 title="American" class="filter-button selectable" @click="filter= 'tradamerican'">🏈</h2>
+    <h2 title="Burgers" class="filter-button selectable" @click="filter= 'burger'">🍔</h2>
+    <h2 title="Vegan" class="filter-button selectable" @click="filter= 'vegan'">🥦</h2>
+    <h2 title="Bakeries" class="filter-button selectable" @click="filter= 'bakeries'">🥐</h2>
+    <h2 title="Desserts" class="filter-button selectable" @click="filter= 'desserts'">🍨</h2>
+  </div>
+  <div v-for="r in homeRestaurants" :key="r.id" class=" ">
+    <HomeRestaurant :homeRestaurant="r" />
+  </div>
 
 </template>
 
@@ -66,6 +69,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../assets/scss/variables";
 .home{
   display: grid;
   height: 80vh;
@@ -95,5 +99,14 @@ export default {
   font-family: fantasyFont;
   src: url('../assets/img/DreamwoodDemoRegular-Zj3q.ttf');
 } 
+
+.filter-button{
+  border: 2px;
+  border-color:aqua;
+  border-style: solid;
+  border-radius: 50%;
+  padding: 5px;
+  
+}
 
 </style>
