@@ -1,4 +1,5 @@
 import { AppState } from "../AppState";
+import { logger } from "../utils/Logger";
 import { api } from "./AxiosService"
 
 class QuestItemsService {
@@ -8,6 +9,12 @@ class QuestItemsService {
     console.log('-createQuestItem-', res.data)
     // Change appstate??
   }
+
+async getMyQuestItems(){
+  const res = await api.get('account/questItems')
+  logger.log('here is the all quest items', res.data)
+  AppState.questitems = res.data
+}
 
 }
 
