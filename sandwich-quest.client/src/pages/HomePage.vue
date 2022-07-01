@@ -1,6 +1,10 @@
 <template>
 
-<div>branding here</div>
+<div>
+  <h1 class="logo">
+    <img class="logo-img" src="../assets/img/SQ BW.png" alt="">
+    Sando Quest</h1>
+</div>
   <Searchbar/>
   <div class="container text-center">
 
@@ -65,4 +69,17 @@ export default {
     }
   }
 }
+
+
+.logo{
+  font-family: fantasyFont;
+}
+.logo-img{
+  width: 50px
+}
+@font-face{
+  font-family: fantasyFont;
+  src: url('../assets/img/DreamwoodDemoRegular-Zj3q.ttf');
+} 
+
 </style>
