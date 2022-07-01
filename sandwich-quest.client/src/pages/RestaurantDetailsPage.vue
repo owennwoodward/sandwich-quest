@@ -16,17 +16,11 @@
                                         <h4>{{ homeRestaurant.display_phone }}</h4>
                                         <h4>Rating: {{ homeRestaurant.rating }}/5</h4>
                                     </div>
+
                                     <div>
-                                        <div class="btn btn-primary " @click="">Add to Collection</div>
-                                        <form>
-                                            <select>
-                                                <option>Colection 1 Fix me</option>
-                                                <option>Colection 2</option>
-                                                <option>Colection 3</option>
-                                                <option>Colection 4</option>
-                                            </select>
-                                        </form>
+                                        <AddToQuest :restaurantId="routeId" :quests="quests"/>
                                     </div>
+
                                 </div>
                                         <!-- 
                                 </div>
@@ -50,19 +44,22 @@
 
 <script>
 import { computed, onMounted } from '@vue/runtime-core'
+import { watchEffect } from "vue"
 import { useRoute } from "vue-router"
 import { AppState } from "../AppState.js"
-import { accountService } from "../services/AccountService.js"
+
+import { questsService } from "../services/QuestsService.js"
 import { yelpService } from "../services/YelpService.js"
 import { logger } from "../utils/Logger.js"
+import Pop from "../utils/Pop.js"
 export default {
     setup() {
         const route = useRoute()
 
-        onMounted(() => {
+        watchEffect( async () => {
             try {
-              yelpService.getById(route.params.id)
-              accountService.getQuests()
+              await yelpService.getById(route.params.id)
+            //   await questsService.getQuests()
             } catch (error) {
               logger.error(error)
               Pop.toast(error.message, 'error')
@@ -70,6 +67,8 @@ export default {
         })
         return {
             homeRestaurant:computed(()=> AppState.activeRestaurant),
+            quests: computed(() => AppState.quests.sort((a,b) => a.updatedAt - b.updatedAt)),
+            routeId: computed(()=> route.params.id),
             addToCollection() {
 
             }

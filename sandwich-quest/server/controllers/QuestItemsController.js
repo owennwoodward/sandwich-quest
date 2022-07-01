@@ -19,7 +19,7 @@ export class QuestItemsController extends BaseController {
 
     async createItem(req, res, next) {
         try {
-            const Item = await questItemsService.createItem(req.body)
+            const Item = await questItemsService.createItem(req.body, req.userInfo.id)
             return res.send(Item)
         } catch (error) {
             next(error)
