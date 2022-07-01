@@ -102,7 +102,7 @@ export default {
 
 .filter-button{
   border: 2px;
-  border-color:aqua;
+  border-color:$secondary;
   border-style: solid;
   border-radius: 50%;
   padding: 5px;
