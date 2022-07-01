@@ -3,7 +3,7 @@
     <div>
       <form>
     <button type="submit"  class="btn btn-primary " @click.prevent="addToCollection">Add to Quest</button>
-         <select v-model="questBar.questId">
+         <select required v-model="questBar.questId">
           <!--  v-model="questBar.questId" -->
               <option v-for="q in quests" :key="q.id" :value="q.id" >
                {{q.name}}
