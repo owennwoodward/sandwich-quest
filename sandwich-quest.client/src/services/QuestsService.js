@@ -22,7 +22,8 @@ class QuestsService {
 
  async getQuestItems(id) {
     const res = await api.get(`api/quests/${id}/items`)
-    console.log(res.data);
+    console.log(res.data, 'getting quest items');
+    AppState.questitems = res.data
   }
 }
 
