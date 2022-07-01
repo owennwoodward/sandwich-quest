@@ -68,6 +68,7 @@ export default {
               let newItem = {
                 name: AppState.activeRestaurant.name,
                 questId: questBar.value.questId,
+                restaurantId: AppState.activeRestaurant.id
               }
 
              try {

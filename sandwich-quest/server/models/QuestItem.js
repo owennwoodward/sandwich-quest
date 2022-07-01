@@ -8,7 +8,7 @@ export const QuestItemSchema = new Schema({
     questId: { type: ObjectId, required: true, ref: 'Quest' },
     creatorId: { type: ObjectId, required: true, ref: 'Account' },
     restaurantId: { type: String, required: true },
-    myNotes: { type: String, required: true, default: '' },
+    myNotes: { type: String, required: false, default: '' },
     isChecked: { type: Boolean, default: false, required: true },
     checkedDate: { type: Date, required: false },
     itemType: { type: String, required: false },

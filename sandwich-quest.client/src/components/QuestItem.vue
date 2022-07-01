@@ -1,6 +1,8 @@
 <template lang="">
-  <div>
+  <div class="card text-dark p-3 my-4 selectable">
     {{quest.name}}
+    {{quest.myNotes}}
+    {{quest.isChecked}}
   </div>
 </template>
 <script>
