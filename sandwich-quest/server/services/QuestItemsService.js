@@ -1,11 +1,12 @@
 import { dbContext } from "../db/DbContext.js";
 import { BadRequest } from "@bcwdev/auth0provider/lib/Errors.js";
+import { logger } from "../utils/Logger.js";
 
 
 class QuestItemsService {
     getQuestItems(questId) {
-        const questItems = dbContext.QuestItem.findById({ questId });
-
+        const questItems = dbContext.QuestItem.find({ questId });
+        logger.log('-GetQuestItems-', questItems)
         return questItems;
 
 

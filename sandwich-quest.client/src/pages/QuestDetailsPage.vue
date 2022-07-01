@@ -1,14 +1,16 @@
 <template>
     <div class="component">
-        
-
+        <div v-for="q in questItems" :key="q.id"  class="">
+        <QuestItem :quest="q" />
+        </div>
     </div>
 </template>
 
 
 <script>
-import { onMounted } from "vue"
+import { computed, onMounted } from "vue"
 import { useRoute } from "vue-router"
+import { AppState } from "../AppState";
 import { questItemsService } from "../services/QuestItemsService";
 import { questsService } from "../services/QuestsService";
 import Pop from "../utils/Pop";
@@ -27,7 +29,7 @@ export default {
        }
      });
         return {
-            
+            questItems: computed(()=> AppState.questitems)
         }
     }
 }
