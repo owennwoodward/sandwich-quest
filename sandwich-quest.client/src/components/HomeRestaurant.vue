@@ -10,9 +10,9 @@
                                 <YelpStars :rating="homeRestaurant.rating" />
                             </div>
                         </div>
-                        <h5>{{homeRestaurant.location.address1}}</h5>
+                        <h5>{{homeRestaurant?.location?.address1}}</h5>
                         <div class="d-flex justify-content-between">
-                            <p>
+                            <!-- <p>
                                 {{homeRestaurant.categories[0]?.title}}
                             </p>
                             <p>
@@ -21,7 +21,8 @@
                             </p>
                             <p>
                                 {{homeRestaurant.categories[2]?.title}}
-                            </p>
+                            </p> -->
+                            <P v-for="c in homeRestaurant.categories" :key="c.alias"> {{c.title}}</P>
                         </div>
                     </div>
                     <div class="card-body">

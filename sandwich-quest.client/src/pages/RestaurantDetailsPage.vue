@@ -1,6 +1,6 @@
 <template>
 
-    <HomeRestaurant />
+    <HomeRestaurant :homeRestaurant="homeRestaurant"/>
     
 </template>
 
