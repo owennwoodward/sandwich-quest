@@ -17,7 +17,8 @@ class QuestItemsService {
         return questItems;
     }
 
-    async createItem(questItem) {
+    async createItem(questItem, creatorId) {
+        questItem.creatorId = creatorId
         let newQuestItem = await dbContext.QuestItem.create(questItem);
         await newQuestItem.populate("creator")
 

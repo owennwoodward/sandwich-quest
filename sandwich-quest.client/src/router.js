@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { authGuard } from '@bcwdev/auth0provider-client'
+import { authGuard, authSettled } from '@bcwdev/auth0provider-client'
 
 function loadPage(page) {
   return () => import(`./pages/${page}.vue`)
@@ -30,7 +30,12 @@ const routes = [
   {
     path: '/restaurantDetails/:id',
     name: 'restaurant-details',
+<<<<<<< HEAD
     component: loadPage('RestaurantDetailsPage')
+=======
+    component: loadPage('RestaurantDetailsPage'),
+    beforeEnter: authSettled
+>>>>>>> 2de1d3d99bd521d989c06b5be90fb46b65d9f040
   }
 ]
 

@@ -16,7 +16,7 @@
 <script>
 import { ref } from 'vue'
 import { yelpService } from '../services/YelpService'
-
+import { logger } from '../utils/Logger'
 
 export default {
     setup(){
@@ -52,10 +52,6 @@ input{
 input:focus{
         background-color: $light
 }
-
-
-
-
 
 
 i{
