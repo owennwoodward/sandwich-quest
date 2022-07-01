@@ -6,10 +6,9 @@ import { api } from "./AxiosService"
 class QuestsService {
 
   async createQuest(questData) {
-    logger.log('hitting questsService', questData)
     const quest = await api.post('api/quests', questData)
     console.log('-createQuest-', quest.data)
-    AppState.quests = [quest.data, ...AppState.quests]
+    AppState.quests.unshift(quest.data)
     return quest.data
   }
 
