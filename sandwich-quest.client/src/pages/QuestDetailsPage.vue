@@ -3,7 +3,8 @@
         <h2>{{quest.name}}</h2>
         
         <div v-for="q in questItems" :key="q.id"  class="">
-        <QuestItem :quest="q" />
+        <!-- <QuestItem :quest="q" /> -->
+        <!-- <HomeRestaurant :homeRestaurant="q" /> -->
         </div>
     </div>
 </template>
