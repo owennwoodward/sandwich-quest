@@ -17,15 +17,20 @@ const routes = [
     component: loadPage('AboutPage')
   },
   {
+    path: '/questsDetails',
+    name: 'QuestDetails',
+    component: loadPage('QuestDetailsPage')
+  },
+  {
     path: '/account',
     name: 'Account',
     component: loadPage('AccountPage'),
     beforeEnter: authGuard
   },
   {
-path: '/restaurantDetails/:id',
-name: 'restaurant-details',
-component: loadPage('RestaurantDetailsPage')
+    path: '/restaurantDetails/:id',
+    name: 'restaurant-details',
+    component: loadPage('RestaurantDetailsPage')
   }
 ]
 
