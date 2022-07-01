@@ -10,16 +10,21 @@ class QuestsService {
     AppState.quests = [quest, ...AppState.quests]
   }
 
-  async getMyQuests() {
+  async getMyQuests(query = {}) {
     // if (!accountId) {
     //   return true
     // }
-    const res = await api.get('account/quests')
+    const res = await api.get('account/quests', query)
     console.log('get my account quests', res.data)
     AppState.quests = res.data
     return res.data
   }
 
+ async getQuestItems(id) {
+    const res = await api.get(`api/quests/${id}/items`)
+    console.log(res.data);
+  }
 }
+
 
 export const questsService = new QuestsService()

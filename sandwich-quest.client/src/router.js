@@ -17,9 +17,10 @@ const routes = [
     component: loadPage('AboutPage')
   },
   {
-    path: '/questsDetails',
+    path: '/questsDetails/:id',
     name: 'QuestDetails',
-    component: loadPage('QuestDetailsPage')
+    component: loadPage('QuestDetailsPage'),
+    beforeEnter: authGuard
   },
   {
     path: '/account',
