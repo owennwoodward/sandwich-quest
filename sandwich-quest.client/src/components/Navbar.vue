@@ -98,7 +98,7 @@ export default {
           let questData = form.value
           let newQuest = await questsService.createQuest(questData)
           Modal.getOrCreateInstance(document.getElementById('modelId')).hide()
-          router.push({name: 'QuestDetails', params: {id: newQuest.id}})
+          router.push({name: 'Account'})
           form.value={}
           
         } catch (error) {

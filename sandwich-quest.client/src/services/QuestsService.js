@@ -8,7 +8,7 @@ class QuestsService {
   async createQuest(questData) {
     const quest = await api.post('api/quests', questData)
     console.log('-createQuest-', quest.data)
-    AppState.quests = [quest.data, ...AppState.quests]
+    AppState.quests.unshift(quest.data)
     return quest.data
   }
 
