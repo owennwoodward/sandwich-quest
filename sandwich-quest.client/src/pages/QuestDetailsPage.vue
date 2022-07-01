@@ -1,7 +1,8 @@
 <template>
     <div class="component">
         <div v-for="q in questItems" :key="q.id"  class="">
-        <QuestItem :quest="q" />
+        <!-- <QuestItem :quest="q" /> -->
+        <!-- <HomeRestaurant :homeRestaurant="q" /> -->
         </div>
     </div>
 </template>
