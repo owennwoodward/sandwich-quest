@@ -30,12 +30,8 @@ const routes = [
   {
     path: '/restaurantDetails/:id',
     name: 'restaurant-details',
-<<<<<<< HEAD
-    component: loadPage('RestaurantDetailsPage')
-=======
     component: loadPage('RestaurantDetailsPage'),
     beforeEnter: authSettled
->>>>>>> 2de1d3d99bd521d989c06b5be90fb46b65d9f040
   }
 ]
 
