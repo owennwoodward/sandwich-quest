@@ -18,7 +18,7 @@
       </form> -->
       <h3 class="mt-4">My Quests</h3>
       <div v-for="q in quests" :key="q.id" class="row card p-3 m-3 bg-primary selectable">
-        <div class="col-12 text-center">
+        <div class="col-12 text-center" @click="goToQuestDetails(q.id)">
           <h5>{{ q.name }}</h5>
 
         </div>
@@ -34,12 +34,15 @@
 
 <script>
 import { computed, onMounted, ref, watchEffect } from 'vue'
+import { useRouter } from "vue-router"
 import { AppState } from '../AppState'
+import { router } from "../router"
 import { questsService } from '../services/QuestsService'
 import Pop from '../utils/Pop'
 export default {
   name: 'Account',
   setup() {
+   const router = useRouter()
     const edits = ref({})
     onMounted(async () => {
       try {
@@ -50,10 +53,19 @@ export default {
       }
     })
     return {
+      router,
       // edits,
       account: computed(() => AppState.account),
       quests: computed(() => AppState.quests),
-      questsItems: computed(() => AppState.questitems)
+      questsItems: computed(() => AppState.questitems),
+      goToQuestDetails(id) {
+        router.push({
+          name: 'QuestDetails', 
+          params: {
+            id: id
+          }
+        })
+      }
 
 
 
