@@ -2,22 +2,24 @@ import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 
 
+
+
+// NOTE This service is not used, we refactored it to a ref object on the homepage. Keeping as an example of refactoring.
+
 let categories = []
 
 class FilterService{
     
-filterCoffee(){
-    logger.log("calling function in service")
+filter(category){
     let businesses = AppState.homeRestaurants.businesses
     let filteredBusinesses = []
-
     for (let index = 0; index < businesses.length; index++) {
         for (let j = 0; j < businesses[index].categories.length; j++) {
             categories += businesses[index].categories[j].alias
             categories += ' '
             logger.log(categories, 'here are the categories')
         }
-        if (categories.includes('coffee')) {
+        if (categories.includes(category)) {
             filteredBusinesses.push(businesses[index])
         }
         categories = []
@@ -29,4 +31,4 @@ filterCoffee(){
 }
 
 
-export const filterService = new FilterService()
+// export const filterService = new FilterService()

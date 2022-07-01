@@ -5,12 +5,19 @@
     <img class="logo-img" src="../assets/img/SQ BW.png" alt="">
     Sando Quest</h1>
 </div>
-  <Searchbar/>
+  <Searchbar @submit.prevent="filter = ''" />
   <div class="container text-center">
 
   </div>
-
-<h2 class="selectable" @click="filterCoffee">☕</h2>
+<!-- TODO make the button not show up if the result would be empty array -->
+<!-- TODO make the search reset the filter -->
+<h2 class="selectable" @click="filter= ''">🍴</h2>
+<h2 class="selectable" @click="filter= 'coffee'">☕</h2>
+<h2 class="selectable" @click="filter= 'tradamerican'">🏈</h2>
+<h2 class="selectable" @click="filter= 'burger'">🍔</h2>
+<h2 class="selectable" @click="filter= 'vegan'">🥦</h2>
+<h2 class="selectable" @click="filter= 'bakeries'">🥐</h2>
+<h2 class="selectable" @click="filter= 'desserts'">🍨</h2>
 
 <div v-for="r in homeRestaurants" :key="r.id" class=" ">
   <HomeRestaurant :homeRestaurant="r"/>
@@ -24,27 +31,34 @@ import { AppState } from '../AppState.js'
 import { yelpService } from '../services/YelpService.js'
 import { logger } from '../utils/Logger.js'
 import HomeRestaurant from '../components/HomeRestaurant.vue'
-import { filterService } from '../services/FilterService.js'
+
 export default {
     name: "Home",
     setup() {
         const searchTerm = ref("");
-       
+        const filter = ref('');
+        let categories = [];
         onMounted(async () => {
         });
         return {
-          filterCoffee(){
-            logger.log('made it to filtercoffee in homepage')
-            filterService.filterCoffee()
+          log(){
+            logger.log('log function works')
           },
+          // filter(category){
+          //   logger.log('made it to filtercoffee in homepage')
+          //   filterService.filter(category)
+          // },
+            filter,
             searchTerm,
-            async search() {
-                let query = searchTerm.value;
-                console.log(query);
-                await yelpService.getAll(query);
-                searchTerm.value = "";
-            },
-            homeRestaurants: computed(() => AppState.homeRestaurants.businesses),
+            // async search() {
+            //   logger.log('here is the filter', filter.value)
+            //     let query = searchTerm.value;
+            //     console.log(query);
+            //     await yelpService.getAll(query);
+            //     filter.value = ""
+            //     searchTerm.value = "";
+            // },
+            homeRestaurants: computed(() => AppState.homeRestaurants.businesses?.filter(r => filter.value ?  (r.categories[0]?.alias || r.categories[1]?.alias || r.categories[2]?.alias) == filter.value : true)),
         };
     },
     components: { HomeRestaurant }
