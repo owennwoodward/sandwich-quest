@@ -81,8 +81,6 @@ export default {
 
             async addToCollection() {
 
-              console.log('-adding to quest-', questBar.value.questId)
-              console.log('-Restaurant object-', props.restaurant)
 
               //massage the data
 

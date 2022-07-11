@@ -17,7 +17,7 @@ filter(category){
         for (let j = 0; j < businesses[index].categories.length; j++) {
             categories += businesses[index].categories[j].alias
             categories += ' '
-            logger.log(categories, 'here are the categories')
+            // logger.log(categories, 'here are the categories')
         }
         if (categories.includes(category)) {
             filteredBusinesses.push(businesses[index])
@@ -25,7 +25,7 @@ filter(category){
         categories = []
     }  
     AppState.homeRestaurants.businesses = filteredBusinesses
-    logger.log(AppState.homeRestaurants.businesses)
+    // logger.log(AppState.homeRestaurants.businesses)
   
  };
 }

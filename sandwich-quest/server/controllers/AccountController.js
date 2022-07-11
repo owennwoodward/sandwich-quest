@@ -43,7 +43,7 @@ export class AccountController extends BaseController {
 
   async editAccount(req, res, next) {
     try {
-      logger.log('made it to controller')
+      // logger.log('made it to controller')
       const account = await accountService.updateAccount(req.userInfo, req.body)
       res.send(account)
     } catch (error) {

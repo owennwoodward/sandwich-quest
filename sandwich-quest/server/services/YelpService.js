@@ -15,7 +15,7 @@ export const yelp = axios.create({
 
 class YelpService {
   async getAll(params) {
-    logger.log(params)
+    // logger.log(params)
     const res = await yelp.get('/businesses/search', { params })
     if (!res.data) {
       throw new BadRequest('Idiot, try again')
@@ -27,7 +27,6 @@ class YelpService {
     if (!res.data) {
       throw new BadRequest('Idiot, not the right ID')
     }
-    // logger.log()
     return res.data
   }
 

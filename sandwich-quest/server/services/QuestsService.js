@@ -17,7 +17,7 @@ class QuestsService {
   }
   async getQuestById(id) {
     let quest = await dbContext.Quest.findById(id).populate("creator", "name picture");
-    logger.log("getQuestById", quest);
+    // logger.log("getQuestById", quest);
     return quest;
   }
 
@@ -27,7 +27,7 @@ class QuestsService {
     if (!quests) {
       throw new BadRequest('something went wrong')
     }
-    logger.log('getting your Quests', quests)
+    // logger.log('getting your Quests', quests)
     return quests
   }
   async createQuest(quest, userId) {
@@ -43,7 +43,7 @@ class QuestsService {
       throw new Forbidden("can't edit that")
     original.name = questData.name ? questData.name : original.name
     original.save()
-    logger.log('edited', original)
+    // logger.log('edited', original)
     return original
 
   }
