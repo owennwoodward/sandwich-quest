@@ -1,7 +1,7 @@
 <template>
-  <nav class="bg-primary px-3 fixed-bottom">
+  <nav class="bg-primary px-3 fixed-bottom nav-bar">
 
-    <div  class="d-flex justify-content-between py-2 pt-3 px-1">
+    <div class="d-flex justify-content-between py-2 pt-3 px-1">
       <div @click="homePage()">
         <i class="selectable mdi mdi-home-circle fs-1"></i>
       </div>
@@ -36,8 +36,8 @@
 
 
               <div class="mb-3">
-                <input v-model="form.name" type="text" class="form-control" name="questName" id="questName" aria-describedby="helpId"
-                  placeholder="Name Your Quest">
+                <input v-model="form.name" type="text" class="form-control" name="questName" id="questName"
+                  aria-describedby="helpId" placeholder="Name Your Quest">
               </div>
 
               <p>This is where you start your quest to try new things and enjoy food and drink!</p>
@@ -79,10 +79,10 @@ export default {
     const form = ref({});
     return {
       form,
-      isLoggedIn: computed(()=> {
-        if(AppState.account.id != undefined) 
-          {return true}
-        return false}),
+      isLoggedIn: computed(() => {
+        if (AppState.account.id != undefined) { return true }
+        return false
+      }),
       homePage() {
         router.push({
           name: 'Home'
@@ -98,9 +98,9 @@ export default {
           let questData = form.value
           let newQuest = await questsService.createQuest(questData)
           Modal.getOrCreateInstance(document.getElementById('modelId')).hide()
-          router.push({name: 'Account'})
-          form.value={}
-          
+          router.push({ name: 'Account' })
+          form.value = {}
+
         } catch (error) {
           console.error(error)
           Pop.toast(error, 'error')
@@ -114,7 +114,6 @@ export default {
 
 
 <style scoped>
-
 .d-flex div i {
   width: 3rem;
   height: 3rem;
@@ -128,4 +127,7 @@ a:hover {
   font-family: 'Courier New', Courier, monospace;
 }
 
+/* .nav-bar {
+  height: 5vh;
+} */
 </style>

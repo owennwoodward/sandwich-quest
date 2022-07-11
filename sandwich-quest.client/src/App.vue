@@ -31,8 +31,18 @@ footer {
 }
 
 .stars {
-    display: flex;
-    flex-direction: row-reverse;
-    transform: scale(.75);
+  display: flex;
+  flex-direction: row-reverse;
+  transform: scale(.75);
+}
+
+body {
+  padding-bottom: 80px;
+}
+
+@media (max-width: 897px) {
+  body {
+    padding-bottom: 60px;
+  }
 }
 </style>
