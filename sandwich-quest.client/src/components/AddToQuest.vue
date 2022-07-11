@@ -1,7 +1,7 @@
 <template lang="">
   <div  v-if="account.id != undefined">
     <div>
-      <form>
+      <form v-if="quests[0] != undefined">
     <button type="submit"  class="btn btn-primary " @click.prevent="addToCollection">Add to Quest</button>
          <select required v-model="questBar.questId">
           <!--  v-model="questBar.questId" -->
@@ -22,10 +22,6 @@ import Pop from "../utils/Pop.js"
 import { questItemsService} from "../services/QuestItemsService"
 export default {
   props: {
-    quests: {
-      type: Object,
-      required: false
-    },
     restaurant: {
       type: Object,
       required: true
@@ -63,21 +59,14 @@ export default {
           questBar,
             homeRestaurant:computed(()=> AppState.activeRestaurant),
             quests: computed(() =>  {
-
               const sorted = AppState.quests.sort((a,b) => a.updatedAt - b.updatedAt);
-
               return sorted.filter(q => {
-                const found = AppState.questitems.find(qi => qi.restaurantId == props.restaurant.id)
-                // console.log('--found--', found)
-  
-                //if a parent component has an R id that already exists on a quest item, gray out the associated quest
-                if (found?.questId != q.id) {
+                const found = AppState.questitems.find(qi =>  qi.restaurantId == props.restaurant.id && qi.questId == q.id);
+                if(q.id != found?.questId) {
                   return true
                 }
                 return false
-
-              });
-              
+              })
             }),
             account: computed(() => AppState.account),
 
