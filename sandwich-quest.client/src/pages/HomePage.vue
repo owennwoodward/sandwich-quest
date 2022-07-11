@@ -35,6 +35,7 @@ import { yelpService } from '../services/YelpService.js'
 import { logger } from '../utils/Logger.js'
 import HomeRestaurant from '../components/HomeRestaurant.vue'
 import Pop from '../utils/Pop.js'
+import { questsService } from "../services/QuestsService.js"
 
 export default {
     name: "Home",
@@ -45,6 +46,9 @@ export default {
         onMounted(async () => {
           try {
              await yelpService.getAll('');  
+             if (AppState.account.id) {
+              await questsService.getMyQuests()
+             }
           } catch (error) {
             Pop.error(error)
           }

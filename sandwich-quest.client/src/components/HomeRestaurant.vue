@@ -2,9 +2,9 @@
     <div class="container home-card mb-4">
         <div class="row">
             <div class="col-md-12">
-                <div class="card" @click="goToRestaurantDetails">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between">
+                <div class="card">
+                    <div  @click="goToRestaurantDetails" class="card-header selectable">
+                        <div  class="d-flex justify-content-between ">
                             <h3>{{ homeRestaurant.name }}</h3>
                             <div class="stars">
                                 <YelpStars :rating="homeRestaurant.rating" />
@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <AddToQuest />
+                                    <AddToQuest :restaurantId="homeRestaurant" />
                                 </div>
                             </div>
                         </div>

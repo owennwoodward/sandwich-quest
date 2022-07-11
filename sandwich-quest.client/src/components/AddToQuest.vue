@@ -26,10 +26,10 @@ export default {
   props: {
     quests: {
       type: Object,
-      required: true
+      required: false
     },
     restaurantId: {
-      type: String,
+      type: Object,
       required: true
     }
   },
@@ -37,24 +37,30 @@ export default {
         const route = useRoute()
         const questBar = ref({})
 
-        onMounted(async ()=>{
-         try {
-           await  questsService.getMyQuests()
-         } catch (error) {
-         Pop.toast(error, 'error')
-         console.error(error);
-         }
-        })
+        // onMounted(async ()=>{
+        //  try {
+        //     if (!AppState.quests[0]) {
+        //         await questsService.getMyQuests()
 
-        watchEffect( async () => {
-            try {
-              // await yelpService.getById(route.params.id)
-              await questsService.getMyQuests()
-            } catch (error) {
-              logger.error(error)
-              Pop.toast(error.message, 'error')
-            }
-        })
+        //       }
+        //  } catch (error) {
+        //  Pop.toast(error, 'error')
+        //  console.error(error);
+        //  }
+        // })
+
+        // watchEffect( async () => {
+        //     try {
+        //       // await yelpService.getById(route.params.id)
+        //       if (!AppState.quests[0]) {
+        //         await questsService.getMyQuests()
+
+        //       }
+        //     } catch (error) {
+        //       logger.error(error)
+        //       Pop.toast(error.message, 'error')
+        //     }
+        // })
         return {
           questBar,
             homeRestaurant:computed(()=> AppState.activeRestaurant),
@@ -66,9 +72,9 @@ export default {
               //massage the data
 
               let newItem = {
-                name: AppState.activeRestaurant.name,
+                name: AppState.activeRestaurant.name || props.homeRestaurant.name,
                 questId: questBar.value.questId,
-                restaurantId: AppState.activeRestaurant.id
+                restaurantId: AppState.activeRestaurant.id || props.homeRestaurant.id
               }
 
              try {
