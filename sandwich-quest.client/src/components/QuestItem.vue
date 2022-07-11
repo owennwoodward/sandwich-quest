@@ -4,18 +4,26 @@
       {{item.myNotes}}
 
   </div>
+      <div class="d-flex ">
+        <p class="text-dark">Have You Been Here?</p>
+        <input class="mx-2 p-2" type="checkbox" name=""  id="">
+        <!-- v-model="editable.checkBox" @click="editItem()" -->
+      </div>
 </template>
 
 
 <script>
+import { ref } from 'vue'
 import { questItemsService } from '../services/QuestItemsService'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
 
 export default {
   props : {item: {type: Object, required: true}},
+  // editable: ref({}),
   setup(props){
     return {
+        // editable,
         async deleteItem(){
           try {
             
@@ -24,6 +32,10 @@ export default {
             logger.error(error)
             Pop.toast(error, 'error')
           }
+        },
+
+        async editItem() {
+          console.log(editable.value)
         }
     }
   }
