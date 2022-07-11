@@ -22,6 +22,11 @@ class QuestsService {
     return res.data
   }
 
+  async editQuest() {
+    const res = await api.put('api/quests/' + questData.id, questData)
+    logger.log('edit quest', res.data)
+  }
+
   //  async getQuestItems(id) {
   //     const res = await api.get(`api/quests/${id}/items`)
   //     console.log(res.data, 'getting quest items');

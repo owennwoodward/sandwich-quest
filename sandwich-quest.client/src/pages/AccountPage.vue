@@ -19,7 +19,7 @@
       </form>
 
       <h3 class="mt-4">My Quests</h3>
-      <Quest v-for="q in quests" :key="q.id" :quest="q"/>
+      <Quest v-for="q in quests" :key="q.id" :quest="q" />
 
     </div>
 
@@ -34,6 +34,7 @@ import { useRouter } from "vue-router"
 import { AppState } from '../AppState'
 import { router } from "../router"
 import { accountService } from '../services/AccountService'
+import { AuthService } from '../services/AuthService'
 import { questItemsService } from '../services/QuestItemsService'
 import { questsService } from '../services/QuestsService'
 accountService
@@ -42,10 +43,10 @@ import Pop from '../utils/Pop'
 export default {
   name: 'Account',
   setup() {
-   const router = useRouter()
+    const router = useRouter()
     const edits = ref({})
-    watchEffect(()=>{
-      edits.value = {...AppState.account}
+    watchEffect(() => {
+      edits.value = { ...AppState.account }
     })
     onMounted(async () => {
       try {
@@ -64,7 +65,7 @@ export default {
       questsItems: computed(() => AppState.questitems),
       goToQuestDetails(id) {
         router.push({
-          name: 'QuestDetails', 
+          name: 'QuestDetails',
           params: {
             id: id
           }
@@ -83,6 +84,11 @@ export default {
           Pop.toast(error.message, 'error')
         }
       },
+
+      async logout() {
+        AuthService.logout({ returnTo: window.location.origin });
+      },
+
     }
   }
 }

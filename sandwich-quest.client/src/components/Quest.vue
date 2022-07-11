@@ -13,6 +13,9 @@
                 <div class="col-2 selectable justify-content-start" @click="removeQuest">
                     <i class="mdi mdi-delete text-danger"></i>
                 </div>
+                <div class="col-2 selectable justify-content-start" @click="editQuest">
+                    <i class="mdi mdi-pencil"></i>
+                </div>
                 <!-- <div class="col-5">
 
                     <input type="checkbox" :id="fieldId" class="font-bold cursor-pointer " />
@@ -46,6 +49,15 @@ export default {
                 } catch (error) {
                     Pop.toast(error)
                     logger.error(error)
+                }
+            },
+
+            async editQuest() {
+                try {
+                    await questsService.editQuest(props.quest.id)
+                } catch (error) {
+                    logger.error(error)
+                    Pop.toast(error.message, 'error')
                 }
             }
         }
