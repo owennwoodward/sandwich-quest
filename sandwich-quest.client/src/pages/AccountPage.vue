@@ -61,7 +61,7 @@ export default {
       router,
       edits,
       account: computed(() => AppState.account),
-      quests: computed(() => AppState.quests),
+      quests: computed(() => AppState.quests.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))),
       questsItems: computed(() => AppState.questitems),
       goToQuestDetails(id) {
         router.push({
