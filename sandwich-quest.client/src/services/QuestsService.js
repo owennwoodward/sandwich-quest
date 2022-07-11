@@ -22,10 +22,16 @@ class QuestsService {
     return res.data
   }
 
- async getQuestItems(id) {
-    const res = await api.get(`api/quests/${id}/items`)
-    console.log(res.data, 'getting quest items');
-    AppState.questitems = res.data
+  //  async getQuestItems(id) {
+  //     const res = await api.get(`api/quests/${id}/items`)
+  //     console.log(res.data, 'getting quest items');
+  //     AppState.questitems = res.data
+  //   }
+
+  async removeQuest(id) {
+    const res = await api.delete('api/quests/' + id)
+    logger.log(res.data, 'deleting quest');
+    AppState.quests = AppState.quests.filter(q => q.id != id)
   }
 }
 

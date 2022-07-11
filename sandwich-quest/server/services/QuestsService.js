@@ -24,7 +24,7 @@ class QuestsService {
   // Come back after lunch and write this get user quest logic
   async getUserQuests(creatorId) {
     const quests = await dbContext.Quest.find({ creatorId })
-    if(!quests) {
+    if (!quests) {
       throw new BadRequest('something went wrong')
     }
     logger.log('getting your Quests', quests)
@@ -49,10 +49,10 @@ class QuestsService {
   }
 
   async removeQuest(id, userId) {
-    let quest = await dbContext.Quest.findById(id);
-    if (!quest) {
-      throw new BadRequest("Invalid quest id");
-    }
+    const quest = await dbContext.Quest.findById(id);
+    // if (!quest) {
+    //   throw new BadRequest("Invalid quest id");
+    // }
     if (quest.creatorId.toString() !== userId) {
       throw new BadRequest("You do not have permission to delete this quest");
     }

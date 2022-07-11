@@ -61,7 +61,7 @@ export class QuestsController extends BaseController {
 
   async removeQuest(req, res, next) {
     try {
-      req.body.accountId = req.userInfo.id;
+      // req.body.accountId = req.userInfo.id;
       const message = await questsService.removeQuest(
         req.params.id,
         req.userInfo.id
