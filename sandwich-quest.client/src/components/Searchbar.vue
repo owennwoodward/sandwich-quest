@@ -25,7 +25,6 @@ export default {
             searchTerm,
             async search() {
                 let query = searchTerm.value
-                console.log(query)
                 await yelpService.getAll(query)
                 searchTerm.value = ''
             }
