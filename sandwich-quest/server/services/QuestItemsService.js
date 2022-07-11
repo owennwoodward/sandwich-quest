@@ -20,6 +20,13 @@ class QuestItemsService {
     }
 
     async createItem(questItem, creatorId) {
+        const itemExists = await dbContext.QuestItem.findOne({questId: questItem.questId, restaurantId: questItem.restaurantId})
+
+        if (itemExists) {
+            throw new BadRequest('That item is already in this quest')
+        }
+
+
         questItem.creatorId = creatorId
         let newQuestItem = await dbContext.QuestItem.create(questItem);
         await newQuestItem.populate("creator")
@@ -39,6 +46,7 @@ class QuestItemsService {
         await questItem.remove();
         return "deleted";
     }
+
 
 }
 
