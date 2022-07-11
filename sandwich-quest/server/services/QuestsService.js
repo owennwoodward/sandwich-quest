@@ -58,6 +58,8 @@ class QuestsService {
     }
 
     await quest.remove();
+    await dbContext.QuestItem.deleteMany({questId: id})
+
     return "deleted";
   }
 }

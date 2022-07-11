@@ -1,6 +1,7 @@
 import { Auth0Provider } from "@bcwdev/auth0provider"
 import { questItemsService } from "../services/QuestItemsService"
 import BaseController from "../utils/BaseController"
+import { logger } from "../utils/Logger"
 
 
 
