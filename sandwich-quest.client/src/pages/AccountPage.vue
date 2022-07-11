@@ -77,7 +77,7 @@ export default {
       async editAccount() {
         try {
           edits.value._id = AppState.account.id
-          logger.log('here is edited account data', edits.value)
+          // logger.log('here is edited account data', edits.value)
           await accountService.editAccount(edits.value)
         } catch (error) {
           logger.error(error)

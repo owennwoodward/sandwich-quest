@@ -19,7 +19,7 @@ class YelpService {
     async getById(id) {
         const res = await api.get(`yelp/${id}`)
         AppState.activeRestaurant = res.data
-        logger.log('getById', res.data)
+        // logger.log('getById', res.data)
     }
    
 

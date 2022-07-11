@@ -6,7 +6,7 @@ import { logger } from "../utils/Logger.js";
 class QuestItemsService {
     getQuestItems(questId) {
         const questItems = dbContext.QuestItem.find({ questId });
-        logger.log('-GetQuestItems-', questItems)
+        // logger.log('-GetQuestItems-', questItems)
         return questItems;
 
 

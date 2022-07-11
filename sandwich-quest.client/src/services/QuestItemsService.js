@@ -11,7 +11,7 @@ class QuestItemsService {
 
 async getMyQuestItems(){
   const res = await api.get('account/questItems')
-  logger.log('here is the all quest items', res.data)
+  // logger.log('here is the all quest items', res.data)
   AppState.questitems = res.data
 }
 

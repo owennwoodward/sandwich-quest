@@ -21,12 +21,12 @@ class QuestsService {
 
   async editQuest() {
     const res = await api.put('api/quests/' + questData.id, questData)
-    logger.log('edit quest', res.data)
+    // logger.log('edit quest', res.data)
   }
 
   async removeQuest(id) {
     const res = await api.delete('api/quests/' + id)
-    logger.log(res.data, 'deleting quest');
+    // logger.log(res.data, 'deleting quest');
     AppState.quests = AppState.quests.filter(q => q.id != id)
   }
 }
