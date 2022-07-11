@@ -1,6 +1,6 @@
 <template>
-  <div class="item-card elevation-2 py-2 my-2">
-      <h6>{{item.name}}</h6>
+  <div class="d-flex justify-content-between item-card elevation-2 py-2 my-2">
+      <h6 class="mx-2">{{item.name}} </h6> <div @click.stop="deleteItem" class="mx-2 text-danger mdi mdi-cancel selectable"></div> 
       {{item.myNotes}}
 
   </div>
@@ -8,11 +8,23 @@
 
 
 <script>
+import { questItemsService } from '../services/QuestItemsService'
+import { logger } from '../utils/Logger'
+import Pop from '../utils/Pop'
+
 export default {
   props : {item: {type: Object, required: true}},
   setup(props){
     return {
-
+        async deleteItem(){
+          try {
+            
+            await questItemsService.deleteItem(props.item.id)
+          } catch (error) {
+            logger.error(error)
+            Pop.toast(error, 'error')
+          }
+        }
     }
   }
 }

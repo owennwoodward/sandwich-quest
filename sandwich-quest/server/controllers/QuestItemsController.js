@@ -41,7 +41,7 @@ export class QuestItemsController extends BaseController {
     async removeItem(req, res, next) {
         try {
             const Item = await questItemsService.removeItem(req.params.id, req.userInfo.id)
-            return res.send('This items has been deleted', Item)
+            return res.send('This item has been deleted')
         } catch (error) {
             next(error)
         }

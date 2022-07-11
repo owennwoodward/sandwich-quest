@@ -15,6 +15,13 @@ async getMyQuestItems(){
   AppState.questitems = res.data
 }
 
+async deleteItem(id){
+  const res = await api.delete(`api/items/${id}`)
+  logger.log('here is what you deleted', res.data)
+  AppState.questitems = AppState.questitems.filter(j => j.id != id)
+  return res.data
+}
+
 }
 
 
