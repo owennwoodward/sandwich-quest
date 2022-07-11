@@ -1,9 +1,9 @@
 <template lang="">
-  <div  v-if="account.id != undefined">
+  <div  v-if="account.id != undefined && quests.length > 0">
     <div>
-      <form v-if="quests[0] != undefined">
+      <form>
     <button type="submit"  class="btn btn-primary " @click.prevent="addToCollection">Add to Quest</button>
-         <select required v-model="questBar.questId">
+         <select  v-if="quests[0] != undefined" required v-model="questBar.questId">
           <!--  v-model="questBar.questId" -->
               <option v-for="q in quests" :key="q.id" :value="q.id" >
                {{q.name}}
@@ -11,6 +11,9 @@
             </select>
          </form>
       </div>
+  </div>
+  <div v-else-if="account.id != undefined && appQuests.length == 0">
+    <div class="text-muted fst-italic">Use the New Quest button to begin!</div>
   </div>
 </template>
 <script>
@@ -58,6 +61,7 @@ export default {
         return {
           questBar,
             homeRestaurant:computed(()=> AppState.activeRestaurant),
+            appQuests: computed(() => AppState.quests),
             quests: computed(() =>  {
               const sorted = AppState.quests.sort((a,b) => a.updatedAt - b.updatedAt);
               return sorted.filter(q => {
@@ -76,6 +80,7 @@ export default {
 
 
             async addToCollection() {
+
               console.log('-adding to quest-', questBar.value.questId)
               console.log('-Restaurant object-', props.restaurant)
 
