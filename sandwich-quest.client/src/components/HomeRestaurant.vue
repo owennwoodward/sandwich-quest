@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <AddToQuest :restaurantId="homeRestaurant" />
+                                    <AddToQuest :restaurant="homeRestaurant" />
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,9 @@
 <script>
 import { onMounted } from '@vue/runtime-core'
 import { useRouter } from "vue-router"
+import { questsService } from "../services/QuestsService.js"
 import { yelpService } from '../services/YelpService.js'
+import Pop from "../utils/Pop.js"
 // import '../assets/img/yelpStars'
 export default {
     props: {
@@ -62,7 +64,9 @@ export default {
     },
 
     setup(props) {
-        const router = useRouter()        
+        const router = useRouter()   
+        
+
         return {
 
             goToRestaurantDetails() {

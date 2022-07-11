@@ -12,7 +12,7 @@ export const QuestItemSchema = new Schema({
     isChecked: { type: Boolean, default: false, required: true },
     checkedDate: { type: Date, required: false },
     itemType: { type: String, required: false },
-    streetAddress: { type: String, required: true },
+    streetAddress: { type: Object, required: true },
     yelpRate: { type: Number, required: true }
 }, { timestamps: true, toJSON: { virtuals: true } })
 
