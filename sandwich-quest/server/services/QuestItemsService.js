@@ -11,7 +11,19 @@ class QuestItemsService {
 
 
     }
-    editItem(id, body) {
+    async editItem(accountId, update) {
+        const original = await dbContext.QuestItem.findById(update.id)
+
+        if (original.creatorId.toString() != accountId) {
+            throw new BadRequest('You are not the person you say you are')
+        }
+
+        original.myNotes = update.myNotes || original.myNotes;
+        original.isChecked = update.isChecked || original.isChecked;
+
+        original.save()
+        return original
+        
     }
     async getUserQuestItems(creatorId) {
         let questItems = await dbContext.QuestItem.find({ creatorId })
