@@ -2,17 +2,20 @@
     <div class="component">
         <div class="container">
             <div class="row justify-content-start">
-                <button class=" col-md-12 d-flex justify-content-between btn btn-primary" type="button"
+                <button class=" col-10 d-flex justify-content-between btn btn-primary borders " type="button"
                     data-bs-toggle="collapse" :data-bs-target="`#id` + quest.id" aria-expanded="false"
                     aria-controls="collapseWidthExample">
-                    {{ quest.name }}
-                    <i class="mdi mdi-delete text-danger"></i>
-                    <!-- <div class="col-md-6 selectable justify-content-end" @click="removeQuest">
-                    </div> -->
+                    <h4 class="">{{ quest.name }}</h4>
+                    <!-- <div class="col-md-6 selectable justify-content-end">
+                        </div> -->
                     <!-- <div class="col-2 selectable justify-content-start" @click="editQuest">
                         <i class="mdi mdi-pencil"></i>
                     </div> -->
                 </button>
+                <div class="col-2 bg-primary borders pt-2 selectable" @click.stop="removeQuest">
+
+                    <i class="mdi mdi-delete text-danger h4 "></i>
+                </div>
 
                 <div style="min-height: 120px;">
                     <div class="collapse collapse-horizontal m-4" :id="`id` + quest.id">
@@ -77,9 +80,13 @@ export default {
     width: 47vw;
 }
 
-@media(max-width: 979px) {
+@media(max-width: 768px) {
     .collapse-mobile {
         width: 75vw;
     }
+}
+
+.borders {
+    border-radius: 0%;
 }
 </style>
