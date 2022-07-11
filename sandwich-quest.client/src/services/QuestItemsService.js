@@ -8,6 +8,7 @@ class QuestItemsService {
     const res = await api.post('api/items', itemData);
     console.log('-createQuestItem-', res.data)
     // Change appstate??
+    AppState.questitems.push(res.data)
   }
 
 async getMyQuestItems(){

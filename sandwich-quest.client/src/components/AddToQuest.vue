@@ -1,5 +1,5 @@
 <template lang="">
-  <div>
+  <div  v-if="account.id != undefined">
     <div>
       <form>
     <button type="submit"  class="btn btn-primary " @click.prevent="addToCollection">Add to Quest</button>
@@ -14,12 +14,10 @@
   </div>
 </template>
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
-import { watchEffect, ref } from "vue"
+import { computed } from '@vue/runtime-core'
+import {  ref } from "vue"
 import { useRoute } from "vue-router"
 import { AppState } from "../AppState.js"
-import { questsService } from "../services/QuestsService.js"
-import { logger } from "../utils/Logger.js"
 import Pop from "../utils/Pop.js"
 import { questItemsService} from "../services/QuestItemsService"
 export default {
@@ -28,7 +26,7 @@ export default {
       type: Object,
       required: false
     },
-    restaurantId: {
+    restaurant: {
       type: Object,
       required: true
     }
@@ -64,22 +62,41 @@ export default {
         return {
           questBar,
             homeRestaurant:computed(()=> AppState.activeRestaurant),
-            quests: computed(() => AppState.quests.sort((a,b) => a.updatedAt - b.updatedAt)),
+            quests: computed(() =>  AppState.quests.sort((a,b) => a.updatedAt - b.updatedAt)),
+            account: computed(() => AppState.account),
+
+              // const sorted = AppState.quests.sort((a,b) => a.updatedAt - b.updatedAt);
+              // return sorted.filter(q => canBeOption(q.id))
+
+            canBeOption(questId) {
+              const found = AppState.questitems.find(qi => qi.restaurantId == props.restaurant.id)
+              console.log('--found--', found)
+
+              //if a parent component has an R id that already exists on a quest item, gray out the associated quest
+              if (found[0].questId == questId) {
+                return true
+              }
+              return false
+            },
+
 
             async addToCollection() {
               console.log('-adding to quest-', questBar.value.questId)
+              console.log('-Restaurant object-', props.restaurant)
 
               //massage the data
 
               let newItem = {
-                name: AppState.activeRestaurant.name || props.homeRestaurant.name,
+                name: props.restaurant.name,
                 questId: questBar.value.questId,
-                restaurantId: AppState.activeRestaurant.id || props.homeRestaurant.id
+                restaurantId: props.restaurant.id,
+                yelpRate: props.restaurant.rating,
+                streetAddress: props.restaurant.location
               }
 
              try {
                await questItemsService.createQuestItem(newItem)
-               Pop.toast('Added Item')
+               Pop.toast('Added Quest Item')
              } catch (error) {
              Pop.toast(error, 'error')
              console.error(error);

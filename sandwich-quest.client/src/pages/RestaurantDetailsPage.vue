@@ -19,10 +19,11 @@ export default {
     setup() {
         const route = useRoute()
 
+
         onMounted( async () => {
             try {
               await yelpService.getById(route.params.id)
-            //   await questsService.getQuests()
+              await questsService.getMyQuests()
             } catch (error) {
               logger.error(error)
               Pop.toast(error.message, 'error')
