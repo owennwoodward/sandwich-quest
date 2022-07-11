@@ -62,21 +62,27 @@ export default {
         return {
           questBar,
             homeRestaurant:computed(()=> AppState.activeRestaurant),
-            quests: computed(() =>  AppState.quests.sort((a,b) => a.updatedAt - b.updatedAt)),
+            quests: computed(() =>  {
+
+              const sorted = AppState.quests.sort((a,b) => a.updatedAt - b.updatedAt);
+
+              return sorted.filter(q => {
+                const found = AppState.questitems.find(qi => qi.restaurantId == props.restaurant.id)
+                // console.log('--found--', found)
+  
+                //if a parent component has an R id that already exists on a quest item, gray out the associated quest
+                if (found?.questId != q.id) {
+                  return true
+                }
+                return false
+
+              });
+              
+            }),
             account: computed(() => AppState.account),
 
-              // const sorted = AppState.quests.sort((a,b) => a.updatedAt - b.updatedAt);
-              // return sorted.filter(q => canBeOption(q.id))
 
             canBeOption(questId) {
-              const found = AppState.questitems.find(qi => qi.restaurantId == props.restaurant.id)
-              console.log('--found--', found)
-
-              //if a parent component has an R id that already exists on a quest item, gray out the associated quest
-              if (found[0].questId == questId) {
-                return true
-              }
-              return false
             },
 
 

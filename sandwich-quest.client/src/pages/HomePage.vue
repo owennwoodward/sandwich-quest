@@ -36,6 +36,7 @@ import { logger } from '../utils/Logger.js'
 import HomeRestaurant from '../components/HomeRestaurant.vue'
 import Pop from '../utils/Pop.js'
 import { questsService } from "../services/QuestsService.js"
+import { questItemsService } from "../services/QuestItemsService.js"
 
 export default {
     name: "Home",
@@ -48,6 +49,7 @@ export default {
              await yelpService.getAll('');  
              if (AppState.account.id) {
               await questsService.getMyQuests()
+              await questItemsService.getMyQuestItems()
              }
           } catch (error) {
             Pop.error(error)

@@ -10,6 +10,7 @@ import { computed, onMounted } from '@vue/runtime-core'
 import { watchEffect } from "vue"
 import { useRoute } from "vue-router"
 import { AppState } from "../AppState.js"
+import { questItemsService } from "../services/QuestItemsService.js"
 
 import { questsService } from "../services/QuestsService.js"
 import { yelpService } from "../services/YelpService.js"
@@ -24,6 +25,7 @@ export default {
             try {
               await yelpService.getById(route.params.id)
               await questsService.getMyQuests()
+              await questItemsService.getMyQuestItems()
             } catch (error) {
               logger.error(error)
               Pop.toast(error.message, 'error')
