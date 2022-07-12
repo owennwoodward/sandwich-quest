@@ -6,24 +6,25 @@
         <button class="accordion-button bg-success text-dark " type="button" data-bs-toggle="collapse"
           :data-bs-target="'#id' + item.id" aria-expanded="true" aria-controls="collapseOne">
           <div class="container-fluid">
-            <div class="row justify-content-end">
-              <div @click.stop="deleteItem" class="col-12 mx-2 ms-5 h5 text-danger mdi mdi-delete selectable"></div>
+            <div class="row ">
+              <div @click.stop="deleteItem"
+                class="col-12 mx-2 ms-5 h5 text-danger mdi mdi-delete selectable d-flex justify-content-end"></div>
 
             </div>
-            <div class="row">
-              <div class="col-10">
-                <h6>Have you Been here?</h6>
+            <div class="h5">
+
+              <div class="col-12 text-center">
+                Did you visit
               </div>
-              <div class="col-2">
-                <div class="col-md-2">
-                  <input class="mx-2" :checked="item.isChecked ? true : false" v-model="editable.checkBox"
-                    @click="editItem()" type="checkbox" name="" id="" />
-                </div>
+              <div class="col-12 text-center">
+
+                {{ item.name }}?
               </div>
             </div>
-            <div class="col-12 text-center">
+            <div class="d-flex justify-content-center py-1">
 
-              <h5 class="mx-2">{{ item.name }} </h5>
+              <input class="" :checked="item.isChecked ? true : false" v-model="editable.checkBox" @click="editItem()"
+                type="checkbox" name="" id="" />
             </div>
 
           </div>
