@@ -10,9 +10,13 @@ export const yelp = Axios.create({
 
 
 let location = 'boise'
+let categories = ''
+let term = ''
 class YelpService {
     async getAll(query = '') {
-        const res = await api.get('yelp', {params: {categories: 'food', location: location, term: query }})
+        categories = AppState.currentCategories
+        term = query
+        const res = await api.get('yelp', {params: {categories: categories, location: location, term: term }})
         // console.log(res.data, 'here is the get all res')
         AppState.homeRestaurants = res.data
     }

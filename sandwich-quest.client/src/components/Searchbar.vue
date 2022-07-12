@@ -15,6 +15,7 @@
 
 <script>
 import { ref } from 'vue'
+import { AppState } from '../AppState'
 import { yelpService } from '../services/YelpService'
 import { logger } from '../utils/Logger'
 
@@ -25,8 +26,10 @@ export default {
             searchTerm,
             async search() {
                 let query = searchTerm.value
+                AppState.currentCategories = ''
                 await yelpService.getAll(query)
-                searchTerm.value = ''
+                AppState.currentTerm = searchTerm.value
+                // searchTerm.value = ''
             }
         }
     }
