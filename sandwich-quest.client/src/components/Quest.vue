@@ -59,7 +59,7 @@ export default {
             
             questItems: computed(() => AppState.questitems.filter(i => i.questId == props.quest.id)),
 
-    doneItems: computed(() => AppState.questitems.filter(i => i.isChecked == true)),
+    doneItems: computed(() => AppState.questitems.filter(i => ((i.isChecked == true) && (i.questId == props.quest.id)))),
 
             async removeQuest() {
                 try {

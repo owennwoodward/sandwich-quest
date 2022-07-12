@@ -17,6 +17,8 @@ class QuestItemsService {
 
   async editItem(update) {
     const res = await api.put(`api/items/${update.id}`, update)
+    let found = AppState.questitems.find(q => q.id == update.id)
+    found.isChecked = update.isChecked
     console.log(res.data)
   }
 
