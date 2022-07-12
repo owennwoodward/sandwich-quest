@@ -22,12 +22,12 @@
                                 <img :src="homeRestaurant.image_url" class="img-fluid rounded elevation-1" :alt="homeRestaurant.name">
                             </div>
                             <div class="col-md-8 my-1">
-                                <div class="row">
+                                <div class="row text-center">
                                     <div class="col-md-6">
                                         <div><b>Phone:</b>
                                             <p>{{ homeRestaurant.phone }}</p>
                                         </div>
-                                        <div class="d-flex flex-column">
+                                        <div v-if="homeRestaurant.transactions[0]" class="d-flex flex-column">
                                             <b>Transactions:</b>
                                             <p class="p-1 m-0 fst-italic" v-for="m in homeRestaurant.transactions">{{ m
                                             }}
@@ -35,9 +35,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div>
+                                        <div class="mb-3">
 
-                                            Directions:
+                                            <b>Directions:</b>
                                             <span> <a class="text-secondary" target="_blank"
                                                     :href="`https://maps.google.com/?q=${homeRestaurant.coordinates?.latitude},${homeRestaurant.coordinates?.longitude}`">
                                                     Google Maps</a></span>
