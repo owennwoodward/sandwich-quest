@@ -28,7 +28,7 @@
           <YelpStars :rating="item.yelpRate" />
           <div class="d-flex ">
             <div @click.stop="deleteItem" class="mx-2 h4 text-danger mdi mdi-cancel selectable"></div>
-            <p class="text-dark">Have You Been Here?</p>
+            <p class="text-dark"></p>
 
           </div>
         </div>
