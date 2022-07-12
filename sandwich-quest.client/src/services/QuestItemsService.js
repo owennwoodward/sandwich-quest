@@ -15,7 +15,7 @@ class QuestItemsService {
     AppState.questitems = res.data
   }
 
-  async editCheckbox(update) {
+  async editItem(update) {
     const res = await api.put(`api/items/${update.id}`, update)
     console.log(res.data)
   }

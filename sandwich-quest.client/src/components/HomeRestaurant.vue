@@ -3,17 +3,17 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div  @click="goToRestaurantDetails" class="card-header selectable">
-                        <div  class="d-flex justify-content-between ">
+                    <div @click="goToRestaurantDetails" class="card-header selectable">
+                        <div class="d-flex justify-content-between ">
                             <h3>{{ homeRestaurant.name }}</h3>
-                            <div class="stars">
+                            <div class="stars ms-5 ">
                                 <YelpStars :rating="homeRestaurant.rating" />
                             </div>
                         </div>
-                        <h5>{{homeRestaurant?.location?.address1}}</h5>
-                        <div class="d-flex justify-content-between">
+                        <h5 class="py-2">{{ homeRestaurant?.location?.address1 }}</h5>
+                        <div class="d-flex justify-content-between fst-italic">
 
-                            <p v-for="c in homeRestaurant.categories" :key="c.alias"> {{c.title}}</p>
+                            <b v-for="c in homeRestaurant.categories" :key="c.alias"> {{ c.title }}</b>
                         </div>
                     </div>
                     <div class="card-body">
@@ -22,22 +22,36 @@
                                 <img :src="homeRestaurant.image_url" class="img-fluid" :alt="homeRestaurant.name">
                             </div>
                             <div class="col-md-8">
-                                <div>
-                                    <div>Phone:
-                                        <p>{{homeRestaurant.phone}}</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div>Phone:
+                                            <p>{{ homeRestaurant.phone }}</p>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            Transactions:
+                                            <p class="p-1 m-0 fst-italic" v-for="m in homeRestaurant.transactions">{{ m
+                                            }}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="d-flex flex-column">
-                                        Transactions:
-                                        <p class="p-1 m-0 fst-italic" v-for="m in homeRestaurant.transactions">{{m}}</p>
-                                    </div>
-                                    <div v-if="homeRestaurant.coordinates?.latitude" class="d-flex flex-column">
-                                        Directions:
-                                        <span> <a class="text-secondary" target="_blank" :href="`https://maps.google.com/?q=${homeRestaurant.coordinates?.latitude},${homeRestaurant.coordinates?.longitude}`"> Google Maps</a></span>
+                                    <div class="col-md-6">
+                                        <div>
+
+                                            Directions:
+                                            <span> <a class="text-secondary" target="_blank"
+                                                    :href="`https://maps.google.com/?q=${homeRestaurant.coordinates?.latitude},${homeRestaurant.coordinates?.longitude}`">
+                                                    Google Maps</a></span>
+                                        </div>
+                                        <div>
+                                            <AddToQuest :restaurant="homeRestaurant" />
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <AddToQuest :restaurant="homeRestaurant" />
+                            </div>
+                            <div>
+                                <div v-if="homeRestaurant.coordinates?.latitude" class="d-flex flex-column">
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -64,8 +78,8 @@ export default {
     },
 
     setup(props) {
-        const router = useRouter()   
-        
+        const router = useRouter()
+
 
         return {
 
@@ -85,7 +99,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
 .home-card {
     color: rgb(34, 32, 32);
 }
@@ -95,5 +108,4 @@ export default {
     flex-direction: row-reverse;
     transform: scale(.75);
 }
-
 </style>

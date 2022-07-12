@@ -8,7 +8,7 @@
 
           <div>
             <input class="mx-2 p-2" :checked="item.isChecked ? true : false" v-model="editable.checkBox"
-              @click="editCheckbox()" type="checkbox" name="" id="" />
+              @click="editItem()" type="checkbox" name="" id="" />
             <!-- v-model="editable.checkBox" @click="editItem()" -->
 
           </div>
@@ -20,7 +20,7 @@
         data-bs-parent="#accordionExample">
         <div class="accordion-body text-dark">
 
-          <textarea :value="item.myNotes">  </textarea>
+          <textarea @blur="editItem" v-model="item.myNotes">  </textarea>
 
           {{ item.streetAddress.display_address[0] }},
           {{ item.streetAddress.city }}
@@ -28,7 +28,7 @@
           <YelpStars :rating="item.yelpRate" />
           <div class="d-flex ">
             <div @click.stop="deleteItem" class="mx-2 h4 text-danger mdi mdi-cancel selectable"></div>
-            <p class="text-dark">Have You Been Here?</p>
+            <p class="text-dark"></p>
 
           </div>
         </div>
@@ -40,7 +40,7 @@
 
 
 <script>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { questItemsService } from '../services/QuestItemsService'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
@@ -49,6 +49,9 @@ export default {
   props: { item: { type: Object, required: true } },
   setup(props) {
     const editable = ref({})
+    watchEffect(() => {
+      editable.value = { ...props.item }
+    })
     return {
       editable,
       async deleteItem() {
@@ -62,13 +65,15 @@ export default {
         }
       },
 
-      async editCheckbox() {
-        // console.log(editable.value.checkBox)
+      async editItem() {
+        console.log(props.item.myNotes)
 
         props.item.isChecked = editable.value.checkBox
+        // props.item.myNotes = editable.value.itemNotes
+
 
         try {
-          questItemsService.editCheckbox(props.item)
+          questItemsService.editItem(props.item)
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
