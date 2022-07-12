@@ -21,6 +21,14 @@ class QuestItemsService {
         original.myNotes = update.myNotes || original.myNotes;
         original.isChecked = update.isChecked || original.isChecked;
 
+
+        // TODO this is really rough, might be able to be a ternary
+        original.isChecked = true
+
+        if (update.isChecked === false) {
+            original.isChecked = false
+        }
+
         original.save()
         return original
         

@@ -26,7 +26,7 @@
         </button>
             <div class="d-flex justify-content-center py-1">
 
-              <input class=""   @click="editItem"
+              <input class=""  :checked="item.isChecked"  @click="editChecked"
                 type="checkbox" name="" id="" />
             </div>
       </h2>
@@ -82,6 +82,17 @@ export default {
           Pop.toast(error, 'error')
         }
       },
+
+      async editChecked() {
+              
+        try {
+          await questItemsService.editChecked(props.item)
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+
 
       async editItem() {
               
