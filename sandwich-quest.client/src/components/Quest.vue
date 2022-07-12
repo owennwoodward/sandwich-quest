@@ -22,7 +22,7 @@
                 <div class="my-3 d-flex justify-content-center">
                     <!-- style="min-height: 120px;" -->
                     <div class="collapse collapse-horizontal  " :id="`id` + quest.id">
-                        <div class="card card-body collapse-mobile d-flex flex-column">
+                        <div class="card card-body collapse-mobile d-flex bg-dark flex-column">
                             <!--  -->
                             <div class="progress">
                                 <div class="progress-bar bg-secondary" role="progressbar" 
@@ -57,10 +57,10 @@ export default {
     props: { quest: { type: Object, required: true } },
     setup(props) {
         return {
-            
+
             questItems: computed(() => AppState.questitems.filter(i => i.questId == props.quest.id)),
 
-    doneItems: computed(() => AppState.questitems.filter(i => ((i.isChecked == true) && (i.questId == props.quest.id)))),
+            doneItems: computed(() => AppState.questitems.filter(i => ((i.isChecked == true) && (i.questId == props.quest.id)))),
 
             async removeQuest() {
                 try {
