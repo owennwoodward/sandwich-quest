@@ -3,7 +3,7 @@
     <div>
       <form>
     <button type="submit"  class="btn btn-primary p-2 " @click.prevent="addToCollection"><b>Add to Quest</b></button>
-         <select class="ms-1 mt-3"  v-if="quests[0] != undefined" required v-model="questBar.questId">
+         <select class="ms-1 mt-3 standard-length"  v-if="quests[0] != undefined" required v-model="questBar.questId">
           <!--  v-model="questBar.questId" -->
               <option class="" v-for="q in quests" :key="q.id" :value="q.id" >
                {{q.name}}
@@ -106,4 +106,8 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.standard-length {
+  width: 7rem;
+}
+
 </style>

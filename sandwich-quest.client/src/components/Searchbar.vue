@@ -6,7 +6,7 @@
         
         <div class="mb-3 p-2 d-flex">
           <input v-model="searchTerm" type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search!">
-          <button><i class="fs-1 mdi mdi-magnify"></i></button>
+          <button class="search-corner-right"><i class="fs-1 mdi mdi-magnify"></i></button>
 
         </div>
     </form>
@@ -65,6 +65,11 @@ i{
 button{
     border: 0px;
     background-color: $light;
+}
+
+.search-corner-right {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 
