@@ -5,12 +5,12 @@
                 <div class="card">
                     <div @click="goToRestaurantDetails" class="card-header selectable bg-success">
                         <div class="d-flex justify-content-between ">
-                            <h3>{{ homeRestaurant.name }}</h3>
-                            <div class="stars ms-5 ">
+                            <div class="display-5">{{ homeRestaurant.name }}</div>
+                        </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="py-2 fst-italic">{{ homeRestaurant?.location?.address1 }}</div>
                                 <YelpStars :rating="homeRestaurant.rating" />
                             </div>
-                        </div>
-                        <h5 class="py-2">{{ homeRestaurant?.location?.address1 }}</h5>
                         <div class="d-flex justify-content-between fst-italic">
 
                             <b v-for="c in homeRestaurant.categories" :key="c.alias"> {{ c.title }}</b>
@@ -103,11 +103,11 @@ export default {
     color: rgb(34, 32, 32);
 }
 
-.stars {
-    display: flex;
-    flex-direction: row-reverse;
-    transform: scale(.75);
-}
+// .stars {
+//     display: flex;
+//     flex-direction: row-reverse;
+//     transform: scale(.75);
+// }
 
 @media(max-width: 768px) {
     .mobile-center {

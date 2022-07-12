@@ -1,9 +1,9 @@
 <template lang="">
   <div  v-if="account.id != undefined && quests.length > 0">
     <div>
-      <form>
+      <form class="quest-control">
     <button type="submit"  class="btn btn-primary p-2 " @click.prevent="addToCollection"><b>Add to Quest</b></button>
-         <select class="ms-1 mt-3 standard-length"  v-if="quests[0] != undefined" required v-model="questBar.questId">
+         <select class="standard-length"  v-if="quests[0] != undefined" required v-model="questBar.questId">
           <!--  v-model="questBar.questId" -->
               <option class="" v-for="q in quests" :key="q.id" :value="q.id" >
                {{q.name}}
@@ -34,30 +34,6 @@ export default {
     const route = useRoute()
     const questBar = ref({})
 
-    // onMounted(async ()=>{
-    //  try {
-    //     if (!AppState.quests[0]) {
-    //         await questsService.getMyQuests()
-
-    //       }
-    //  } catch (error) {
-    //  Pop.toast(error, 'error')
-    //  console.error(error);
-    //  }
-    // })
-
-    // watchEffect( async () => {
-    //     try {
-    //       // await yelpService.getById(route.params.id)
-    //       if (!AppState.quests[0]) {
-    //         await questsService.getMyQuests()
-
-    //       }
-    //     } catch (error) {
-    //       logger.error(error)
-    //       Pop.toast(error.message, 'error')
-    //     }
-    // })
     return {
       questBar,
       homeRestaurant: computed(() => AppState.activeRestaurant),
@@ -108,6 +84,13 @@ export default {
 <style scoped lang="scss">
 .standard-length {
   width: 7rem;
+  margin-left: 1rem;
+  border-radius: 4px;
+}
+
+.quest-control {
+  display: flex;
+  align-items: center;
 }
 
 </style>
