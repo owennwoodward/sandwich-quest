@@ -32,7 +32,7 @@
                                     </div>
                                     <div v-if="homeRestaurant.coordinates?.latitude" class="d-flex flex-column">
                                         Directions:
-                                        <span> <a class="text-secondary" :href="`https://maps.google.com/?q=${homeRestaurant.coordinates?.latitude},${homeRestaurant.coordinates?.longitude}`"> Google Maps</a></span>
+                                        <span> <a class="text-secondary" target="_blank" :href="`https://maps.google.com/?q=${homeRestaurant.coordinates?.latitude},${homeRestaurant.coordinates?.longitude}`"> Google Maps</a></span>
                                     </div>
                                 </div>
                                 <div>
