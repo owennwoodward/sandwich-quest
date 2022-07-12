@@ -21,14 +21,14 @@
                 {{ item.name }}?
               </div>
             </div>
-            <div class="d-flex justify-content-center py-1">
-
-              <input class="" :checked="item.isChecked ? true : false" v-model="editable.checkBox" @click="editItem()"
-                type="checkbox" name="" id="" />
-            </div>
 
           </div>
         </button>
+            <div class="d-flex justify-content-center py-1">
+
+              <input class=""   @click="editItem"
+                type="checkbox" name="" id="" />
+            </div>
       </h2>
       <div :id="'id' + item.id" class="accordion-collapse collapse show" aria-labelledby="headingOne"
         data-bs-parent="#accordionExample">
@@ -84,14 +84,9 @@ export default {
       },
 
       async editItem() {
-        console.log(props.item.myNotes)
-
-        props.item.isChecked = editable.value.checkBox
-        // props.item.myNotes = editable.value.itemNotes
-
-
+              
         try {
-          questItemsService.editItem(props.item)
+          await questItemsService.editItem(props.item)
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
