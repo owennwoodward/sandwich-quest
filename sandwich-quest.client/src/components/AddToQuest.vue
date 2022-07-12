@@ -2,10 +2,10 @@
   <div  v-if="account.id != undefined && quests.length > 0">
     <div>
       <form>
-    <button type="submit"  class="btn btn-primary " @click.prevent="addToCollection">Add to Quest</button>
-         <select  v-if="quests[0] != undefined" required v-model="questBar.questId">
+    <button type="submit"  class="btn btn-primary p-2 " @click.prevent="addToCollection"><b>Add to Quest</b></button>
+         <select class="ms-1 mt-3"  v-if="quests[0] != undefined" required v-model="questBar.questId">
           <!--  v-model="questBar.questId" -->
-              <option v-for="q in quests" :key="q.id" :value="q.id" >
+              <option class="" v-for="q in quests" :key="q.id" :value="q.id" >
                {{q.name}}
               </option>
             </select>
@@ -18,11 +18,11 @@
 </template>
 <script>
 import { computed } from '@vue/runtime-core'
-import {  ref } from "vue"
+import { ref } from "vue"
 import { useRoute } from "vue-router"
 import { AppState } from "../AppState.js"
 import Pop from "../utils/Pop.js"
-import { questItemsService} from "../services/QuestItemsService"
+import { questItemsService } from "../services/QuestItemsService"
 export default {
   props: {
     restaurant: {
@@ -30,81 +30,80 @@ export default {
       required: true
     }
   },
-    setup(props) {
-        const route = useRoute()
-        const questBar = ref({})
+  setup(props) {
+    const route = useRoute()
+    const questBar = ref({})
 
-        // onMounted(async ()=>{
-        //  try {
-        //     if (!AppState.quests[0]) {
-        //         await questsService.getMyQuests()
+    // onMounted(async ()=>{
+    //  try {
+    //     if (!AppState.quests[0]) {
+    //         await questsService.getMyQuests()
 
-        //       }
-        //  } catch (error) {
-        //  Pop.toast(error, 'error')
-        //  console.error(error);
-        //  }
-        // })
+    //       }
+    //  } catch (error) {
+    //  Pop.toast(error, 'error')
+    //  console.error(error);
+    //  }
+    // })
 
-        // watchEffect( async () => {
-        //     try {
-        //       // await yelpService.getById(route.params.id)
-        //       if (!AppState.quests[0]) {
-        //         await questsService.getMyQuests()
+    // watchEffect( async () => {
+    //     try {
+    //       // await yelpService.getById(route.params.id)
+    //       if (!AppState.quests[0]) {
+    //         await questsService.getMyQuests()
 
-        //       }
-        //     } catch (error) {
-        //       logger.error(error)
-        //       Pop.toast(error.message, 'error')
-        //     }
-        // })
-        return {
-          questBar,
-            homeRestaurant:computed(()=> AppState.activeRestaurant),
-            appQuests: computed(() => AppState.quests),
-            quests: computed(() =>  {
-              const sorted = AppState.quests.sort((a,b) => new Date(b.createdAt) -new Date(a.createdAt));
-              return sorted.filter(q => {
-                const found = AppState.questitems.find(qi =>  qi.restaurantId == props.restaurant.id && qi.questId == q.id);
-                if(q.id != found?.questId) {
-                  return true
-                }
-                return false
-              })
-            }),
-            account: computed(() => AppState.account),
-
-
-            canBeOption(questId) {
-            },
+    //       }
+    //     } catch (error) {
+    //       logger.error(error)
+    //       Pop.toast(error.message, 'error')
+    //     }
+    // })
+    return {
+      questBar,
+      homeRestaurant: computed(() => AppState.activeRestaurant),
+      appQuests: computed(() => AppState.quests),
+      quests: computed(() => {
+        const sorted = AppState.quests.sort((a, b) => a.updatedAt - b.updatedAt);
+        return sorted.filter(q => {
+          const found = AppState.questitems.find(qi => qi.restaurantId == props.restaurant.id && qi.questId == q.id);
+          if (q.id != found?.questId) {
+            return true
+          }
+          return false
+        })
+      }),
+      account: computed(() => AppState.account),
 
 
-            async addToCollection() {
+      canBeOption(questId) {
+      },
 
 
-              //massage the data
+      async addToCollection() {
 
-              let newItem = {
-                name: props.restaurant.name,
-                questId: questBar.value.questId,
-                restaurantId: props.restaurant.id,
-                yelpRate: props.restaurant.rating,
-                streetAddress: props.restaurant.location
-              }
 
-             try {
-               await questItemsService.createQuestItem(newItem)
-               Pop.toast('Added Quest Item')
-             } catch (error) {
-             Pop.toast(error, 'error')
-             console.error(error);
-             }
-            }
+        //massage the data
 
+        let newItem = {
+          name: props.restaurant.name,
+          questId: questBar.value.questId,
+          restaurantId: props.restaurant.id,
+          yelpRate: props.restaurant.rating,
+          streetAddress: props.restaurant.location
         }
+
+        try {
+          await questItemsService.createQuestItem(newItem)
+          Pop.toast('Added Quest Item')
+        } catch (error) {
+          Pop.toast(error, 'error')
+          console.error(error);
+        }
+      }
+
     }
+  }
 }
 </script>
 <style scoped lang="scss">
-  
 </style>

@@ -10,17 +10,17 @@
   <div class="container text-center">
 
   </div>
-  <!-- TODO make the button not show up if the result would be empty array -->
+  <!-- TODO give user a default message if nothing is currently showing -->
   
   <h5>Filters:</h5>
   <div class="p-3 pb-5 d-flex justify-content-around">
-    <h2 title="All" class="filter-button selectable" @click="filter= ''">👌</h2>
-    <h2 title="Coffee" class="filter-button selectable" @click="filter= 'coffee'">☕</h2>
-    <h2 title="American" class="filter-button selectable" @click="filter= 'tradamerican'">🏈</h2>
-    <h2 title="Burgers" class="filter-button selectable" @click="filter= 'burger'">🍔</h2>
-    <h2 title="Vegan" class="filter-button selectable" @click="filter= 'vegan'">🥦</h2>
-    <h2 title="Bakeries" class="filter-button selectable" @click="filter= 'bakeries'">🥐</h2>
-    <h2 title="Desserts" class="filter-button selectable" @click="filter= 'desserts'">🍨</h2>
+    <h2 title="All" class="filter-button selectable" @click="sort('')">👌</h2>
+    <h2 title="Coffee" class="filter-button selectable" @click="sort('coffee')">☕</h2>
+    <h2 title="American" class="filter-button selectable" @click="sort( 'tradamerican')">🏈</h2>
+    <h2 title="Burgers" class="filter-button selectable" @click="sort( 'burger')">🍔</h2>
+    <h2 title="Vegan" class="filter-button selectable" @click="sort( 'vegan')">🥦</h2>
+    <h2 title="Bakeries" class="filter-button selectable" @click="sort( 'bakeries')">🥐</h2>
+    <h2 title="Desserts" class="filter-button selectable" @click="sort( 'desserts')">🍨</h2>
   </div>
   <div v-for="r in homeRestaurants" :key="r.id" class=" ">
     <HomeRestaurant :homeRestaurant="r" />
@@ -59,6 +59,16 @@ export default {
             filter,
             searchTerm,
             homeRestaurants: computed(() => AppState.homeRestaurants.businesses?.filter(r => filter.value ?  (r.categories[0]?.alias || r.categories[1]?.alias || r.categories[2]?.alias) == filter.value : true)),
+           async sort(category){
+              AppState.currentCategories = category
+              try {
+                 await yelpService.getAll(AppState.currentTerm)
+                
+              } catch (error) {
+                Pop.toast(error, 'error')
+                logger.error(error)
+              }
+            }
         };
     },
     components: { HomeRestaurant }

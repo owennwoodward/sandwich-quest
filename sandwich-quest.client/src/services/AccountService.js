@@ -14,8 +14,7 @@ class AccountService {
 
   async getQuests() {
     const res = await api.get('account/quests')
-    // FIXME datap???
-    AppState.quests = res.datap
+    AppState.quests = res.data
     return res.data
   }
 
