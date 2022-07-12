@@ -3,7 +3,9 @@
   <div class="d-flex align-middle">
     <h1 class="logo">
       <img class="logo-img" src="../assets/img/SQBW.png" alt="">
-      Sando Quest
+      <div class="mt-2">
+        Sando Quest
+      </div>
     </h1>
   </div>
   <Searchbar @submit.prevent="filter = ''" />
@@ -98,9 +100,14 @@ export default {
 
 .logo{
   font-family: fantasyFont;
+  margin: 0;
+  transform: scale(1);
+  display: flex;
+  align-items: center;
+  
 }
 .logo-img{
-  width: 50px
+  width: 4rem;
 }
 @font-face{
   font-family: fantasyFont;
