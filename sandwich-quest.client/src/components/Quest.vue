@@ -2,7 +2,8 @@
     <div class="component">
         <div class="container">
             <div class="row justify-content-start">
-                <button class=" col-10 d-flex justify-content-between btn btn-primary borders " type="button"
+                <button v-if="!questItems == 0"
+                    class=" col-10 d-flex justify-content-between btn btn-primary borders corner-left" type="button"
                     data-bs-toggle="collapse" :data-bs-target="`#id` + quest.id" aria-expanded="false"
                     aria-controls="collapseWidthExample">
                     <h4 class="">{{ quest.name }}</h4>
@@ -12,14 +13,16 @@
                         <i class="mdi mdi-pencil"></i>
                     </div> -->
                 </button>
-                <div class="col-2 bg-primary borders pt-2 selectable" @click.stop="removeQuest">
+                <div class="col-2 text-end bg-primary borders pt-2 selectable corner-right" @click.stop="removeQuest">
 
                     <i class="mdi mdi-delete text-danger h4 "></i>
                 </div>
 
-                <div style="min-height: 120px;">
-                    <div class="collapse collapse-horizontal m-4" :id="`id` + quest.id">
-                        <div class="card card-body collapse-mobile">
+                <div class="my-3 d-flex justify-content-center">
+                    <!-- style="min-height: 120px;" -->
+                    <div class="collapse collapse-horizontal  " :id="`id` + quest.id">
+                        <div class="card card-body collapse-mobile d-flex flex-column">
+                            <!--  -->
                             <QuestItem v-for="i in questItems" :key="i.id" :item="i" />
                         </div>
                     </div>
@@ -88,5 +91,15 @@ export default {
 
 .borders {
     border-radius: 0%;
+}
+
+.corner-left {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.corner-right {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 </style>
