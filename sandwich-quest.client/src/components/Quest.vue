@@ -7,6 +7,7 @@
                     data-bs-toggle="collapse" :data-bs-target="`#id` + quest.id" aria-expanded="false"
                     aria-controls="collapseWidthExample">
                     <h4 class="">{{ quest.name }}</h4>
+
                     <!-- <div class="col-md-6 selectable justify-content-end">
                         </div> -->
                     <!-- <div class="col-2 selectable justify-content-start" @click="editQuest">
@@ -23,6 +24,10 @@
                     <div class="collapse collapse-horizontal  " :id="`id` + quest.id">
                         <div class="card card-body collapse-mobile d-flex flex-column">
                             <!--  -->
+                            <div class="progress">
+                                <div class="progress-bar bg-secondary" role="progressbar" :style="'width:' + doneItems.length/questItems.length *100 " 
+                                    aria-valuemin="0" aria-valuemax="100">{{doneItems.length/questItems.length *100}}</div>
+                            </div>
                             <QuestItem v-for="i in questItems" :key="i.id" :item="i" />
                         </div>
                     </div>
@@ -51,7 +56,10 @@ export default {
     props: { quest: { type: Object, required: true } },
     setup(props) {
         return {
+            
             questItems: computed(() => AppState.questitems.filter(i => i.questId == props.quest.id)),
+
+    doneItems: computed(() => AppState.questitems.filter(i => i.isChecked == true)),
 
             async removeQuest() {
                 try {
