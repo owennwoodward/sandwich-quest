@@ -25,8 +25,9 @@
                         <div class="card card-body collapse-mobile d-flex flex-column">
                             <!--  -->
                             <div class="progress">
-                                <div class="progress-bar bg-secondary" role="progressbar" :style="'width:' + doneItems.length/questItems.length *100 " 
-                                    aria-valuemin="0" aria-valuemax="100">{{doneItems.length/questItems.length *100}}</div>
+                                <div class="progress-bar bg-secondary" role="progressbar" 
+                                 :style="{ 'width': doneItems.length/questItems.length *100 + '%' }"
+                                    aria-valuemin="0" aria-valuemax="100">{{doneItems.length/questItems.length *100}}%</div>
                             </div>
                             <QuestItem v-for="i in questItems" :key="i.id" :item="i" />
                         </div>
