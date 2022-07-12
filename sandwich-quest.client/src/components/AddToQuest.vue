@@ -63,7 +63,7 @@ export default {
             homeRestaurant:computed(()=> AppState.activeRestaurant),
             appQuests: computed(() => AppState.quests),
             quests: computed(() =>  {
-              const sorted = AppState.quests.sort((a,b) => a.updatedAt - b.updatedAt);
+              const sorted = AppState.quests.sort((a,b) => new Date(b.createdAt) -new Date(a.createdAt));
               return sorted.filter(q => {
                 const found = AppState.questitems.find(qi =>  qi.restaurantId == props.restaurant.id && qi.questId == q.id);
                 if(q.id != found?.questId) {
