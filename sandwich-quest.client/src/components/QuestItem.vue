@@ -6,10 +6,11 @@
         <button class="accordion-button bg-success text-dark " type="button" data-bs-toggle="collapse"
           :data-bs-target="'#id' + item.id" aria-expanded="true" aria-controls="collapseOne">
           <div class="container-fluid">
+            <div class="row justify-content-end">
+              <div @click.stop="deleteItem" class="col-12 mx-2 ms-5 h5 text-danger mdi mdi-delete selectable"></div>
+
+            </div>
             <div class="row">
-              <div class="col-md-2">
-                <div @click.stop="deleteItem" class="mx-2 ms-5 h5 text-danger mdi mdi-delete selectable"></div>
-              </div>
               <div class="col-10">
                 <h6>Have you Been here?</h6>
               </div>
@@ -19,12 +20,12 @@
                     @click="editItem()" type="checkbox" name="" id="" />
                 </div>
               </div>
-              <div class="col-12 text-center">
-
-                <h5 class="mx-2">{{ item.name }} </h5>
-              </div>
-
             </div>
+            <div class="col-12 text-center">
+
+              <h5 class="mx-2">{{ item.name }} </h5>
+            </div>
+
           </div>
         </button>
       </h2>
