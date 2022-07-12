@@ -1,18 +1,18 @@
 <template lang="">
-  <div>
-    <img v-if="rating >= 5" src="../assets/img/yelpStars/stars_regular_5.png"/>
-    <img  v-else-if=" rating >= 4.5" src="../assets/img/yelpStars/stars_regular_4_half.png"/>
-    <img  v-else-if="rating >= 4" src="../assets/img/yelpStars/stars_regular_4.png"/>
-    <img  v-else-if=" rating >= 3.5" src="../assets/img/yelpStars/stars_regular_3_half.png"/>
-    <img  v-else-if="rating >= 3" src="../assets/img/yelpStars/stars_regular_3.png"/>
-    <img  v-else-if=" rating >= 2.5" src="../assets/img/yelpStars/stars_regular_2_half.png"/>
-    <img  v-else-if="rating >= 2" src="../assets/img/yelpStars/stars_regular_2.png"/>
-    <img  v-else-if=" rating >= 1.5" src="../assets/img/yelpStars/stars_regular_1_half.png"/>
-    <img  v-else-if="rating >= 1" src="../assets/img/yelpStars/stars_regular_1.png"/>
-    <img  v-else-if="rating >= 0" src="../assets/img/yelpStars/stars_regular_0.png"/>
+
+    <img class="stars" v-if="rating >= 5" src="../assets/img/yelpStars/stars_regular_5.png"/>
+    <img class="stars"  v-else-if=" rating >= 4.5" src="../assets/img/yelpStars/stars_regular_4_half.png"/>
+    <img class="stars"  v-else-if="rating >= 4" src="../assets/img/yelpStars/stars_regular_4.png"/>
+    <img class="stars"  v-else-if=" rating >= 3.5" src="../assets/img/yelpStars/stars_regular_3_half.png"/>
+    <img class="stars"  v-else-if="rating >= 3" src="../assets/img/yelpStars/stars_regular_3.png"/>
+    <img class="stars"  v-else-if=" rating >= 2.5" src="../assets/img/yelpStars/stars_regular_2_half.png"/>
+    <img class="stars"  v-else-if="rating >= 2" src="../assets/img/yelpStars/stars_regular_2.png"/>
+    <img class="stars"  v-else-if=" rating >= 1.5" src="../assets/img/yelpStars/stars_regular_1_half.png"/>
+    <img class="stars"  v-else-if="rating >= 1" src="../assets/img/yelpStars/stars_regular_1.png"/>
+    <img class="stars"  v-else-if="rating >= 0" src="../assets/img/yelpStars/stars_regular_0.png"/>
 
 
-  </div>
+
 </template>
 <script>
 export default {
@@ -67,6 +67,13 @@ export default {
   
 }
 </script>
-<style lang="">
-  
+<style scoped lang="scss">
+
+  .stars {
+    // transform: scale(.6);
+    width: 123px;
+    height: 24px;
+    justify-content: end;
+    align-self: center;
+  }
 </style>
