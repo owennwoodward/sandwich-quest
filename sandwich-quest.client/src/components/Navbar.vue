@@ -95,9 +95,9 @@ export default {
       },
       async createQuest() {
         try {
+          Modal.getOrCreateInstance(document.getElementById('modelId')).hide()
           let questData = form.value
           let newQuest = await questsService.createQuest(questData)
-          Modal.getOrCreateInstance(document.getElementById('modelId')).hide()
           // router.push({ name: 'Account' })
           form.value = {}
 
