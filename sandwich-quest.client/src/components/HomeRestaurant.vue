@@ -3,32 +3,32 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div @click="goToRestaurantDetails" class="card-header selectable">
+                    <div @click="goToRestaurantDetails" class="card-header selectable bg-success">
                         <div class="d-flex justify-content-between ">
-                            <h3>{{ homeRestaurant.name }}</h3>
-                            <div class="stars ms-5 ">
+                            <div class="display-5">{{ homeRestaurant.name }}</div>
+                        </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="py-2 fst-italic">{{ homeRestaurant?.location?.address1 }}</div>
                                 <YelpStars :rating="homeRestaurant.rating" />
                             </div>
-                        </div>
-                        <h5 class="py-2">{{ homeRestaurant?.location?.address1 }}</h5>
                         <div class="d-flex justify-content-between fst-italic">
 
                             <b v-for="c in homeRestaurant.categories" :key="c.alias"> {{ c.title }}</b>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-md-4">
-                                <img :src="homeRestaurant.image_url" class="img-fluid" :alt="homeRestaurant.name">
+                                <img :src="homeRestaurant.image_url" class="img-fluid rounded elevation-1" :alt="homeRestaurant.name">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-8 my-1">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div>Phone:
+                                        <div><b>Phone:</b>
                                             <p>{{ homeRestaurant.phone }}</p>
                                         </div>
                                         <div class="d-flex flex-column">
-                                            Transactions:
+                                            <b>Transactions:</b>
                                             <p class="p-1 m-0 fst-italic" v-for="m in homeRestaurant.transactions">{{ m
                                             }}
                                             </p>
@@ -42,7 +42,7 @@
                                                     :href="`https://maps.google.com/?q=${homeRestaurant.coordinates?.latitude},${homeRestaurant.coordinates?.longitude}`">
                                                     Google Maps</a></span>
                                         </div>
-                                        <div>
+                                        <div class="mobile-center">
                                             <AddToQuest :restaurant="homeRestaurant" />
                                         </div>
                                     </div>
@@ -103,9 +103,16 @@ export default {
     color: rgb(34, 32, 32);
 }
 
-.stars {
-    display: flex;
-    flex-direction: row-reverse;
-    transform: scale(.75);
+// .stars {
+//     display: flex;
+//     flex-direction: row-reverse;
+//     transform: scale(.75);
+// }
+
+@media(max-width: 768px) {
+    .mobile-center {
+        display: flex;
+        justify-content: center;
+    }
 }
 </style>

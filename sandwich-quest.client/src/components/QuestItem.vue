@@ -5,31 +5,43 @@
       <h2 class="accordion-header" :id="'headerId' + item.id">
         <button class="accordion-button bg-success text-dark " type="button" data-bs-toggle="collapse"
           :data-bs-target="'#id' + item.id" aria-expanded="true" aria-controls="collapseOne">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-2">
+                <h6>Have you Been here?</h6>
+                <input class="mx-2" :checked="item.isChecked ? true : false" v-model="editable.checkBox"
+                  @click="editItem()" type="checkbox" name="" id="" />
+              </div>
+              <div class="col-8 text-center">
 
-          <div>
-            <input class="mx-2 p-2" :checked="item.isChecked ? true : false" v-model="editable.checkBox"
-              @click="editItem()" type="checkbox" name="" id="" />
-            <!-- v-model="editable.checkBox" @click="editItem()" -->
+                <h3 class="mx-2">{{ item.name }} </h3>
+              </div>
+              <div class="col-2">
+                <div @click.stop="deleteItem" class="mx-2 ms-5 h5 text-danger mdi mdi-delete selectable"></div>
 
+              </div>
+            </div>
           </div>
-
-          <h6 class="mx-2">{{ item.name }} </h6>
         </button>
       </h2>
       <div :id="'id' + item.id" class="accordion-collapse collapse show" aria-labelledby="headingOne"
         data-bs-parent="#accordionExample">
-        <div class="accordion-body text-dark">
+        <div class="accordion-body text-dark ">
+          <div class="container-fluid">
+            <div class="row">
 
-          <textarea @blur="editItem" v-model="item.myNotes">  </textarea>
+              <div class="py-2">
 
-          {{ item.streetAddress.display_address[0] }},
-          {{ item.streetAddress.city }}
-          {{ item.streetAddress.state }}
-          <YelpStars :rating="item.yelpRate" />
-          <div class="d-flex ">
-            <div @click.stop="deleteItem" class="mx-2 h4 text-danger mdi mdi-cancel selectable"></div>
-            <p class="text-dark"></p>
+                <YelpStars :rating="item.yelpRate" />
+              </div>
 
+              <div class="py-4 h4">
+                {{ item.streetAddress.display_address[0] }},
+                {{ item.streetAddress.city }}
+                {{ item.streetAddress.state }}
+              </div>
+              <textarea class="py-3" placeholder="How was it?" @blur="editItem" v-model="item.myNotes">  </textarea>
+            </div>
           </div>
         </div>
       </div>

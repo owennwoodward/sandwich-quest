@@ -2,7 +2,7 @@
 
   <div class="d-flex align-middle">
     <h1 class="logo">
-      <img class="logo-img" src="../assets/img/SQ BW.png" alt="">
+      <img class="logo-img" src="../assets/img/SQBW.png" alt="">
       Sando Quest
     </h1>
   </div>
