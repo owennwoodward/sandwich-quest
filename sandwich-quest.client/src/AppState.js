@@ -9,5 +9,6 @@ export const AppState = reactive({
   homeRestaurants: [],
   activeRestaurant: {},
   currentCategories: '',
-  currentTerm: ''
+  currentTerm: '',
+  currentLocation: ''
 })
