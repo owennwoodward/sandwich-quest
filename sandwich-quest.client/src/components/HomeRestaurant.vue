@@ -19,7 +19,8 @@
                     <div class="card-body">
                         <div class="row ">
                             <div class="col-md-4">
-                                <img :src="homeRestaurant.image_url" class="img-fluid rounded elevation-1" :alt="homeRestaurant.name">
+                                <img :id="homeRestaurant.id + 'image'" :src="homeRestaurant.image_url" @error="changeImg" class="img-fluid rounded elevation-1" >
+                                <!-- @error="imgCondition = true" -->
                             </div>
                             <div class="col-md-8 my-1">
                                 <div class="row text-center">
@@ -64,10 +65,12 @@
 
 <script>
 import { onMounted } from '@vue/runtime-core'
+import { computed } from "vue"
 import { useRouter } from "vue-router"
 import { questsService } from "../services/QuestsService.js"
 import { yelpService } from '../services/YelpService.js'
 import Pop from "../utils/Pop.js"
+import defaultImg from '../assets/img/SQBW.png'
 // import '../assets/img/yelpStars'
 export default {
     props: {
@@ -82,7 +85,8 @@ export default {
 
 
         return {
-
+            defaultImg,
+            imgCondition: false,
             goToRestaurantDetails() {
                 router.push({
                     name: 'restaurant-details',
@@ -90,8 +94,14 @@ export default {
                         id: props.homeRestaurant.id
                     }
                 })
-            }
+            },
+            // method to change src tag
+            changeImg() {
+                document.getElementById(`${props.homeRestaurant.id}image`).src = defaultImg
+            },
+            // altImg: computed(() => {return document.getElementById(`${props.homeRestaurant.id}image`).getAttribute('src') ? defaultImg :props.homeRestaurant.image_url })
         }
+
     }
 }
 
