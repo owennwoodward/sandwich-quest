@@ -7,14 +7,14 @@
           :data-bs-target="'#id' + item.id" aria-expanded="true" aria-controls="collapseOne">
           <div class="container-fluid">
             <div class="row ">
-              
-              </div>
+
+            </div>
             <div class="h5">
-              
-            
+
+
               <div class="col-12 text-center display-5 ms-2">
-                
-            {{ item.name }}
+
+                {{ item.name }}
               </div>
             </div>
 
@@ -22,24 +22,24 @@
         </button>
         <div class="d-flex row justify-content-evenly">
           <div class="col-md-6">
-            
-            
+
+
             <div class="d-flex justify-content-center py-1">
-              <h5 class="text-dark">Did you visit {{item.name}}?</h5> 
-            
-            <input class="mx-2 mb-1"  :checked="item.isChecked"  @click="editChecked"
-                type="checkbox" name="" id="" />
+              <h5 class="text-dark">Did you visit {{ item.name }}?</h5>
+
+              <input class="mx-2 mb-1 mt-2" :checked="item.isChecked" @click="editChecked" type="checkbox" name=""
+                id="" />
             </div>
-            </div>
-              <div class="col-md-6">
+          </div>
+          <div class="col-md-6">
             <div class="d-flex justify-content-center">
 
               <h5 class="text-dark mt-1">Delete Quest Item?</h5>
-              <div @click.stop="deleteItem"
-                class=" text-danger mdi mdi-delete selectable d-flex justify-content-end "></div>
+              <div @click.stop="deleteItem" class=" text-danger mdi mdi-delete selectable d-flex justify-content-end ">
+              </div>
             </div>
-            </div>
-            </div>
+          </div>
+        </div>
       </h2>
       <div :id="'id' + item.id" class="accordion-collapse collapse show" aria-labelledby="headingOne"
         data-bs-parent="#accordionExample">
@@ -95,7 +95,7 @@ export default {
       },
 
       async editChecked() {
-              
+
         try {
           await questItemsService.editChecked(props.item)
         } catch (error) {
@@ -106,7 +106,7 @@ export default {
 
 
       async editItem() {
-              
+
         try {
           await questItemsService.editItem(props.item)
         } catch (error) {
