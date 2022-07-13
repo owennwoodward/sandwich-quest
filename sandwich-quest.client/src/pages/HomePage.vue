@@ -14,30 +14,30 @@
   </div>
   <!-- TODO give user a default message if nothing is currently showing -->
 
-  <h5>Filters:</h5>
+  <h5 class="ms-3">Filters:</h5>
   <div class="row">
     <div class=" p-3 pb-5 d-flex justify-content-around">
-      <div class="text-center col-md-3">All
-        <h2 title="All" class="filter-button selectable" @click="sort('')">👌</h2>
+      <div class="text-center mt-1">All
+        <h2 title="All" class=" mt-2 filter-button selectable" @click="sort('')">👌</h2>
       </div>
-      <div class="text-center">Coffee
-        <h2 title="Coffee" class="filter-button selectable" @click="sort('coffee')">☕</h2>
+      <div class="text-center  mt-1">Coffee
+        <h2 title="Coffee" class="mt-2 filter-button selectable" @click="sort('coffee')">☕</h2>
       </div>
-      <div class="text-center">American
+      <!-- <div class="text-center  mb-1">American
         <h2 title="American" class="filter-button selectable" @click="sort('tradamerican')">🏈</h2>
-      </div>
-      <div class="text-center">Burger
-        <h2 title="Burgers" class="filter-button selectable" @click="sort('burger')">🍔</h2>
+      </div> -->
+      <div class="text-center  mt-1">Burger
+        <h2 title="Burgers" class="mt-2 filter-button selectable" @click="sort('burger')">🍔</h2>
       </div>
 
-      <div class="text-center">Vegan
-        <h2 title="Vegan" class="filter-button selectable" @click="sort('vegan')">🥦</h2>
+      <div class="text-center  mt-1">Vegan
+        <h2 title="Vegan" class="mt-2 filter-button selectable" @click="sort('vegan')">🥦</h2>
       </div>
-      <div class="text-center">Bakery
-        <h2 title="Bakeries" class="filter-button selectable" @click="sort('bakeries')">🥐</h2>
+      <div class="text-center  mt-1">Bakery
+        <h2 title="Bakeries" class="mt-2 filter-button selectable" @click="sort('bakeries')">🥐</h2>
       </div>
-      <div class="text-center">Dessert
-        <h2 title="Desserts" class="filter-button selectable" @click="sort('desserts')">🍨</h2>
+      <div class="text-center  mt-1">Dessert
+        <h2 title="Desserts" class="mt-2 filter-button selectable" @click="sort('desserts')">🍨</h2>
       </div>
     </div>
   </div>
