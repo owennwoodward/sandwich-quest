@@ -41,6 +41,9 @@
       </div>
     </div>
   </div>
+  <h4 class="text-center" v-if="homeRestaurants == 0">No Results for your search for {{ currentTerm }}, in the
+    category
+    {{ currentCategories || 'All' }}</h4>
   <div v-for="r in homeRestaurants" :key="r.id" class=" ">
     <HomeRestaurant :homeRestaurant="r" />
   </div>
@@ -77,6 +80,8 @@ export default {
     return {
       filter,
       searchTerm,
+      currentTerm: computed(() => AppState.currentTerm),
+      currentCategories: computed(() => AppState.currentCategories),
       homeRestaurants: computed(() => AppState.homeRestaurants.businesses?.filter(r => filter.value ? (r.categories[0]?.alias || r.categories[1]?.alias || r.categories[2]?.alias) == filter.value : true)),
       async sort(category) {
         AppState.currentCategories = category
