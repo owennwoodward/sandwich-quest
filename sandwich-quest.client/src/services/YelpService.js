@@ -16,11 +16,22 @@ let term = ''
 let coords = {}
 class YelpService {
     async getAll(query = '') {
-        await locationService.getUserCoordinates()
+        try {
+            await locationService.getUserCoordinates()
+        } catch (error) {
+            console.error(error)
+        }
         location = AppState.currentLocation || 'boise'
         categories = AppState.currentCategories
         coords = AppState.currentCoords.coords
         term = query
+        
+        if (!AppState.currentCoords?.coords?.latitude || AppState.currentLocation) {
+            const res = await api.get('yelp', {params: {categories: categories, location: location, term: term }})
+            AppState.homeRestaurants = res.data
+             return
+        }
+
         const res = await api.get('yelp', {params: {categories: categories, location: location, latitude: coords.latitude, longitude:coords.longitude, term: term }})
         // console.log(res.data, 'here is the get all res')
         AppState.homeRestaurants = res.data
