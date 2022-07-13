@@ -41,9 +41,12 @@
       </div>
     </div>
   </div>
-  <h4 class="text-center" v-if="homeRestaurants == 0">No Results for your search for {{ currentTerm }}, in the
+  <h4 class="text-center" v-if="homeRestaurants == 0">No Results for your search for <span class="caps"> {{ currentTerm
+  }} </span>,
+    in the
     category
-    {{ currentCategories || 'All' }}</h4>
+    <span class="caps"> {{ currentCategories || 'All' }} </span>
+  </h4>
   <div v-for="r in homeRestaurants" :key="r.id" class=" ">
     <HomeRestaurant :homeRestaurant="r" />
   </div>
@@ -130,6 +133,10 @@ export default {
   display: flex;
   align-items: center;
 
+}
+
+.caps {
+  text-transform: capitalize;
 }
 
 .logo-img {
