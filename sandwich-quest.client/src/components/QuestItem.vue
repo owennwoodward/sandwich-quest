@@ -7,27 +7,38 @@
           :data-bs-target="'#id' + item.id" aria-expanded="true" aria-controls="collapseOne">
           <div class="container-fluid">
             <div class="row ">
-              <div @click.stop="deleteItem"
-                class="col-12 mx-2 ms-5 h5 text-danger mdi mdi-delete selectable d-flex justify-content-end"></div>
-
-            </div>
-            <div class="h5">
-
-              <div class="col-12 text-center">
-                Did you visit
+              
               </div>
-              <div class="col-12 text-center">
-
-                {{ item.name }}?
+            <div class="h5">
+              
+            
+              <div class="col-12 text-center display-5 ms-2">
+                
+            {{ item.name }}
               </div>
             </div>
 
           </div>
         </button>
+        <div class="d-flex row justify-content-evenly">
+          <div class="col-md-6">
+            
+            
             <div class="d-flex justify-content-center py-1">
-
-              <input class=""  :checked="item.isChecked"  @click="editChecked"
+              <h5 class="text-dark">Did you visit {{item.name}}?</h5> 
+            
+            <input class="mx-2 mb-1"  :checked="item.isChecked"  @click="editChecked"
                 type="checkbox" name="" id="" />
+            </div>
+            </div>
+              <div class="col-md-6">
+            <div class="d-flex justify-content-center">
+
+              <h5 class="text-dark mt-1">Delete Quest Item?</h5>
+              <div @click.stop="deleteItem"
+                class=" text-danger mdi mdi-delete selectable d-flex justify-content-end "></div>
+            </div>
+            </div>
             </div>
       </h2>
       <div :id="'id' + item.id" class="accordion-collapse collapse show" aria-labelledby="headingOne"
