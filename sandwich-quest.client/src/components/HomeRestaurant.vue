@@ -28,12 +28,12 @@
                                         <div><b>Phone:</b>
                                             <p>{{ homeRestaurant.phone }}</p>
                                         </div>
-                                        <div v-if="homeRestaurant.transactions[0]" class="d-flex flex-column">
+                                        <!-- <div v-if="homeRestaurant.transactions[0]" class="d-flex flex-column">
                                             <b>Transactions:</b>
                                             <p class="p-1 m-0 fst-italic" v-for="m in homeRestaurant.transactions">{{ m
                                             }}
                                             </p>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
