@@ -13,17 +13,40 @@
 
   </div>
   <!-- TODO give user a default message if nothing is currently showing -->
-  
-  <h5>Filters:</h5>
-  <div class="p-3 pb-5 d-flex justify-content-around">
-    <h2 title="All" class="filter-button selectable" @click="sort('')">👌</h2>
-    <h2 title="Coffee" class="filter-button selectable" @click="sort('coffee')">☕</h2>
-    <h2 title="American" class="filter-button selectable" @click="sort( 'tradamerican')">🏈</h2>
-    <h2 title="Burgers" class="filter-button selectable" @click="sort( 'burger')">🍔</h2>
-    <h2 title="Vegan" class="filter-button selectable" @click="sort( 'vegan')">🥦</h2>
-    <h2 title="Bakeries" class="filter-button selectable" @click="sort( 'bakeries')">🥐</h2>
-    <h2 title="Desserts" class="filter-button selectable" @click="sort( 'desserts')">🍨</h2>
+
+  <h5 class="ms-3">Filters:</h5>
+  <div class="row">
+    <div class=" p-3 pb-5 d-flex justify-content-around">
+      <div class="text-center mt-1">All
+        <h2 title="All" class=" mt-2 filter-button selectable" @click="sort('')">👌</h2>
+      </div>
+      <div class="text-center  mt-1">Coffee
+        <h2 title="Coffee" class="mt-2 filter-button selectable" @click="sort('coffee')">☕</h2>
+      </div>
+      <!-- <div class="text-center  mb-1">American
+        <h2 title="American" class="filter-button selectable" @click="sort('tradamerican')">🏈</h2>
+      </div> -->
+      <div class="text-center  mt-1">Burger
+        <h2 title="Burgers" class="mt-2 filter-button selectable" @click="sort('burger')">🍔</h2>
+      </div>
+
+      <div class="text-center  mt-1">Vegan
+        <h2 title="Vegan" class="mt-2 filter-button selectable" @click="sort('vegan')">🥦</h2>
+      </div>
+      <div class="text-center  mt-1">Bakery
+        <h2 title="Bakeries" class="mt-2 filter-button selectable" @click="sort('bakeries')">🥐</h2>
+      </div>
+      <div class="text-center  mt-1">Dessert
+        <h2 title="Desserts" class="mt-2 filter-button selectable" @click="sort('desserts')">🍨</h2>
+      </div>
+    </div>
   </div>
+  <h4 class="text-center" v-if="homeRestaurants == 0">No Results for your search for <span class="caps"> {{ currentTerm
+  }} </span>,
+    in the
+    category
+    <span class="caps"> {{ currentCategories || 'All' }} </span>
+  </h4>
   <div v-for="r in homeRestaurants" :key="r.id" class=" ">
     <HomeRestaurant :homeRestaurant="r" />
   </div>
@@ -41,53 +64,58 @@ import { questsService } from "../services/QuestsService.js"
 import { questItemsService } from "../services/QuestItemsService.js"
 
 export default {
-    name: "Home",
-    setup() {
-        const searchTerm = ref("");
-        const filter = ref('');
-        let categories = [];
-        onMounted(async () => {
-          try {
-             await yelpService.getAll('');  
-             if (AppState.account.id) {
-              await questsService.getMyQuests()
-              await questItemsService.getMyQuestItems()
-             }
-          } catch (error) {
-            Pop.error(error)
-          }
-        });
-        return {
-            filter,
-            searchTerm,
-            homeRestaurants: computed(() => AppState.homeRestaurants.businesses?.filter(r => filter.value ?  (r.categories[0]?.alias || r.categories[1]?.alias || r.categories[2]?.alias) == filter.value : true)),
-           async sort(category){
-              AppState.currentCategories = category
-              try {
-                 await yelpService.getAll(AppState.currentTerm)
-                
-              } catch (error) {
-                Pop.toast(error, 'error')
-                logger.error(error)
-              }
-            }
-        };
-    },
-    components: { HomeRestaurant }
+  name: "Home",
+  setup() {
+    const searchTerm = ref("");
+    const filter = ref('');
+    let categories = [];
+    onMounted(async () => {
+      try {
+        await yelpService.getAll('');
+        if (AppState.account.id) {
+          await questsService.getMyQuests()
+          await questItemsService.getMyQuestItems()
+        }
+      } catch (error) {
+        Pop.error(error)
+      }
+    });
+    return {
+      filter,
+      searchTerm,
+      currentTerm: computed(() => AppState.currentTerm),
+      currentCategories: computed(() => AppState.currentCategories),
+      homeRestaurants: computed(() => AppState.homeRestaurants.businesses?.filter(r => filter.value ? (r.categories[0]?.alias || r.categories[1]?.alias || r.categories[2]?.alias) == filter.value : true)),
+      async sort(category) {
+        AppState.currentCategories = category
+        try {
+          await yelpService.getAll(AppState.currentTerm)
+
+        } catch (error) {
+          Pop.toast(error, 'error')
+          logger.error(error)
+        }
+      }
+    };
+  },
+  components: { HomeRestaurant }
 }
 </script>
 
 <style scoped lang="scss">
 @import "../assets/scss/variables";
-.home{
+
+.home {
   display: grid;
   height: 80vh;
   place-content: center;
   text-align: center;
   user-select: none;
-  .home-card{
+
+  .home-card {
     width: 50vw;
-    > img{
+
+    >img {
       height: 200px;
       max-width: 200px;
       width: 100%;
@@ -98,34 +126,39 @@ export default {
 }
 
 
-.logo{
+.logo {
   font-family: fantasyFont;
   margin: 0;
   transform: scale(1);
   display: flex;
   align-items: center;
-  
+
 }
-.logo-img{
+
+.caps {
+  text-transform: capitalize;
+}
+
+.logo-img {
   width: 4rem;
 }
-@font-face{
+
+@font-face {
   font-family: fantasyFont;
   src: url('../assets/img/DreamwoodDemoRegular-Zj3q.ttf');
-} 
+}
 
-.filter-button{
+.filter-button {
   border: 2px;
   border-color: $secondary;
   border-style: solid;
   background-color: $secondary;
   border-radius: 50%;
   padding: 5px;
-  
+
 }
 
-.filter-button:hover{
+.filter-button:hover {
   transform: scale(1.05);
 }
-
 </style>

@@ -2,6 +2,7 @@
     <div class="component">
         <div class="container">
             <div class="row justify-content-start">
+                
                 <button v-if="!questItems == 0"
                     class=" col-10 d-flex justify-content-between btn btn-primary borders corner-left" type="button"
                     data-bs-toggle="collapse" :data-bs-target="`#id` + quest.id" aria-expanded="false"
@@ -14,17 +15,17 @@
                         <i class="mdi mdi-pencil"></i>
                     </div> -->
                 </button>
+
                 <div class="col-2 text-end bg-primary borders pt-2 selectable corner-right" @click.stop="removeQuest">
 
                     <i class="mdi mdi-delete text-danger h4 "></i>
                 </div>
-
                 <div class="my-3 d-flex justify-content-center">
                     <!-- style="min-height: 120px;" -->
                     <div class="collapse collapse-horizontal  " :id="`id` + quest.id">
                         <div class="card card-body collapse-mobile d-flex bg-dark flex-column">
                             <!--  -->
-                            <div class="progress">
+                            <div v-if="questItems.length >= 1" class="progress">
                                 <div class="progress-bar bg-secondary" role="progressbar"
                                     :style="{ 'width': Math.floor(doneItems.length / questItems.length * 100) + '%' }"
                                     aria-valuemin="0" aria-valuemax="100">{{ Math.floor(doneItems.length /
@@ -32,6 +33,7 @@
                                             * 100)
                                     }}%</div>
                             </div>
+                            <h5 v-if="questItems == 0">You have no quest items for this quest</h5>
                             <QuestItem v-for="i in questItems" :key="i.id" :item="i" />
                         </div>
                     </div>
