@@ -2,6 +2,7 @@
     <div class="component">
         <div class="container">
             <div class="row justify-content-start">
+                
                 <button v-if="!questItems == 0"
                     class=" col-10 d-flex justify-content-between btn btn-primary borders corner-left" type="button"
                     data-bs-toggle="collapse" :data-bs-target="`#id` + quest.id" aria-expanded="false"
@@ -32,6 +33,7 @@
                                             * 100)
                                     }}%</div>
                             </div>
+                            <h5 v-if="questItems == 0">You have no quest items for this quest</h5>
                             <QuestItem v-for="i in questItems" :key="i.id" :item="i" />
                         </div>
                     </div>
