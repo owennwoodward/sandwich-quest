@@ -10,5 +10,9 @@ export const AppState = reactive({
   activeRestaurant: {},
   currentCategories: '',
   currentTerm: '',
-  currentLocation: ''
+  currentLocation: '',
+  currentCoords: {
+    latitude: 0,
+    longitude: 0
+  }
 })

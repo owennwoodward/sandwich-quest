@@ -6,7 +6,7 @@
         <i class="selectable mdi mdi-home-circle fs-1"></i>
       </div>
       <div class="selectable d-flex display-6 fw-bold flex-column justify-content-center p-1" data-bs-toggle="modal"
-        data-bs-target="#modelId">
+        data-bs-target="#navBar">
         New Quest
       </div>
       <div @click="accountPage()">
@@ -22,7 +22,7 @@
   <!-- Button trigger modal -->
 
   <!-- Modal -->
-  <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal fade" id="navBar" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -95,7 +95,7 @@ export default {
       },
       async createQuest() {
         try {
-          Modal.getOrCreateInstance(document.getElementById('modelId')).hide()
+          Modal.getOrCreateInstance(document.getElementById('navBar')).hide()
           let questData = form.value
           let newQuest = await questsService.createQuest(questData)
           // router.push({ name: 'Account' })
