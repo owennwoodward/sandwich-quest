@@ -77,7 +77,7 @@ export default {
         await questItemsService.getMyQuestItems()
       } catch (error) {
         console.error(error)
-        Pop.toast(error, 'error')
+        // Pop.toast(error, 'error')
       }
     })
     return {
