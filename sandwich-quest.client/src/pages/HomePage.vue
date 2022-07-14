@@ -1,6 +1,6 @@
 <template>
 
-  <div class="d-flex align-middle">
+  <div class="d-flex align-middle selectable" @click="$router.go">
     <h1 class="logo">
       <img class="logo-img" src="../assets/img/SQBW.png" alt="">
       <div class="mt-2">
@@ -96,6 +96,7 @@ export default {
           logger.error(error)
         }
       }
+      
     };
   },
   components: { HomeRestaurant }
