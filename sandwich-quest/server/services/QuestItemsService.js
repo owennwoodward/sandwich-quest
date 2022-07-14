@@ -15,7 +15,7 @@ class QuestItemsService {
         const original = await dbContext.QuestItem.findById(update.id)
 
         if (original.creatorId.toString() != accountId) {
-            throw new BadRequest('You are not the person you say you are')
+            throw new BadRequest('This is not your account')
         }
 
         original.myNotes = update.myNotes || original.myNotes;
@@ -31,7 +31,7 @@ class QuestItemsService {
 
         original.save()
         return original
-        
+
     }
     async getUserQuestItems(creatorId) {
         let questItems = await dbContext.QuestItem.find({ creatorId })
@@ -40,7 +40,7 @@ class QuestItemsService {
     }
 
     async createItem(questItem, creatorId) {
-        const itemExists = await dbContext.QuestItem.findOne({questId: questItem.questId, restaurantId: questItem.restaurantId})
+        const itemExists = await dbContext.QuestItem.findOne({ questId: questItem.questId, restaurantId: questItem.restaurantId })
 
         if (itemExists) {
             throw new BadRequest('That item is already in this quest')

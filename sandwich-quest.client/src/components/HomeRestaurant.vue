@@ -6,11 +6,12 @@
                     <div @click="goToRestaurantDetails" class="card-header selectable bg-success">
                         <div class="d-flex justify-content-between ">
                             <div class="display-5">{{ homeRestaurant.name }}</div>
+                            <span class="m-2">{{ homeRestaurant.price }}</span>
                         </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="py-2 fst-italic">{{ homeRestaurant?.location?.address1 }}</div>
-                                <YelpStars :rating="homeRestaurant.rating" />
-                            </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="py-2 fst-italic">{{ homeRestaurant?.location?.address1 }}</div>
+                            <YelpStars :rating="homeRestaurant.rating" />
+                        </div>
                         <div class="d-flex justify-content-between fst-italic">
 
                             <b v-for="c in homeRestaurant.categories" :key="c.alias"> {{ c.title }}</b>
@@ -19,7 +20,8 @@
                     <div class="card-body">
                         <div class="row ">
                             <div class="col-md-4">
-                                <img :id="homeRestaurant.id + 'image'" :src="homeRestaurant.image_url" @error="changeImg" class="img-fluid rounded elevation-1" >
+                                <img :id="homeRestaurant.id + 'image'" :src="homeRestaurant.image_url"
+                                    @error="changeImg" class="img-fluid rounded elevation-1">
                                 <!-- @error="imgCondition = true" -->
                             </div>
                             <div class="col-md-8 my-1">

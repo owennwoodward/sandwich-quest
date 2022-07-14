@@ -65,7 +65,10 @@ export default {
           questId: questBar.value.questId,
           restaurantId: props.restaurant.id,
           yelpRate: props.restaurant.rating,
-          streetAddress: props.restaurant.location
+          streetAddress: props.restaurant.location,
+          distance: props.restaurant.distance,
+          price: props.restaurant.price,
+          coordinates: props.restaurant.coordinates
         }
 
         try {
@@ -92,5 +95,4 @@ export default {
   display: flex;
   align-items: center;
 }
-
 </style>

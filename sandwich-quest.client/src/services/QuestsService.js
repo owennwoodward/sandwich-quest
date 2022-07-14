@@ -14,7 +14,7 @@ class QuestsService {
 
   async getMyQuests(query = {}) {
     const res = await api.get('account/quests', query)
-    // console.log('get my account quests', res.data)
+    console.log('get my account quests', res.data)
     AppState.quests = res.data
     return res.data
   }
