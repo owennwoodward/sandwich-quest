@@ -32,8 +32,8 @@
                 <label class="ms-5" for="">Account picture:</label>
                 <input class="me-5" type="text" v-model="edits.picture" />
               </div>
-              <button data-bs-dismiss="offcanvas" aria-label="Save" class="btn btn-primary mt-3">Save</button>
             </div>
+            <button data-bs-dismiss="offcanvas" aria-label="Save" class="btn btn-primary mt-3">Save</button>
           </form>
         </div>
       </div>

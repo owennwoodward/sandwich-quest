@@ -72,12 +72,12 @@ export default {
     onMounted(async () => {
       try {
         await yelpService.getAll('');
-        if (AppState.account.id) {
-          await questsService.getMyQuests()
-          await questItemsService.getMyQuestItems()
-        }
+        // if (AppState.account.id) {
+        //   await questsService.getMyQuests()
+        //   await questItemsService.getMyQuestItems()
+        // }
       } catch (error) {
-        Pop.error(error)
+        Pop.error(error, 'this is the error ur looking for')
       }
     });
     return {
