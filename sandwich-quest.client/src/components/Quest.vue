@@ -2,23 +2,27 @@
     <div class="component">
         <div class="container">
             <div class="row justify-content-start">
-                
+
                 <button v-if="!questItems == 0"
+                    :class="{ 'bg-success blur darken-27': (doneItems.length == questItems.length && questItems.length != 0) }"
                     class=" col-10 d-flex justify-content-between btn btn-primary borders corner-left" type="button"
                     data-bs-toggle="collapse" :data-bs-target="`#id` + quest.id" aria-expanded="false"
                     aria-controls="collapseWidthExample">
-                    <h4 class="">{{ quest.name }}</h4>
-
-                    <!-- <div class="col-md-6 selectable justify-content-end">
-                        </div> -->
-                    <!-- <div class="col-2 selectable justify-content-start" @click="editQuest">
-                        <i class="mdi mdi-pencil"></i>
-                    </div> -->
+                    <h4 :class="{ 'text-decoration-line-through': (doneItems.length == questItems.length && questItems.length != 0) }"
+                        class="">{{
+                                quest.name
+                        }}</h4>
                 </button>
 
-                <div class="col-2 text-end bg-primary borders pt-2 selectable corner-right" @click.stop="removeQuest">
 
+                <div :class="{ 'bg-success blur darken-27': (doneItems.length == questItems.length && questItems.length != 0) }"
+                    class="col-2 text-end bg-primary borders pt-2 selectable corner-right" @click.stop="removeQuest">
+
+                    <i v-if="(doneItems.length == questItems.length && questItems.length != 0)"
+                        class="mdi mdi-check  h4 "></i>
                     <i class="mdi mdi-delete text-danger h4 "></i>
+
+
                 </div>
                 <div class="my-3 d-flex justify-content-center">
                     <!-- style="min-height: 120px;" -->
@@ -26,7 +30,8 @@
                         <div class="card card-body collapse-mobile d-flex bg-dark flex-column">
                             <!--  -->
                             <div v-if="questItems.length >= 1" class="progress">
-                                <div class="progress-bar bg-secondary" role="progressbar"
+                                <div :class="{ 'green': doneItems.length == questItems.length }"
+                                    class="progress-bar bg-secondary" role="progressbar"
                                     :style="{ 'width': Math.floor(doneItems.length / questItems.length * 100) + '%' }"
                                     aria-valuemin="0" aria-valuemax="100">{{ Math.floor(doneItems.length /
                                             questItems.length
@@ -38,11 +43,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="col-5">
-
-                    <input type="checkbox" :id="fieldId" class="font-bold cursor-pointer " />
-                </div> -->
 
             </div>
         </div>
@@ -93,6 +93,16 @@ export default {
 
 
 <style lang="scss" scoped>
+.blur {
+    filter: blur();
+
+}
+
+.green {
+    background-color: green !important;
+    ;
+}
+
 .collapse-mobile {
     width: 47vw;
 }
