@@ -10,13 +10,13 @@ export const mapBox = axios.create({
     // headers: {
     //     authorization: ``
     // }
-    params:{
+    params: {
         access_token: 'pk.eyJ1IjoiYmlnZGFkZHlkb20iLCJhIjoiY2w1azRxeHpsMDZpNTNmcGV4dTE2dXUxdCJ9.lUKUQoRd_memrOQ3bxOfLg'
     }
 })
 
 class MapBoxService {
-    async getAll(params){
+    async getAll(params) {
         const res = await mapBox.get('/mapbox/driving', { params })
         if (!res.data) {
             throw new BadRequest('Idiot, try again')
@@ -24,7 +24,7 @@ class MapBoxService {
         return res.data
 
     }
-    async getById(mapBoxId){
+    async getById(mapBoxId) {
         const res = await mapBox.get(`/mapbox/driving/${mapBoxId}`)
         if (!res.data) {
             throw new BadRequest('Idiot, not the right ID')

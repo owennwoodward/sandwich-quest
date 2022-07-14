@@ -18,14 +18,14 @@ class YelpService {
     // logger.log(params)
     const res = await yelp.get('/businesses/search', { params })
     if (!res.data) {
-      throw new BadRequest('Idiot, try again')
+      throw new BadRequest('Not a correct search ry again')
     }
     return res.data
   }
   async getById(yelpId) {
     const res = await yelp.get(`businesses/${yelpId}`)
     if (!res.data) {
-      throw new BadRequest('Idiot, not the right ID')
+      throw new BadRequest('Incorrect Id')
     }
     return res.data
   }

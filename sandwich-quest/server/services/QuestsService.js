@@ -25,7 +25,7 @@ class QuestsService {
   async getUserQuests(creatorId) {
     const quests = await dbContext.Quest.find({ creatorId })
     if (!quests) {
-      throw new BadRequest('something went wrong')
+      throw new BadRequest('Something went wrong')
     }
     // logger.log('getting your Quests', quests)
     return quests
@@ -40,7 +40,7 @@ class QuestsService {
   async editQuest(id, questData) {
     const original = await dbContext.Quest.findById(id).populate("creator", "name picture")
     if (original.creatorId.toString() != questData.creatorId)
-      throw new Forbidden("can't edit that")
+      throw new Forbidden("Can't edit that")
     original.name = questData.name ? questData.name : original.name
     original.save()
     // logger.log('edited', original)
@@ -58,7 +58,7 @@ class QuestsService {
     }
 
     await quest.remove();
-    await dbContext.QuestItem.deleteMany({questId: id})
+    await dbContext.QuestItem.deleteMany({ questId: id })
 
     return "deleted";
   }

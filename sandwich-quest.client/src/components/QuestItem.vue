@@ -26,7 +26,7 @@
 
             <div class="d-flex justify-content-center py-1">
               <h5 class="text-dark">Did you visit {{ item.name }}?</h5>
-
+              <!-- {{ item.price }} -->
               <input class="mx-2 mb-1 mt-2" :checked="item.isChecked" @click="editChecked" type="checkbox" name=""
                 id="" />
             </div>
@@ -41,22 +41,26 @@
           </div>
         </div>
       </h2>
-      <div :id="'id' + item.id" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+      <div :id="'id' + item.id" class="accordion-collapse collapse" aria-labelledby="headingOne"
         data-bs-parent="#accordionExample">
         <div class="accordion-body text-dark ">
           <div class="container-fluid">
             <div class="row">
 
-              <div class="py-2 d-flex justify-content-center">
+              <div class="py-2 d-flex justify-content-around">
 
-                <YelpStars :rating="item.yelpRate" />
+                <YelpStars :rating="item.yelpRate" /><b class="fst-italic">Cost: {{ item.price }}</b>
               </div>
 
-              <div class="py-4 h4">
+              <div class="pt-2 h4">
                 {{ item.streetAddress.display_address[0] }},
                 {{ item.streetAddress.city }}
                 {{ item.streetAddress.state }}
               </div>
+              <span class="py-2"> <a class="text-secondary" target="_blank"
+                  :href="`https://maps.google.com/?q=${item.coordinates?.latitude},${item.coordinates?.longitude}`">
+                  Google Maps</a></span>
+              <div class="h5">{{ (item.distance * (.000621)).toFixed(2) }} miles</div>
               <textarea class="py-3" placeholder="How was it?" @blur="editItem" v-model="item.myNotes">  </textarea>
             </div>
           </div>

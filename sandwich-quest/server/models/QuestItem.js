@@ -13,7 +13,10 @@ export const QuestItemSchema = new Schema({
     checkedDate: { type: Date, required: false },
     itemType: { type: String, required: false },
     streetAddress: { type: Object, required: true },
-    yelpRate: { type: Number, required: true }
+    yelpRate: { type: Number, required: true },
+    price: { type: String, required: true },
+    coordinates: { type: Object, required: true },
+    distance: { type: Number, required: true }
 }, { timestamps: true, toJSON: { virtuals: true } })
 
 QuestItemSchema.virtual('creator', {
