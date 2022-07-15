@@ -16,5 +16,4 @@ export const AppState = reactive({
     longitude: 0
   },
   currentMap: "",
-  maps: []
 })
