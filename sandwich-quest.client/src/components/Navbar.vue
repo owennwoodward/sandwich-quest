@@ -36,15 +36,16 @@
 
 
               <div class="mb-3">
-                <input v-model="form.name" type="text" class="form-control" name="questName" id="questName"
+                  <input v-model="form.name" type="text" required class="form-control" name="questName" id="questName"
                   aria-describedby="helpId" placeholder="Name Your Quest">
+                 
               </div>
 
               <p>This is where you start your quest to try new things and enjoy food and drink!</p>
               <p>You will be able to add restaurants and other noshing spots to your list after creation!</p>
 
               <div class="d-flex flex-row-reverse">
-                <button type="submit">Create</button>
+                <button class="btn btn-primary" type="submit">Create</button>
 
               </div>
 
@@ -93,10 +94,16 @@ export default {
           path: '/account'
         })
       },
-      async createQuest() {
+     checkEmpty(){
+      if (!form.value){
+            Pop.toast('You must enter a name for a quest', 'error')
+          }
+     },
+     async createQuest() {
         try {
           Modal.getOrCreateInstance(document.getElementById('navBar')).hide()
           let questData = form.value
+          
           let newQuest = await questsService.createQuest(questData)
           // router.push({ name: 'Account' })
           form.value = {}

@@ -5,7 +5,7 @@ import { logger } from "../utils/Logger";
 class MapsService{
 
 getStaticMap(questId){
-    
+  
     let allDoneCoords = ''
     let allUndoneCoords = ''
     let cleanedDoneCoords = ''
@@ -25,9 +25,11 @@ getStaticMap(questId){
     let map =  `https://maps.googleapis.com/maps/api/staticmap?size=600x300&markers=color:blue|${cleanedDoneCoords}&markers=color:red|${cleanedUndoneCoords}&key=AIzaSyAQaE5n_90mQg1JByV_OQ7q5wloxgLuqCY`
     console.log(map)
     let foundQuest = AppState.quests.find(q => q.id == questId)
-    foundQuest.map = map
+    if (foundQuest){
+        foundQuest.map = map
+    }
         
- 
+
 }
 
 

@@ -141,6 +141,7 @@ export default {
 
         try {
           await questItemsService.editItem(props.item)
+          Pop.toast("Note Updated", 'success')
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
