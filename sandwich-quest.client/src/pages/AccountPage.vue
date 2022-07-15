@@ -58,6 +58,7 @@ import { AppState } from '../AppState'
 import { router } from "../router"
 import { accountService } from '../services/AccountService'
 import { AuthService } from '../services/AuthService'
+import { locationService } from "../services/LocationService"
 import { questItemsService } from '../services/QuestItemsService'
 import { questsService } from '../services/QuestsService'
 accountService
@@ -75,6 +76,7 @@ export default {
       try {
         await questsService.getMyQuests()
         await questItemsService.getMyQuestItems()
+        await locationService.getUserCoordinates()
       } catch (error) {
         console.error(error)
         // Pop.toast(error, 'error')
