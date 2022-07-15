@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row justify-content-start">
 
-                <button v-if="!questItems == 0"
+                <button  v-if="!questItems == 0"
                     :class="{ 'bg-success blur darken-27': (doneItems.length == questItems.length && questItems.length != 0) }"
                     class=" col-10 d-flex justify-content-between btn btn-primary borders corner-left" type="button"
                     data-bs-toggle="collapse" :data-bs-target="`#id` + quest.id" aria-expanded="false"
@@ -124,6 +124,8 @@ export default {
 .blur:active{
     box-shadow: none;
 }
+
+
 
 .green {
     background-color: green !important;
