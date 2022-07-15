@@ -3,17 +3,14 @@
   <div class="accordion my-2" :id="'accordion' + item.id">
     <div class="accordion-item">
       <h2 class="accordion-header" :id="'headerId' + item.id">
-        <button class="accordion-button bg-success text-dark " type="button" data-bs-toggle="collapse"
+        <button class="item accordion-button bg-success collapsed text-dark " type="button" data-bs-toggle="collapse"
           :data-bs-target="'#id' + item.id" aria-expanded="true" aria-controls="collapseOne">
           <div class="container-fluid">
             <div class="row ">
 
             </div>
             <div class="h5">
-
-
               <div class="col-12 text-center display-5 ms-2">
-
                 {{ item.name }}
               </div>
             </div>
@@ -60,7 +57,7 @@
               <span class="py-2"> <a class="text-secondary" target="_blank"
                   :href="`https://maps.google.com/?q=${item.coordinates?.latitude},${item.coordinates?.longitude}`">
                   Google Maps</a></span>
-              <div class="h5">{{ (item.distance * (.000621)).toFixed(2) }} miles</div>
+              <div class="h5">{{ this.calculatedDistance }} miles</div>
               <textarea class="py-3" placeholder="How was it?" @blur="editItem" v-model="item.myNotes">  </textarea>
             </div>
           </div>
@@ -73,7 +70,8 @@
 
 
 <script>
-import { ref, watchEffect } from 'vue'
+import { computed, onMounted , ref, watchEffect } from 'vue'
+import { AppState } from "../AppState"
 import { questItemsService } from '../services/QuestItemsService'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
@@ -86,7 +84,33 @@ export default {
       editable.value = { ...props.item }
     })
     return {
+      // item.distance * (.000621)).toFixed(2) METERS TO MILES EQ
       editable,
+
+      calculatedDistance: computed(() => {
+        const lat1 = AppState.currentCoords.coords?.latitude
+        const lat2 = props.item.coordinates.latitude
+        const lon1 = AppState.currentCoords.coords?.longitude
+        const lon2 = props.item.coordinates.longitude
+
+        const R = 6371e3; // metres
+        const φ1 = lat1 * Math.PI / 180; // φ, λ in radians
+        const φ2 = lat2 * Math.PI / 180;
+        const Δφ = (lat2 - lat1) * Math.PI / 180;
+        const Δλ = (lon2 - lon1) * Math.PI / 180;
+
+        const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+          Math.cos(φ1) * Math.cos(φ2) *
+          Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        const dist = R * c; // in metres
+
+        const miles = (dist * (.000621)).toFixed(2)
+        
+        return miles
+      }),
+
       async deleteItem() {
         try {
           if (await Pop.confirm()) {
@@ -131,4 +155,19 @@ export default {
   background-color: $dark;
   color: $light
 }
+
+ .accordion-button:not(.collapsed){
+    box-shadow: 0px 0px 2px 2px #6db8c9;
+ }
+
+.accordion-button.collapsed{
+     box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, .0)
+    // box-shadow: 0px 0px 2px 2px transparent;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+      
+}
+
 </style>

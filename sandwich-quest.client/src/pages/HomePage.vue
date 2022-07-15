@@ -1,6 +1,6 @@
 <template>
 
-  <div class="d-flex align-middle">
+  <div class="d-flex align-middle selectable" @click="$router.go">
     <h1 class="logo">
       <img class="logo-img" src="../assets/img/SQBW.png" alt="">
       <div class="mt-2">
@@ -72,10 +72,10 @@ export default {
     onMounted(async () => {
       try {
         await yelpService.getAll('');
-        // if (AppState.account.id) {
-        //   await questsService.getMyQuests()
-        //   await questItemsService.getMyQuestItems()
-        // }
+        if (AppState.account.id) {
+          await questsService.getMyQuests()
+          await questItemsService.getMyQuestItems()
+        }
       } catch (error) {
         Pop.error(error, 'this is the error ur looking for')
       }
@@ -96,6 +96,7 @@ export default {
           logger.error(error)
         }
       }
+      
     };
   },
   components: { HomeRestaurant }

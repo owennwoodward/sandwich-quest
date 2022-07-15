@@ -5,7 +5,7 @@
         <!-- TODO fix focus highlighting for bar/icon-->
         
         <div class="mb-3 p-2 d-flex">
-          <input v-model="searchTerm" type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search!">
+          <input v-model="searchTerm" type="text" class="search form-control" name="" id="" aria-describedby="helpId" placeholder="Search!">
           <button class="search-corner-right"><i class="fs-1 mdi mdi-magnify"></i></button>
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-light mx-2" data-bs-toggle="modal" data-bs-target="#locationModal">
@@ -101,6 +101,13 @@ export default {
 .magnify-container {
     width: 3rem;
     height: 3rem;
+}
+
+.search{
+    box-shadow: none;
+}
+.search.active{
+     box-shadow: none;
 }
 
 input{
