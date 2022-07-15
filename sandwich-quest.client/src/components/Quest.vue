@@ -42,10 +42,7 @@
                             <QuestItem v-for="i in questItems" :key="i.id" :item="i" />
 
                             <img :src="map" alt="">
-                            <!-- <img src="https://thiscatdoesnotexist.com" alt=""> -->
-
-
-
+                           
                         </div>
                     </div>
                 </div>
@@ -71,14 +68,10 @@ export default {
 
     setup(props) {
 
-        let questMap = 'https://thiscatdoesnotexist.com'
-
     async function getStaticMap(id) {
             try {
                 console.log('fetching map')
                 await mapsService.getStaticMap(id)
-                
-                
 
             } catch (error) {
                 Pop.toast(error)
@@ -86,7 +79,6 @@ export default {
             }
         }
 
-       
         watchEffect(() => {
             AppState.questitems;
             getStaticMap(props.quest.id)
@@ -98,8 +90,6 @@ export default {
             doneItems: computed(() => AppState.questitems.filter(i => ((i.isChecked == true) && (i.questId == props.quest.id)))),
 
             map: computed(() => AppState.currentMap),
-
-
 
             async removeQuest() {
                 try {
@@ -124,6 +114,7 @@ export default {
     }
 }
 </script>
+
 
 
 <style lang="scss" scoped>
