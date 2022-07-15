@@ -118,11 +118,16 @@ export default {
 <style lang="scss" scoped>
 .blur {
     filter: blur();
-
+    border-color: #a0c1d1;
+    box-shadow: none;
+}
+.blur:active{
+    box-shadow: none;
 }
 
 .green {
     background-color: green !important;
+    
     ;
 }
 

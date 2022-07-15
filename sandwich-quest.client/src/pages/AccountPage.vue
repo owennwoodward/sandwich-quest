@@ -74,8 +74,8 @@ export default {
     })
     onMounted(async () => {
       try {
-        await questsService.getMyQuests()
         await questItemsService.getMyQuestItems()
+        await questsService.getMyQuests()
         await locationService.getUserCoordinates()
       } catch (error) {
         console.error(error)
