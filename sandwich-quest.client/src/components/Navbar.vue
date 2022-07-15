@@ -105,6 +105,7 @@ export default {
           let questData = form.value
           
           let newQuest = await questsService.createQuest(questData)
+          Pop.toast('Quest Created!', 'success')
           // router.push({ name: 'Account' })
           form.value = {}
 
