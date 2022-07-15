@@ -88,9 +88,9 @@ export default {
       editable,
 
       calculatedDistance: computed(() => {
-        const lat1 = AppState.currentCoords.coords.latitude
+        const lat1 = AppState.currentCoords.coords?.latitude
         const lat2 = props.item.coordinates.latitude
-        const lon1 = AppState.currentCoords.coords.longitude
+        const lon1 = AppState.currentCoords.coords?.longitude
         const lon2 = props.item.coordinates.longitude
 
         const R = 6371e3; // metres
