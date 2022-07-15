@@ -57,7 +57,7 @@
               <span class="py-2"> <a class="text-secondary" target="_blank"
                   :href="`https://maps.google.com/?q=${item.coordinates?.latitude},${item.coordinates?.longitude}`">
                   Google Maps</a></span>
-              <div v-if="calculatedDistance" class="h5">{{ this.calculatedDistance }} miles</div>
+              <div v-if="coords" class="h5">{{ this.calculatedDistance }} miles</div>
               <textarea class="py-3" placeholder="How was it?" @blur="editItem" v-model="item.myNotes">  </textarea>
             </div>
           </div>
@@ -86,7 +86,7 @@ export default {
     return {
       // item.distance * (.000621)).toFixed(2) METERS TO MILES EQ
       editable,
-
+      coords: computed(()=> AppState.currentCoords.coords?.latitude),
       calculatedDistance: computed(() => {
         const lat1 = AppState.currentCoords.coords?.latitude
         const lat2 = props.item.coordinates.latitude
@@ -108,9 +108,7 @@ export default {
 
         const miles = (dist * (.000621)).toFixed(2)
 
-        if (typeof miles != 'number') {
-          return ''
-        }
+     
         
         return miles
       }),
