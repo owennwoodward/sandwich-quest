@@ -57,7 +57,7 @@
               <span class="py-2"> <a class="text-secondary" target="_blank"
                   :href="`https://maps.google.com/?q=${item.coordinates?.latitude},${item.coordinates?.longitude}`">
                   Google Maps</a></span>
-              <div class="h5">{{ this.calculatedDistance }} miles</div>
+              <div v-if="calculatedDistance" class="h5">{{ this.calculatedDistance }} miles</div>
               <textarea class="py-3" placeholder="How was it?" @blur="editItem" v-model="item.myNotes">  </textarea>
             </div>
           </div>
@@ -107,6 +107,10 @@ export default {
         const dist = R * c; // in metres
 
         const miles = (dist * (.000621)).toFixed(2)
+
+        if (typeof miles != 'number') {
+          return ''
+        }
         
         return miles
       }),
@@ -137,6 +141,7 @@ export default {
 
         try {
           await questItemsService.editItem(props.item)
+          Pop.toast("Note Updated", 'success')
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')

@@ -8,8 +8,9 @@
 
     <div class="about text-center">
       <img class="rounded-pill p-3" :src="account.picture" alt="" />
+      <div class="text-break">
       <h1>{{ account.name }}</h1>
-
+</div>
 
       <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
         aria-controls="offcanvasTop">Edit Account</button>

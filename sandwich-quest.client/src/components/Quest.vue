@@ -5,7 +5,7 @@
 
                 <button  v-if="!questItems == 0"
                     :class="{ 'bg-success blur darken-27': (doneItems.length == questItems.length && questItems.length != 0) }"
-                    class=" col-10 d-flex justify-content-between btn btn-primary borders corner-left" type="button"
+                    class=" ongoing col-10 d-flex justify-content-between btn btn-primary borders corner-left" type="button"
                     data-bs-toggle="collapse" :data-bs-target="`#id` + quest.id" aria-expanded="false"
                     aria-controls="collapseWidthExample">
                     <h4 :class="{ 'text-decoration-line-through': (doneItems.length == questItems.length && questItems.length != 0) }"
@@ -19,7 +19,7 @@
                     class="col-2 text-end bg-primary borders pt-2 selectable corner-right" @click.stop="removeQuest">
 
                     <i v-if="(doneItems.length == questItems.length && questItems.length != 0)"
-                        class="mdi mdi-check  h4 "></i>
+                        class="mdi mdi-check-circle check  h4 "></i>
                     <i class="mdi mdi-delete text-danger h4 "></i>
 
 
@@ -27,7 +27,7 @@
                 <div class="my-3 d-flex justify-content-center">
                     <!-- style="min-height: 120px;" -->
                     <div class="collapse collapse-horizontal  " :id="`id` + quest.id">
-                        <div class="card card-body collapse-mobile d-flex bg-dark flex-column">
+                        <div class=" card-body  collapse-mobile d-flex bg-dark flex-column">
                             <!--  -->
                             <div v-if="questItems.length >= 1" class="progress">
                                 <div :class="{ 'green': doneItems.length == questItems.length }"
@@ -117,8 +117,17 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.check{
+    color: green;
+}
+.ongoing{
+    box-shadow: none;
+}
+.ongoing:active{
+    box-shadow: none;
+}
 .blur {
-    filter: blur();
     border-color: #a0c1d1;
     box-shadow: none;
 }
