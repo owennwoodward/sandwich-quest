@@ -24,8 +24,10 @@ export default {
         onMounted( async () => {
             try {
               await yelpService.getById(route.params.id)
-              await questsService.getMyQuests()
-              await questItemsService.getMyQuestItems()
+              if (AppState.account?.id) {
+                  await questsService.getMyQuests()
+                  await questItemsService.getMyQuestItems()
+              }
             } catch (error) {
               logger.error(error)
               Pop.toast(error.message, 'error')
