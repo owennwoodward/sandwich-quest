@@ -41,7 +41,7 @@
                             <h5 v-if="questItems == 0">You have no quest items for this quest</h5>
                             <QuestItem v-for="i in questItems" :key="i.id" :item="i" />
 
-                            <img :src="map" alt="">
+                            <img :src="map.mapUrl" alt="">
                            
                         </div>
                     </div>
@@ -68,28 +68,39 @@ export default {
 
     setup(props) {
 
-    async function getStaticMap(id) {
+    // async function getStaticMap(id) {
+    //         try {
+    //             console.log('fetching map')
+    //             await mapsService.getStaticMap(id)
+
+    //         } catch (error) {
+    //             Pop.toast(error)
+    //             logger.error(error)
+    //         }
+    //     }
+
+        watchEffect( async () => {
+            // AppState.questitems;
             try {
+                if (AppState.maps.find(m => m.questId == props.quest.id)) {
+                    return
+                }
                 console.log('fetching map')
-                await mapsService.getStaticMap(id)
+                await mapsService.getStaticMap(props.quest.id)
 
             } catch (error) {
                 Pop.toast(error)
                 logger.error(error)
             }
-        }
-
-        watchEffect(() => {
-            AppState.questitems;
-            getStaticMap(props.quest.id)
+            // getStaticMap(props.quest.id)
         })
         return {
-            getStaticMap,
+            // getStaticMap,
             questItems: computed(() => AppState.questitems.filter(i => i.questId == props.quest.id)),
 
             doneItems: computed(() => AppState.questitems.filter(i => ((i.isChecked == true) && (i.questId == props.quest.id)))),
 
-            map: computed(() => AppState.currentMap),
+            map: computed(() => AppState.maps.filter(m => m.questId == props.quest.id)),
 
             async removeQuest() {
                 try {

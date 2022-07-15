@@ -1,21 +1,30 @@
 import { AppState } from "../AppState";
+import { questItemsService } from '../services/QuestItemsService'
 
 
 class MapsService{
 
-getStaticMap(questId){
+async getStaticMap(questId){
     
     let allCoords = ''
     let cleanedCoords = ''
+
+    if (AppState.questitems.length == 0) {
+        await questItemsService.getMyQuestItems()
+    }
+
     let filteredQuestItems = AppState.questitems.filter(qi => qi.questId == questId)
+    
+    console.log(filteredQuestItems)
     filteredQuestItems.forEach(qi => {
         allCoords += qi.coordinates.latitude + "," + qi.coordinates.longitude + "|"
     })
     cleanedCoords = this.cleanCoords(allCoords)
 
-    let map =  `https://maps.googleapis.com/maps/api/staticmap?size=600x300&markers=${cleanedCoords}&key=AIzaSyAQaE5n_90mQg1JByV_OQ7q5wloxgLuqCY`
-    console.log(map)
-    AppState.currentMap = map
+    let mapObject =  {mapUrl: `https://maps.googleapis.com/maps/api/staticmap?size=600x300&markers=${cleanedCoords}&key=AIzaSyAQaE5n_90mQg1JByV_OQ7q5wloxgLuqCY`, questId}
+    console.log(mapObject, questId)
+    AppState.maps = [...AppState.maps, mapObject]
+    return mapObject
  
 }
 
