@@ -10,10 +10,7 @@
 
             </div>
             <div class="h5">
-
-
               <div class="col-12 text-center display-5 ms-2">
-
                 {{ item.name }}
               </div>
             </div>
