@@ -3,7 +3,7 @@
   <div class="accordion my-2" :id="'accordion' + item.id">
     <div class="accordion-item">
       <h2 class="accordion-header" :id="'headerId' + item.id">
-        <button class="accordion-button bg-success text-dark " type="button" data-bs-toggle="collapse"
+        <button class="item accordion-button bg-success collapsed text-dark " type="button" data-bs-toggle="collapse"
           :data-bs-target="'#id' + item.id" aria-expanded="true" aria-controls="collapseOne">
           <div class="container-fluid">
             <div class="row ">
@@ -155,4 +155,19 @@ export default {
   background-color: $dark;
   color: $light
 }
+
+ .accordion-button:not(.collapsed){
+    box-shadow: 0px 0px 2px 2px #6db8c9;
+ }
+
+.accordion-button.collapsed{
+     box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, .0)
+    // box-shadow: 0px 0px 2px 2px transparent;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+      
+}
+
 </style>
