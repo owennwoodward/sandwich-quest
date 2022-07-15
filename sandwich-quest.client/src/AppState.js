@@ -14,5 +14,6 @@ export const AppState = reactive({
   currentCoords: {
     latitude: 0,
     longitude: 0
-  }
+  },
+  currentMap: ""
 })

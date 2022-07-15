@@ -40,6 +40,9 @@
                             </div>
                             <h5 v-if="questItems == 0">You have no quest items for this quest</h5>
                             <QuestItem v-for="i in questItems" :key="i.id" :item="i" />
+
+                            <img :src="map" alt="">
+                           
                         </div>
                     </div>
                 </div>
@@ -52,20 +55,41 @@
 
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted, watchEffect } from 'vue'
 import { AppState } from '../AppState'
 import { questsService } from '../services/QuestsService'
+import { mapsService } from '../services/MapsService'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
 
 export default {
-    props: { quest: { type: Object, required: true } },
-    setup(props) {
-        return {
 
+    props: { quest: { type: Object, required: true } },
+
+    setup(props) {
+
+    async function getStaticMap(id) {
+            try {
+                console.log('fetching map')
+                await mapsService.getStaticMap(id)
+
+            } catch (error) {
+                Pop.toast(error)
+                logger.error(error)
+            }
+        }
+
+        watchEffect(() => {
+            AppState.questitems;
+            getStaticMap(props.quest.id)
+        })
+        return {
+            getStaticMap,
             questItems: computed(() => AppState.questitems.filter(i => i.questId == props.quest.id)),
 
             doneItems: computed(() => AppState.questitems.filter(i => ((i.isChecked == true) && (i.questId == props.quest.id)))),
+
+            map: computed(() => AppState.currentMap),
 
             async removeQuest() {
                 try {
@@ -90,6 +114,7 @@ export default {
     }
 }
 </script>
+
 
 
 <style lang="scss" scoped>
