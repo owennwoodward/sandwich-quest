@@ -40,6 +40,7 @@
                             </div>
                             <h5 v-if="questItems == 0">You have no quest items for this quest</h5>
                             <QuestItem v-for="i in questItems" :key="i.id" :item="i" />
+
                             <img v-if="questItems != 0" :src="quest.map" alt="">
                         </div>
                     </div>
