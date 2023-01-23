@@ -7,14 +7,14 @@ class QuestsService {
 
   async createQuest(questData) {
     const quest = await api.post('api/quests', questData)
-    console.log('-createQuest-', quest.data)
+    logger.log('-createQuest-', quest.data)
     AppState.quests.unshift(quest.data)
     return quest.data
   }
 
   async getMyQuests(query = {}) {
     const res = await api.get('account/quests', query)
-    console.log('get my account quests', res.data)
+    logger.log('get my account quests', res.data)
     AppState.quests = res.data
     return res.data
   }
