@@ -14,10 +14,10 @@ class LocationService {
     async getUserCoordinates() {
         // const location = await getCoords()
         AppState.currentCoords = await getCoords()
-        console.log(AppState.currentCoords.coords.latitude, AppState.currentCoords.coords.longitude, AppState.currentCoords )
-        
-                    // AppState.currentCoords.latitude = location.coords.latitude
-                    // AppState.currentCoords.longitude = location.coords.longitude
+        logger.log(AppState.currentCoords.coords.latitude, AppState.currentCoords.coords.longitude, AppState.currentCoords)
+
+        // AppState.currentCoords.latitude = location.coords.latitude
+        // AppState.currentCoords.longitude = location.coords.longitude
     }
 }
 

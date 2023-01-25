@@ -12,11 +12,7 @@ const routes = [
     component: loadPage('HomePage'),
     beforeEnter: authSettled
   },
-  {
-    path: '/about',
-    name: 'About',
-    component: loadPage('AboutPage')
-  },
+
   {
     path: '/questsDetails/:id',
     name: 'QuestDetails',
